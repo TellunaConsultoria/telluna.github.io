@@ -8,15 +8,18 @@
 
   <style>
     :root{
-      --bg:#0B2522;         /* verde premium */
-      --bg2:#0F2E2A;        /* verde alternativo */
-      --card:#0f2f2b;       /* card escuro */
-      --paper:#f3efe6;      /* off-white elegante */
-      --text:#e9efe9;       /* texto claro */
-      --muted:#b9c7bf;      /* texto secundário */
-      --gold:#C6A85A;       /* dourado */
-      --line: rgba(233,239,233,.14);
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --green:#0F2E2A;
+      --green2:#0B2522;
+      --beige:#F3EFE6; /* tom da sua logo */
+      --beige2:#EFE7DA;
+      --gold:#C6A85A;
+      --textDark:#0B2522;
+      --textLight:#EAF1EA;
+      --mutedLight:#B9C7BF;
+      --mutedDark:#3E4A46;
+      --lineLight: rgba(234,241,234,.18);
+      --lineDark: rgba(11,37,34,.14);
+      --shadow: 0 18px 50px rgba(0,0,0,.25);
       --radius: 22px;
       --radius2: 16px;
     }
@@ -25,61 +28,60 @@
     body{
       margin:0;
       font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background:
-        radial-gradient(900px 500px at 15% 15%, rgba(198,168,90,.15), transparent 55%),
-        radial-gradient(900px 500px at 85% 10%, rgba(233,239,233,.08), transparent 60%),
-        linear-gradient(180deg, var(--bg2), var(--bg));
-      color: var(--text);
+      background: linear-gradient(180deg, var(--green), var(--green2));
+      color: var(--textLight);
       overflow-x:hidden;
     }
-
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 20px 70px}
+
+    .wrap{max-width:1100px; margin:0 auto; padding:26px 20px 70px}
+
+    /* TOPBAR */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:8px 0 20px;
+      gap:16px; padding:8px 0 18px;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-    }
-    .logo{
-      width:44px; height:44px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(198,168,90,.25), rgba(233,239,233,.10));
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand .logoBox{
+      width:56px; height:56px; border-radius:18px;
+      background: rgba(243,239,230,.06);
+      border: 1px solid rgba(198,168,90,.25);
       display:grid; place-items:center;
-      border:1px solid rgba(198,168,90,.25);
+      overflow:hidden;
     }
-    .brand h1{
-      font-size:16px; margin:0; letter-spacing:.4px;
+    .brand img{
+      width:52px; height:52px; object-fit:contain; display:block;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.18));
     }
-    .brand small{
-      display:block; margin-top:2px; color:var(--muted); font-size:12px;
-    }
+    .brand h1{font-size:16px; margin:0; letter-spacing:.3px}
+    .brand small{display:block; margin-top:2px; color:var(--mutedLight); font-size:12px}
 
     .cta-row{display:flex; gap:10px; align-items:center}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px; border-radius:14px; font-weight:700;
-      border:1px solid rgba(233,239,233,.12);
+      border:1px solid rgba(234,241,234,.14);
       background: rgba(15,47,43,.55);
       backdrop-filter: blur(8px);
       cursor:pointer;
+      white-space:nowrap;
     }
     .btn.primary{
       background: linear-gradient(135deg, rgba(198,168,90,.95), rgba(198,168,90,.72));
-      color:#0B2522;
+      color: var(--textDark);
       border:1px solid rgba(198,168,90,.55);
     }
 
+    /* HERO */
     .hero{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap:22px;
+      gap:18px;
       align-items:stretch;
-      margin-top:10px;
+      margin-top:8px;
     }
-
     .panel{
-      border:1px solid rgba(233,239,233,.12);
+      border:1px solid rgba(234,241,234,.14);
       background: rgba(15,47,43,.46);
       backdrop-filter: blur(10px);
       border-radius: var(--radius);
@@ -87,7 +89,6 @@
       overflow:hidden;
       position:relative;
     }
-
     .hero-left{
       padding:34px 30px;
       min-height: 360px;
@@ -96,11 +97,10 @@
       justify-content:space-between;
       gap:18px;
     }
-
     .kicker{
       display:inline-flex;
       gap:10px; align-items:center;
-      color:var(--muted);
+      color:var(--mutedLight);
       font-size:13px;
       letter-spacing:.6px;
       text-transform:uppercase;
@@ -110,7 +110,6 @@
       background: var(--gold);
       box-shadow: 0 0 0 6px rgba(198,168,90,.12);
     }
-
     .title{
       margin:0;
       font-size:44px;
@@ -120,16 +119,27 @@
     .title .gold{color:var(--gold)}
     .sub{
       margin:0;
-      color:var(--muted);
+      color:var(--mutedLight);
       font-size:16px;
       line-height:1.6;
-      max-width: 58ch;
+      max-width: 60ch;
     }
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
 
-    .actions{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:10px;
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
     }
+    .card{
+      padding:16px 16px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(234,241,234,.14);
+      background: rgba(11,37,34,.40);
+    }
+    .card b{display:block; margin-bottom:6px}
+    .card p{margin:0; color:var(--mutedLight); line-height:1.55; font-size:14px}
 
     .mini{
       padding:26px 22px;
@@ -138,93 +148,74 @@
       gap:14px;
       justify-content:space-between;
     }
-
-    .mini h3{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.3px;
-    }
-    .mini p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
+    .mini h3{margin:0; font-size:16px; letter-spacing:.3px}
+    .mini p{margin:0; color:var(--mutedLight); line-height:1.55; font-size:14px}
     .mini .pill{
       display:inline-flex;
       align-items:center;
       gap:8px;
       padding:10px 12px;
       border-radius:999px;
-      border:1px solid rgba(233,239,233,.14);
+      border:1px solid rgba(234,241,234,.16);
       background: rgba(11,37,34,.55);
       width:fit-content;
       font-weight:700;
-      color: var(--text);
+      color: var(--textLight);
       font-size:13px;
     }
     .arrow{color:var(--gold); font-weight:900}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:16px;
+    /* SECTION (Beige blocks) */
+    .sectionBeige{
       margin-top:18px;
+      background: linear-gradient(180deg, var(--beige), var(--beige2));
+      color: var(--textDark);
+      border-radius: var(--radius);
+      border: 1px solid rgba(11,37,34,.12);
+      box-shadow: 0 16px 44px rgba(0,0,0,.12);
+      overflow:hidden;
     }
-
-    .card{
-      padding:18px 18px;
-      border-radius: var(--radius2);
-      border:1px solid rgba(233,239,233,.12);
-      background: rgba(15,47,43,.40);
-    }
-    .card b{display:block; margin-bottom:6px}
-    .card p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
-
-    .section{
-      margin-top:26px;
+    .sectionBeige .inner{padding:22px}
+    .sectionBeige h2{margin:0 0 8px; font-size:18px; letter-spacing:.2px}
+    .sectionBeige .subDark{margin:0; color:var(--mutedDark); line-height:1.6; font-size:15px}
+    .twoCols{
+      margin-top:14px;
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:16px;
+      gap:14px;
     }
-    .section .panel{padding:22px}
-    .section h2{
-      margin:0 0 8px;
-      font-size:18px;
-      letter-spacing:.2px;
+    .beigeCard{
+      background: rgba(255,255,255,.55);
+      border:1px solid rgba(11,37,34,.10);
+      border-radius: var(--radius2);
+      padding:16px;
     }
-    .list{
-      margin:12px 0 0; padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    .li{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(233,239,233,.10);
-      background: rgba(11,37,34,.45);
-    }
-    .check{
-      width:18px; height:18px; margin-top:1px;
-      border-radius:6px;
-      border:1px solid rgba(198,168,90,.6);
-      display:grid; place-items:center;
-      color: var(--gold);
-      font-size:12px;
-      flex: 0 0 auto;
-    }
-    .li span{color:var(--muted); font-size:14px; line-height:1.45}
+    .beigeCard b{display:block; margin-bottom:6px}
+    .beigeCard p{margin:0; color:var(--mutedDark); line-height:1.55; font-size:14px}
 
+    /* Plans */
+    .plans{
+      margin-top:18px;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(234,241,234,.14);
+      background: rgba(15,47,43,.46);
+      box-shadow: var(--shadow);
+    }
+    .plans .inner{padding:22px}
     .pricing{
-      margin-top:16px;
+      margin-top:14px;
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:16px;
+      gap:14px;
     }
     .price{
-      padding:18px;
+      padding:16px;
       border-radius: var(--radius2);
-      border:1px solid rgba(233,239,233,.12);
-      background: rgba(15,47,43,.40);
+      border:1px solid rgba(234,241,234,.14);
+      background: rgba(11,37,34,.40);
     }
-    .price .tag{
+    .tag{
       color:var(--gold);
       font-weight:800;
       font-size:12px;
@@ -232,40 +223,41 @@
       text-transform:uppercase;
     }
     .price h3{margin:8px 0 6px; font-size:18px}
-    .price .meta{margin:0; color:var(--muted); font-size:13px}
+    .meta{margin:0; color:var(--mutedLight); font-size:13px; line-height:1.5}
     .price ul{
-      margin:12px 0 0; padding-left:18px; color:var(--muted);
+      margin:12px 0 0; padding-left:18px; color:var(--mutedLight);
       line-height:1.55; font-size:13.5px;
     }
-    .price .foot{
+    .foot{
       margin-top:14px;
       padding-top:12px;
-      border-top:1px solid var(--line);
+      border-top:1px solid var(--lineLight);
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-      color:var(--text);
       font-weight:800;
+      color: var(--textLight);
     }
-    .price .foot small{color:var(--muted); font-weight:600}
+    .foot small{color:var(--mutedLight); font-weight:600}
 
+    /* Footer */
     .footer{
-      margin-top:26px;
+      margin-top:22px;
       padding-top:18px;
-      border-top:1px solid var(--line);
+      border-top:1px solid rgba(234,241,234,.16);
       display:flex;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
-      color:var(--muted);
+      color:var(--mutedLight);
       font-size:13px;
     }
-    .footer b{color:var(--text)}
+    .footer b{color:var(--textLight)}
     .badge{color:var(--gold); font-weight:800}
 
     @media (max-width: 920px){
       .hero{grid-template-columns:1fr}
-      .title{font-size:36px}
+      .title{font-size:34px}
       .grid{grid-template-columns:1fr}
-      .section{grid-template-columns:1fr}
+      .twoCols{grid-template-columns:1fr}
       .pricing{grid-template-columns:1fr}
     }
   </style>
@@ -275,11 +267,15 @@
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
-        <div class="logo">🌙</div>
+        <div class="logoBox">
+          <!-- IMPORTANTE: faça upload do arquivo "logo-telluna.png" no repositório -->
+          <img src="logo-telluna.png" alt="Logo Telluna" />
+        </div>
         <div>
           <h1>Telluna <small>Estratégia • Estrutura • Crescimento</small></h1>
         </div>
       </div>
+
       <div class="cta-row">
         <a class="btn" href="#planos">Ver planos</a>
         <a class="btn primary" href="mailto:contato@telluna.com.br">Agendar conversa</a>
@@ -290,14 +286,17 @@
       <div class="panel hero-left">
         <div>
           <div class="kicker"><span class="dot"></span> Consultoria Empresarial Estratégica</div>
+
           <h2 class="title">
             PMEs não quebram por falta de esforço.<br>
             Quebram por falta de <span class="gold">estrutura estratégica</span>.
           </h2>
+
           <p class="sub">
             Organizamos gestão, fortalecemos governança e alinhamos decisões para empresas que querem crescer
             com previsibilidade, controle e direção.
           </p>
+
           <div class="actions">
             <a class="btn primary" href="mailto:contato@telluna.com.br">Quero um diagnóstico</a>
             <a class="btn" href="#como">Como funciona</a>
@@ -327,47 +326,47 @@
             Abordagem prática e adaptada à realidade das PMEs — sem burocracia, com foco em execução.
           </p>
         </div>
-        <a class="pill" href="#planos">
-          Saiba mais <span class="arrow">→</span>
-        </a>
+        <a class="pill" href="#planos">Saiba mais <span class="arrow">→</span></a>
       </div>
     </div>
 
-    <div class="section" id="como">
-      <div class="panel">
-        <h2>Como fazemos</h2>
-        <p class="sub">Um método simples para gerar organização e decisões melhores, sem travar a operação.</p>
-        <div class="list">
-          <div class="li"><div class="check">✓</div><span><b>Diagnóstico</b>: entendemos a realidade, riscos e prioridades.</span></div>
-          <div class="li"><div class="check">✓</div><span><b>Plano de ação</b>: metas, prazos e responsáveis sem excesso de teoria.</span></div>
-          <div class="li"><div class="check">✓</div><span><b>Implantação guiada</b>: suporte para aplicar o que foi definido.</span></div>
-        </div>
-      </div>
+    <!-- BLOCO BEGE (diversificar) -->
+    <div class="sectionBeige" id="como">
+      <div class="inner">
+        <h2>Como funciona</h2>
+        <p class="subDark">Um método simples para gerar organização e decisões melhores, sem travar a operação.</p>
 
-      <div class="panel">
-        <h2>Por que agir agora</h2>
-        <p class="sub">
-          O mercado favorece empresas mais organizadas, transparentes e preparadas para crescer com segurança.
-          Antecipar estrutura reduz risco e aumenta competitividade.
-        </p>
-        <div class="list">
-          <div class="li"><div class="check">✓</div><span>Menos retrabalho, desperdício e decisões no improviso.</span></div>
-          <div class="li"><div class="check">✓</div><span>Mais previsibilidade para crédito, contratos e parcerias.</span></div>
-          <div class="li"><div class="check">✓</div><span>Posicionamento mais forte para escalar com consistência.</span></div>
+        <div class="twoCols">
+          <div class="beigeCard">
+            <b>1) Diagnóstico</b>
+            <p>Entendemos a realidade do negócio, riscos, gargalos e prioridades de gestão.</p>
+          </div>
+          <div class="beigeCard">
+            <b>2) Plano de ação</b>
+            <p>Metas, prazos e responsáveis com foco no que destrava resultado e previsibilidade.</p>
+          </div>
+          <div class="beigeCard">
+            <b>3) Implantação guiada</b>
+            <p>Acompanhamento para colocar em prática e ajustar com segurança durante a execução.</p>
+          </div>
+          <div class="beigeCard">
+            <b>4) Consolidação</b>
+            <p>Indicadores simples para manter controle e evolução contínua após a consultoria.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="panel" style="margin-top:16px" id="planos">
-      <div style="padding:22px">
-        <h2 style="margin:0 0 6px; font-size:18px;">Planos, prazos e investimento</h2>
-        <p class="sub" style="margin:0">Escolha o nível ideal para o momento do seu negócio. Tudo remoto e com entregas claras.</p>
+    <div class="plans" id="planos">
+      <div class="inner">
+        <h2 style="margin:0 0 6px; font-size:18px;">Planos e formatos de atendimento</h2>
+        <p class="sub" style="margin:0">Tudo remoto, com escopo claro. O investimento é definido após a conversa inicial.</p>
 
         <div class="pricing">
           <div class="price">
             <div class="tag">Essencial</div>
             <h3>Organização</h3>
-            <p class="meta">Para começar com clareza e prioridades.</p>
+            <p class="meta">Para começar com clareza, prioridades e direção.</p>
             <ul>
               <li>Diagnóstico simplificado</li>
               <li>Mapa de riscos e oportunidades</li>
@@ -375,7 +374,7 @@
               <li>Reuniões estratégicas online</li>
             </ul>
             <div class="foot">
-              <span>R$ 6.000+</span>
+              <span>Investimento sob consulta</span>
               <small>até 60 dias</small>
             </div>
           </div>
@@ -383,7 +382,7 @@
           <div class="price" style="border-color: rgba(198,168,90,.35)">
             <div class="tag">Estratégico</div>
             <h3>Estruturação</h3>
-            <p class="meta">Para formalizar e evoluir com método.</p>
+            <p class="meta">Para formalizar processos e evoluir com método.</p>
             <ul>
               <li>Diagnóstico completo</li>
               <li>Políticas e processos básicos</li>
@@ -391,7 +390,7 @@
               <li>Apoio à implantação</li>
             </ul>
             <div class="foot">
-              <span>R$ 10.000+</span>
+              <span>Investimento sob consulta</span>
               <small>até 90 dias</small>
             </div>
           </div>
@@ -399,22 +398,23 @@
           <div class="price">
             <div class="tag">Recorrente</div>
             <h3>Acompanhamento</h3>
-            <p class="meta">Para manter ritmo e evolução contínua.</p>
+            <p class="meta">Para manter ritmo e evolução contínua com suporte.</p>
             <ul>
               <li>Revisão mensal de metas e indicadores</li>
               <li>Ajustes estratégicos contínuos</li>
               <li>Suporte consultivo ao gestor</li>
-              <li>Contrato mínimo 6 meses</li>
+              <li>Contrato mínimo de 6 meses</li>
             </ul>
             <div class="foot">
-              <span>R$ 1.500/mês+</span>
-              <small>6 meses</small>
+              <span>Investimento sob consulta</span>
+              <small>mín. 6 meses</small>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Rodapé (pode ficar em verde) -->
     <div class="footer">
       <div><b>Telluna</b> <span class="badge">•</span> Consultoria Empresarial Estratégica</div>
       <div>Contato: <a href="mailto:contato@telluna.com.br"><b>contato@telluna.com.br</b></a></div>
