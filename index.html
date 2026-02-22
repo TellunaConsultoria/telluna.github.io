@@ -361,13 +361,77 @@
       .finalCta .inner{align-items:flex-start}
     }
   </style>
+  .brandHero{
+  padding: 80px 20px 60px;
+  text-align:center;
+}
+
+.brandInner{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.brandLogo{
+  width:110px;
+  margin-bottom:30px;
+}
+
+.brandTitle{
+  margin:0;
+  font-size:56px;
+  letter-spacing:4px;
+  font-weight:700;
+  color:#EAF1EA;
+}
+
+.brandSubtitle{
+  margin-top:20px;
+  font-size:16px;
+  letter-spacing:1px;
+  color:#B9C7BF;
+  line-height:1.8;
+}
+
+.brandButtons{
+  margin-top:35px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn.ghost{
+  background:transparent;
+  border:1px solid rgba(234,241,234,.3);
+  color:#EAF1EA;
+}
 </head>
 
 <body>
   <div class="wrap">
     <!-- HEADER -->
-    <div class="topbar">
-      <div class="brand">
+<div class="brandHero">
+  <div class="brandInner">
+    <img src="logo-telluna.png" alt="Logo Telluna" class="brandLogo" />
+
+    <h1 class="brandTitle">TELLUNA</h1>
+
+    <p class="brandSubtitle">
+      Consultoria Empresarial Estratégica<br>
+      Estratégia • Estrutura • Crescimento
+    </p>
+
+    <div class="brandButtons">
+      <a class="btn primary" href="mailto:contato@telluna.com.br">
+        Agendar conversa
+      </a>
+      <a class="btn ghost" href="#planos">
+        Ver planos
+      </a>
+    </div>
+  </div>
+</div>
+    <div class="brand">
         <div class="logoWrap">
           <img src="logo-telluna.png" alt="Logo Telluna" />
         </div>
