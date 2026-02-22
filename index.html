@@ -1,718 +1,326 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Telluna | Consultoria Empresarial Estratégica</title>
-  <meta name="description" content="Consultoria empresarial estratégica para PMEs: estrutura, direção e decisões para crescer com previsibilidade." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telluna | Consultoria Empresarial Estratégica</title>
 
-  <style>
-    :root{
-      /* Brand */
-      --green:#0F2E2A;
-      --green2:#0B2522;
-      --gold:#C6A85A;
+<style>
 
-      /* Beige premium */
-      --beige:#F3EFE6;
-      --beige2:#EFE7DA;
-      --white: #ffffff;
+/* =========================
+   CONFIGURAÇÃO GLOBAL
+========================= */
 
-      /* Text */
-      --text:#0B2522;
-      --muted:#41514B;
-      --muted2:#5A6A64;
+:root{
+  --green:#0F2E2A;
+  --green-dark:#0B2522;
+  --gold:#C6A85A;
+  --beige:#F3EFE6;
+  --text:#102321;
+}
 
-      /* UI */
-      --line: rgba(11,37,34,.12);
-      --shadow: 0 18px 50px rgba(0,0,0,.10);
-      --shadow2: 0 14px 30px rgba(0,0,0,.08);
-      --radius: 22px;
-      --radius2: 16px;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-      --max: 1120px;
-    }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--beige);
+  color: var(--text);
+}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 520px at 18% 10%, rgba(198,168,90,.16), transparent 60%),
-        radial-gradient(900px 520px at 85% 0%, rgba(15,46,42,.06), transparent 62%),
-        linear-gradient(180deg, var(--beige), var(--beige2));
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+/* =========================
+   HEADER
+========================= */
 
-    /* Header (fixed) */
-    .header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(243,239,230,.72);
-      border-bottom: 1px solid var(--line);
-    }
-    .headerInner{
-     .wrap{
-     width: 100%;
-     max-width: 1400px;
-     margin: 0 auto;
-     padding: 0 60px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
-    .logoBox{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      background: linear-gradient(180deg, var(--beige), var(--beige2));
-      border:1px solid rgba(11,37,34,.10);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      flex: 0 0 auto;
-    }
-    .logoBox img{
-      width:36px;
-      height:36px;
-      object-fit:contain;
-      display:block;
-    }
-    .brandText{
-      min-width:0;
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
-    }
-    .brandText b{
-      font-size:16px;
-      letter-spacing:.8px;
-      color: var(--green2);
-    }
-    .brandText small{
-      margin-top:4px;
-      font-size:12px;
-      color: var(--muted2);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 64ch;
-    }
+header{
+  width:100%;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+}
 
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    .iconBtn{
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      display:grid;
-      place-items:center;
-      box-shadow: 0 10px 24px rgba(0,0,0,.05);
-      transition: transform .15s ease;
-    }
-    .iconBtn:hover{transform: translateY(-1px)}
-    .iconBtn svg{width:18px; height:18px; fill: var(--green2)}
+.brand img{
+  width:42px;
+}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:11px 14px;
-      border-radius:14px;
-      font-weight:800;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      cursor:pointer;
-      white-space:nowrap;
-      transition: transform .15s ease;
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(198,168,90,.95), rgba(198,168,90,.72));
-      color: var(--green2);
-      border:1px solid rgba(198,168,90,.55);
-      box-shadow: 0 18px 40px rgba(198,168,90,.18);
-    }
-    .btn.ghost{
-      background: transparent;
-    }
+.brand h1{
+  font-size:20px;
+  letter-spacing:1px;
+  color:var(--green-dark);
+}
 
-    /* Hero */
-    .hero{
-      padding: 100px 0 60px;
-    }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:40px;
-      align-items:stretch;
-    }
-    .card{
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.45);
-      box-shadow: var(--shadow2);
-    }
-    .heroMain{
-      padding: 36px 28px;
-      position:relative;
-      overflow:hidden;
-    }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted2);
-      font-size:12px;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      margin-bottom:14px;
-    }
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background: var(--gold);
-      box-shadow: 0 0 0 6px rgba(198,168,90,.12);
-      flex: 0 0 auto;
-    }
-    .heroTitle{
-      margin:0;
-      font-size:52px;
-      line-height:1.05;
-      letter-spacing:-.8px;
-      color: var(--green2);
-      max-width: 26ch;
-    }
-    .heroTitle .gold{color: var(--gold)}
-    .heroSub{
-      margin:16px 0 0;
-      font-size:16px;
-      line-height:1.7;
-      color: var(--muted);
-      max-width: 70ch;
-    }
-    .heroActions{
-      margin-top:22px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .miniTrust{
-      margin-top:22px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(243,239,230,.65);
-      color: var(--green2);
-      font-weight:800;
-      font-size:13px;
-    }
-    .pill i{
-      width:18px;height:18px;
-      border-radius:6px;
-      border:1px solid rgba(198,168,90,.55);
-      display:grid;place-items:center;
-      color: var(--gold);
-      font-style:normal;
-      font-size:12px;
-      flex:0 0 auto;
-      background: rgba(255,255,255,.5);
-    }
+nav{
+  display:flex;
+  gap:15px;
+}
 
-    .heroSide{
-      padding: 26px 22px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .heroSide h3{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.2px;
-      color: var(--green2);
-    }
-    .heroSide p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.65;
-      font-size:14px;
-    }
-    .sideBox{
-      margin-top:10px;
-      padding:14px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(255,255,255,.55);
-    }
-    .sideBox b{color: var(--green2)}
-    .sideBox span{color: var(--muted); font-size:13.5px; line-height:1.55; display:block; margin-top:6px}
+nav a{
+  text-decoration:none;
+  color:var(--green-dark);
+  font-weight:600;
+}
 
-    /* Section titles */
-    .section{
-      padding: 26px 0;
-    }
-    .sectionTitle{
-      margin:0 0 12px;
-      font-size:28px;
-      letter-spacing:-.2px;
-      color: var(--green2);
-    }
-    .sectionLead{
-      margin:0 0 18px;
-      color: var(--muted);
-      line-height:1.65;
-      font-size:15.5px;
-      max-width: 90ch;
-    }
+.button{
+  padding:10px 18px;
+  background:var(--gold);
+  border-radius:8px;
+  color:var(--green-dark);
+  font-weight:bold;
+  text-decoration:none;
+}
 
-    /* Authority section (green) */
-    .bandGreen{
-      background:
-        radial-gradient(900px 520px at 25% 0%, rgba(198,168,90,.18), transparent 60%),
-        linear-gradient(180deg, var(--green), var(--green2));
-      color: #EAF1EA;
-      border-top: 1px solid rgba(255,255,255,.10);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .bandInner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 44px 20px;
-    }
-    .bandTitle{
-      margin:0 0 12px;
-      font-size:28px;
-      letter-spacing:-.2px;
-      color:#EAF1EA;
-    }
-    .bandLead{
-      margin:0 0 18px;
-      color: rgba(234,241,234,.82);
-      line-height:1.65;
-      max-width: 92ch;
-      font-size:15.5px;
-    }
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    .gCard{
-      border-radius: var(--radius2);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(11,37,34,.35);
-      padding:16px;
-    }
-    .gCard b{display:block; color: var(--gold); margin-bottom:6px}
-    .gCard p{margin:0; color: rgba(234,241,234,.82); line-height:1.6; font-size:14px}
+/* =========================
+   HERO
+========================= */
 
-    /* How it works */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    .step{
-      padding:16px;
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.45);
-      box-shadow: 0 10px 22px rgba(0,0,0,.04);
-    }
-    .step .n{
-      width:30px;height:30px;
-      border-radius:10px;
-      display:grid;place-items:center;
-      background: rgba(198,168,90,.18);
-      border:1px solid rgba(198,168,90,.45);
-      color: var(--green2);
-      font-weight:900;
-      margin-bottom:10px;
-    }
-    .step b{display:block; margin-bottom:6px; color: var(--green2)}
-    .step p{margin:0; color: var(--muted); line-height:1.6; font-size:14px}
+.hero{
+  width:100%;
+  padding:80px 60px;
+}
 
-    /* For whom + impact */
-    .twoCols{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    .list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    .li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:12px;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.45);
-    }
-    .check{
-      width:18px;height:18px;
-      border-radius:6px;
-      border:1px solid rgba(198,168,90,.55);
-      background: rgba(255,255,255,.5);
-      display:grid;place-items:center;
-      color: var(--gold);
-      font-weight:900;
-      font-size:12px;
-      flex: 0 0 auto;
-      margin-top:2px;
-    }
-    .li span{color: var(--muted); line-height:1.55; font-size:14px}
+.hero-container{
+  max-width:1400px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:60px;
+  align-items:center;
+}
 
-    /* Plans (green) */
-    .plansGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    .plan{
-      border-radius: var(--radius2);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(11,37,34,.35);
-      padding:16px;
-    }
-    .plan .tag{
-      color: var(--gold);
-      font-weight:900;
-      letter-spacing:.7px;
-      text-transform:uppercase;
-      font-size:12px;
-    }
-    .plan h3{
-      margin:8px 0 8px;
-      color:#EAF1EA;
-      font-size:18px;
-    }
-    .plan p{
-      margin:0;
-      color: rgba(234,241,234,.82);
-      line-height:1.6;
-      font-size:14px;
-    }
-    .plan .meta{
-      margin-top:12px;
-      padding-top:12px;
-      border-top:1px solid rgba(255,255,255,.12);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      color:#EAF1EA;
-      font-weight:900;
-      font-size:13px;
-    }
-    .plan .meta small{
-      color: rgba(234,241,234,.78);
-      font-weight:700;
-    }
+.hero-text h2{
+  font-size:64px;
+  line-height:1.05;
+  max-width:20ch;
+}
 
-    /* Final CTA */
-    .cta{
-      padding: 22px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      box-shadow: var(--shadow2);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .cta h3{margin:0; color: var(--green2); font-size:18px}
-    .cta p{margin:6px 0 0; color: var(--muted); line-height:1.55; font-size:14px}
+.hero-text span{
+  color:var(--gold);
+}
 
-    /* Footer */
-    .footer{
-      margin-top: 26px;
-      padding: 18px 0 28px;
-      border-top: 1px solid var(--line);
-      color: var(--muted2);
-      font-size:13px;
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .footBrand{
-      display:flex; align-items:center; gap:10px;
-    }
-    .footBrand b{color: var(--green2)}
-    .footLogo{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(255,255,255,.45);
-      display:grid;place-items:center; overflow:hidden;
-    }
-    .footLogo img{width:26px;height:26px;object-fit:contain}
+.hero-text p{
+  margin-top:25px;
+  font-size:18px;
+  line-height:1.6;
+  max-width:550px;
+}
 
-    /* Responsive */
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr}
-      .heroTitle{font-size:40px}
-      .grid3{grid-template-columns:1fr}
-      .steps{grid-template-columns:1fr}
-      .twoCols{grid-template-columns:1fr}
-      .plansGrid{grid-template-columns:1fr}
-      .brandText small{max-width: 48ch}
-    }
-  </style>
+.hero-actions{
+  margin-top:30px;
+  display:flex;
+  gap:15px;
+}
+
+.hero-image{
+  width:100%;
+  height:600px;
+  border-radius:24px;
+  background:
+    linear-gradient(180deg, rgba(11,37,34,.25), rgba(11,37,34,.55)),
+    url('foto-hero.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+/* =========================
+   SEÇÃO VERDE
+========================= */
+
+.section-green{
+  background:var(--green);
+  color:white;
+  padding:80px 60px;
+}
+
+.section-container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-green h3{
+  font-size:32px;
+}
+
+.section-green p{
+  margin-top:15px;
+  line-height:1.6;
+  max-width:700px;
+}
+
+/* =========================
+   COMO FUNCIONA
+========================= */
+
+.section{
+  padding:80px 60px;
+}
+
+.section-container h3{
+  font-size:32px;
+}
+
+.steps{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.step{
+  background:white;
+  padding:30px;
+  border-radius:16px;
+}
+
+/* =========================
+   PLANOS
+========================= */
+
+.plans{
+  background:var(--green);
+  color:white;
+  padding:80px 60px;
+}
+
+.plans-container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.plan-grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.plan{
+  background:rgba(255,255,255,0.1);
+  padding:30px;
+  border-radius:16px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:1000px){
+
+.hero-container{
+  grid-template-columns:1fr;
+}
+
+.hero-image{
+  height:350px;
+}
+
+.steps{
+  grid-template-columns:1fr;
+}
+
+.plan-grid{
+  grid-template-columns:1fr;
+}
+
+}
+
+</style>
 </head>
 
 <body>
-  <!-- HEADER FIXO -->
-  <header class="header">
-    <div class="headerInner">
-      <div class="brand">
-        <div class="logoBox">
-          <img src="logo-telluna.png" alt="Logo Telluna">
-        </div>
-        <div class="brandText">
-          <b>TELLUNA</b>
-          <small>Consultoria Empresarial Estratégica</small>
-        </div>
-      </div>
 
-      <nav class="nav">
-        <!-- ÍCONES (somente pela logo/ícone, como você pediu) -->
-        <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" target="_blank" aria-label="Instagram Telluna">
-          <!-- Instagram SVG -->
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
-          </svg>
-        </a>
+<header>
+  <div class="brand">
+    <img src="logo-telluna.png" alt="Telluna">
+    <h1>TELLUNA</h1>
+  </div>
+  <nav>
+    <a href="#como">Como funciona</a>
+    <a href="#planos">Planos</a>
+    <a class="button" href="mailto:contato@telluna.com.br">Agendar conversa</a>
+  </nav>
+</header>
 
-        <a class="iconBtn" href="https://www.linkedin.com/company/telluna/" target="_blank" aria-label="LinkedIn Telluna">
-          <!-- LinkedIn SVG -->
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5zM5.5 20.5h2.9V9h-2.9zM10.1 9h2.78v1.57h.04a3.05 3.05 0 0 1 2.75-1.5c2.94 0 3.48 1.93 3.48 4.44v6.99h-2.9v-6.2c0-1.48 0-3.38-2.06-3.38s-2.38 1.61-2.38 3.27v6.31h-2.9z"/>
-          </svg>
-        </a>
-
-        <a class="btn ghost" href="#planos">Planos</a>
-        <a class="btn primary" href="mailto:contato@telluna.com.br">Agendar conversa</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <main class="wrap">
-    <section class="hero" id="inicio">
-      <div class="heroGrid">
-        <div class="card heroMain">
-
-          <h1 class="heroTitle">
-            PMEs não quebram por falta de esforço.<br>
-            Quebram por falta de <span class="gold">estrutura estratégica</span>.
-          </h1>
-
-          <p class="heroSub">
-            Nós organizamos a gestão, fortalecemos a governança e direcionamos as decisões
-          </p>
-
-          <div class="heroActions">
-            <a class="btn primary" href="mailto:contato@telluna.com.br">Solicitar diagnóstico</a>
-            <a class="btn ghost" href="#como">Como funciona</a>
-          </div>
-
-  <!-- AUTORIDADE (VERDE) -->
-  <section class="bandGreen" id="porque">
-    <div class="bandInner">
-      <h2 class="bandTitle">Por que a Telluna</h2>
-      <p class="bandLead">
-        Consultoria executiva para PMEs que precisam profissionalizar a gestão e crescer com previsibilidade. Sem excesso de teoria — com rotina leve, indicadores simples e foco em execução.
+<section class="hero">
+  <div class="hero-container">
+    
+    <div class="hero-text">
+      <h2>
+        PMEs não quebram por falta de esforço.
+        Quebram por falta de <span>estrutura estratégica</span>.
+      </h2>
+      <p>
+        A Telluna organiza gestão, fortalece governança e direciona decisões para transformar operação em crescimento consistente.
       </p>
-
-      <div class="grid3">
-        <div class="gCard">
-          <b>Método e clareza</b>
-          <p>Direcionamento objetivo, prioridades claras e plano de ação aplicável.</p>
-        </div>
-        <div class="gCard">
-          <b>Governança na prática</b>
-          <p>Regras mínimas, processos essenciais e transparência para decisões melhores.</p>
-        </div>
-        <div class="gCard">
-          <b>Implantação guiada</b>
-          <p>Acompanhamento para sair do papel e virar rotina — sem travar a operação.</p>
-        </div>
+      <div class="hero-actions">
+        <a class="button" href="mailto:contato@telluna.com.br">Solicitar diagnóstico</a>
       </div>
     </div>
-  </section>
 
-  <!-- COMO FUNCIONA (BEGE) -->
-  <section class="section wrap" id="como">
-    <h2 class="sectionTitle">Como funciona</h2>
-    <p class="sectionLead">
-      Um método enxuto para organizar, priorizar e executar. O objetivo é reduzir improviso, fortalecer controle e sustentar crescimento.
+    <div class="hero-image"></div>
+
+  </div>
+</section>
+
+<section class="section-green">
+  <div class="section-container">
+    <h3>Por que a Telluna</h3>
+    <p>
+      Consultoria executiva para PMEs que precisam profissionalizar a gestão e crescer com previsibilidade.
     </p>
+  </div>
+</section>
 
+<section class="section" id="como">
+  <div class="section-container">
+    <h3>Como funciona</h3>
     <div class="steps">
       <div class="step">
-        <div class="n">1</div>
-        <b>Diagnóstico</b>
-        <p>Levantamos cenário, gargalos e riscos. Entendemos o que impede previsibilidade hoje.</p>
+        <h4>Diagnóstico</h4>
+        <p>Análise da situação atual e identificação de gargalos.</p>
       </div>
       <div class="step">
-        <div class="n">2</div>
-        <b>Plano de ação</b>
-        <p>Definimos prioridades, metas, prazos e responsáveis — com foco no que destrava resultado.</p>
+        <h4>Plano de ação</h4>
+        <p>Definição de prioridades e metas claras.</p>
       </div>
       <div class="step">
-        <div class="n">3</div>
-        <b>Implantação</b>
-        <p>Acompanhamos a execução, ajustamos e consolidamos indicadores simples para manter controle.</p>
+        <h4>Implantação</h4>
+        <p>Acompanhamento da execução e ajustes estratégicos.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PARA QUEM É + IMPACTO -->
-  <section class="section wrap" id="paraquem">
-    <div class="twoCols">
-      <div>
-        <h2 class="sectionTitle">Para quem é</h2>
-        <p class="sectionLead">Para empresas que querem crescer com direção e organização, sem depender de esforço “no braço”.</p>
-
-        <ul class="list">
-          <li class="li"><span class="check">✓</span><span>Empresas que cresceram e perderam controle de rotina, processos e prioridades.</span></li>
-          <li class="li"><span class="check">✓</span><span>Gestores que precisam profissionalizar a gestão sem burocracia.</span></li>
-          <li class="li"><span class="check">✓</span><span>Negócios que querem previsibilidade para escalar com segurança.</span></li>
-        </ul>
+<section class="plans" id="planos">
+  <div class="plans-container">
+    <h3>Planos de atendimento</h3>
+    <div class="plan-grid">
+      <div class="plan">
+        <h4>Essencial</h4>
+        <p>Organização básica para estruturar decisões.</p>
       </div>
-
-      <div>
-        <h2 class="sectionTitle">Impacto esperado</h2>
-        <p class="sectionLead">Estrutura se converte em decisões melhores e menos desperdício. O resultado aparece no dia a dia.</p>
-
-        <ul class="list">
-          <li class="li"><span class="check">✓</span><span><b>Clareza</b> de prioridades, metas e responsabilidades.</span></li>
-          <li class="li"><span class="check">✓</span><span><b>Controle</b> com indicadores simples e rotina de acompanhamento.</span></li>
-          <li class="li"><span class="check">✓</span><span><b>Crescimento</b> mais previsível, com risco reduzido e decisões mais seguras.</span></li>
-        </ul>
+      <div class="plan">
+        <h4>Estratégico</h4>
+        <p>Formalização de processos e governança.</p>
+      </div>
+      <div class="plan">
+        <h4>Acompanhamento</h4>
+        <p>Suporte contínuo para evolução sustentável.</p>
       </div>
     </div>
-  </section>
-
-  <!-- PLANOS (VERDE) -->
-  <section class="bandGreen" id="planos">
-    <div class="bandInner">
-      <h2 class="bandTitle">Planos de atendimento</h2>
-      <p class="bandLead">O investimento é definido após a conversa inicial, conforme o momento e escopo da empresa.</p>
-
-      <div class="plansGrid">
-        <div class="plan">
-          <div class="tag">Essencial</div>
-          <h3>Organização</h3>
-          <p>Para criar clareza de prioridades e estrutura mínima de gestão para decisões melhores.</p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>até 60 dias</small>
-          </div>
-        </div>
-
-        <div class="plan" style="border-color: rgba(198,168,90,.35)">
-          <div class="tag">Estratégico</div>
-          <h3>Estruturação</h3>
-          <p>Para formalizar processos essenciais e consolidar rotina de acompanhamento com indicadores simples.</p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>até 90 dias</small>
-          </div>
-        </div>
-
-        <div class="plan">
-          <div class="tag">Recorrente</div>
-          <h3>Acompanhamento</h3>
-          <p>Para manter consistência, revisar metas e evoluir com suporte consultivo ao gestor.</p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>mín. 6 meses</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL (BEGE) -->
-  <section class="section wrap" id="contato">
-    <div class="cta">
-      <div>
-        <h3>Quer saber qual plano faz sentido para o seu momento?</h3>
-        <p>Me diga seu setor, tamanho da empresa e principal desafio. Eu retorno com um direcionamento claro.</p>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn primary" href="mailto:contato@telluna.com.br">Agendar conversa</a>
-        <a class="btn ghost" href="#inicio">Voltar ao topo</a>
-      </div>
-    </div>
-
-    <footer class="footer">
-      <div class="footBrand">
-        <div class="footLogo"><img src="logo-telluna.png" alt="Logo Telluna"></div>
-        <div>
-          <b>Telluna</b><div style="margin-top:4px;">Consultoria Empresarial Estratégica</div>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:10px; align-items:center;">
-        <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" target="_blank" aria-label="Instagram Telluna (rodapé)">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
-          </svg>
-        </a>
-
-        <a class="iconBtn" href="https://www.linkedin.com/company/telluna/" target="_blank" aria-label="LinkedIn Telluna (rodapé)">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5zM5.5 20.5h2.9V9h-2.9zM10.1 9h2.78v1.57h.04a3.05 3.05 0 0 1 2.75-1.5c2.94 0 3.48 1.93 3.48 4.44v6.99h-2.9v-6.2c0-1.48 0-3.38-2.06-3.38s-2.38 1.61-2.38 3.27v6.31h-2.9z"/>
-          </svg>
-        </a>
-      </div>
-    </footer>
-  </section>
+  </div>
+</section>
 
 </body>
 </html>
