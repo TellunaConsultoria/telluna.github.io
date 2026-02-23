@@ -14,15 +14,14 @@
 
       --beige:#F3EFE6;
       --beige2:#EFE7DA;
-      --white:#ffffff;
 
       --text:#0B2522;
       --muted:#41514B;
       --muted2:#5A6A64;
 
       --line: rgba(11,37,34,.12);
-      --shadow: 0 18px 50px rgba(0,0,0,.10);
       --shadow2: 0 14px 30px rgba(0,0,0,.08);
+
       --radius: 22px;
       --radius2: 16px;
 
@@ -71,7 +70,7 @@
       min-width:0;
     }
     .logoBox{
-      width:58px; height:58px;           /* (Imagem 1) maior */
+      width:58px; height:58px;
       border-radius:18px;
       background: linear-gradient(180deg, var(--beige), var(--beige2));
       border:1px solid rgba(11,37,34,.10);
@@ -85,7 +84,7 @@
     .brandText{min-width:0; line-height:1.05}
     .brandText b{
       display:block;
-      font-size:22px;                     /* (Imagem 1) maior */
+      font-size:22px;
       letter-spacing:1.2px;
       color: var(--green2);
     }
@@ -186,7 +185,7 @@
       font-size:16.5px;
       line-height:1.75;
       color: var(--muted);
-      max-width: 80ch;
+      max-width: 85ch;
     }
     .heroActions{
       margin-top:22px;
@@ -236,7 +235,7 @@
       transform: scale(1.02);
     }
 
-    /* SECTION BASE */
+    /* SEÇÃO BASE */
     .section{padding: 46px 0;}
     .sectionTitle{
       margin:0 0 12px;
@@ -249,10 +248,10 @@
       color: var(--muted);
       line-height:1.7;
       font-size:15.5px;
-      max-width: 92ch;
+      max-width: 100ch;
     }
 
-    /* POR QUE (Imagem 3) - mais conteúdo e menos vazio */
+    /* BAND VERDE */
     .bandGreen{
       background:
         radial-gradient(900px 520px at 25% 0%, rgba(198,168,90,.18), transparent 60%),
@@ -277,15 +276,40 @@
       color: rgba(234,241,234,.84);
       line-height:1.7;
       font-size:15.5px;
-      max-width: 92ch;
+      max-width: none; /* sem corte "no meio" */
     }
-    .whyGrid{
+
+    /* POR QUE - 2 COLUNAS (imagem esquerda / texto direita) */
+    .why2col{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 22px;
       align-items: stretch;
-      margin-top: 18px;
+      margin-top: 16px;
     }
+
+    .whyImage{
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      min-height: 520px;           /* garante altura para não sobrar vazio */
+      background:
+        linear-gradient(180deg, rgba(11,37,34,.18), rgba(11,37,34,.70)),
+        radial-gradient(900px 520px at 20% 10%, rgba(198,168,90,.16), transparent 60%),
+        url('parceria.jpg');
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow2);
+      position:relative;
+    }
+
+    .whyRight{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      min-height: 520px;           /* mesma altura da imagem para preencher */
+    }
+
     .whyCard{
       border-radius: var(--radius2);
       border:1px solid rgba(255,255,255,.12);
@@ -294,6 +318,7 @@
     }
     .whyCard b{display:block; color: var(--gold); margin-bottom:8px}
     .whyCard p{margin:0; color: rgba(234,241,234,.84); line-height:1.65; font-size:14.5px}
+
     .whyList{
       display:grid;
       gap:10px;
@@ -318,7 +343,33 @@
     }
     .whyItem span{color: rgba(234,241,234,.84); line-height:1.6; font-size:14.5px}
 
-    /* COMO FUNCIONA (Imagem 4 -> usar como na 5) */
+    /* complemento que preenche sem cansar */
+    .whyMetrics{
+      margin-top:auto; /* empurra para preencher a parte de baixo */
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    .metric{
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(11,37,34,.35);
+      padding:14px;
+    }
+    .metric b{
+      display:block;
+      color:#EAF1EA;
+      font-size:14px;
+      margin-bottom:6px;
+    }
+    .metric span{
+      display:block;
+      color: rgba(234,241,234,.84);
+      font-size:13.5px;
+      line-height:1.5;
+    }
+
+    /* COMO FUNCIONA */
     .process{
       display:grid;
       grid-template-columns: 1fr 420px 1fr;
@@ -388,7 +439,7 @@
     .n3{bottom:20px; left:50%; transform: translateX(-50%);}
     .n4{top:50%; left:20px; transform: translateY(-50%);}
 
-    /* PLANOS (Imagem 6) - mais caracteres, ainda enxuto */
+    /* PLANOS */
     .plansGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -434,7 +485,7 @@
     }
     .plan .meta small{color: rgba(234,241,234,.78); font-weight:700}
 
-    /* FOOTER (pedido) */
+    /* FOOTER */
     footer{
       border-top: 1px solid rgba(255,255,255,.12);
       margin-top: 26px;
@@ -468,8 +519,11 @@
     @media (max-width: 1020px){
       .heroGrid{grid-template-columns: 1fr;}
       .heroImageCard, .heroImageFill{min-height: 320px;}
-      .whyGrid{grid-template-columns: 1fr;}
-      .process{grid-template-columns: 1fr; }
+      .why2col{grid-template-columns: 1fr;}
+      .whyImage{min-height: 280px;}
+      .whyRight{min-height: unset;}
+      .whyMetrics{grid-template-columns: 1fr;}
+      .process{grid-template-columns: 1fr;}
       .wheelWrap{height: 360px;}
       .plansGrid{grid-template-columns: 1fr;}
       .heroTitle{font-size:44px;}
@@ -496,7 +550,6 @@
         <a class="btn ghost" href="#como">Como funciona</a>
         <a class="btn ghost" href="#planos">Planos</a>
 
-        <!-- Ícones acessíveis somente por logo/ícone -->
         <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" target="_blank" aria-label="Instagram Telluna">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
@@ -526,7 +579,6 @@
             Quebram por falta de <span class="gold">estrutura estratégica</span>.
           </h1>
 
-          <!-- (Imagem 2) texto ajustado -->
           <p class="heroSub">
             Nós organizamos a gestão, fortalecemos a governança e direcionamos as decisões
             para transformar operação em crescimento consistente — com método, clareza e execução.
@@ -544,7 +596,6 @@
           </div>
         </div>
 
-        <!-- imagem no lugar da caixa 2 -->
         <div class="card heroImageCard" aria-label="Imagem institucional Telluna">
           <div class="heroImageFill"></div>
         </div>
@@ -552,7 +603,7 @@
     </section>
   </main>
 
-  <!-- POR QUE (melhor explicado) -->
+  <!-- POR QUE (Imagem esquerda / Texto direita / sem vazio) -->
   <section class="bandGreen" id="porque">
     <div class="bandInner">
       <h2 class="bandTitle">Por que a Telluna</h2>
@@ -562,25 +613,46 @@
         reduz desperdícios e ganha previsibilidade para crescer com segurança.
       </p>
 
-      <div class="whyGrid">
-        <div class="whyCard">
-          <b>O que entregamos, na prática</b>
-          <p>
-            Diagnóstico do cenário atual, plano de ação com prioridades e metas, e acompanhamento de implantação.
-            Um método enxuto para organizar rotina, consolidar indicadores simples e dar direção ao crescimento.
-          </p>
-        </div>
+      <div class="why2col">
+        <div class="whyImage" aria-label="Transparência e parceria"></div>
 
-        <div class="whyList">
-          <div class="whyItem"><span class="whyCheck">✓</span><span>Aplicável para qualquer setor — com adaptação ao seu momento.</span></div>
-          <div class="whyItem"><span class="whyCheck">✓</span><span>Organização sem burocracia: clareza, controle e execução.</span></div>
-          <div class="whyItem"><span class="whyCheck">✓</span><span>Atuação remota com rotina leve e acompanhamento consistente.</span></div>
+        <div class="whyRight">
+          <div class="whyCard">
+            <b>O que entregamos, na prática</b>
+            <p>
+              Diagnóstico do cenário atual, plano de ação com prioridades e metas, e acompanhamento de implantação.
+              Um método enxuto para organizar rotina, consolidar indicadores simples e dar direção ao crescimento.
+            </p>
+          </div>
+
+          <div class="whyList">
+            <div class="whyItem"><span class="whyCheck">✓</span><span>Aplicável para qualquer setor — com adaptação ao seu momento.</span></div>
+            <div class="whyItem"><span class="whyCheck">✓</span><span>Organização sem burocracia: clareza, controle e execução.</span></div>
+            <div class="whyItem"><span class="whyCheck">✓</span><span>Atuação remota com rotina leve e acompanhamento consistente.</span></div>
+          </div>
+
+          <!-- preenchimento premium (sem parecer texto demais) -->
+          <div class="whyMetrics">
+            <div class="metric">
+              <b>Clareza</b>
+              <span>Prioridades + responsáveis + sequência de execução para destravar decisões.</span>
+            </div>
+            <div class="metric">
+              <b>Controle</b>
+              <span>Indicadores simples e rotina para reduzir desperdício e retrabalho.</span>
+            </div>
+            <div class="metric">
+              <b>Previsibilidade</b>
+              <span>Gestão organizada para crescer com segurança, sem travar a operação.</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMO FUNCIONA (modelo tipo imagem 5) -->
+  <!-- COMO FUNCIONA -->
   <section class="section wrap" id="como">
     <h2 class="sectionTitle">Como funciona</h2>
     <p class="sectionLead">
@@ -621,7 +693,7 @@
     </div>
   </section>
 
-  <!-- PLANOS (descrições melhores e mais caracteres) -->
+  <!-- PLANOS -->
   <section class="bandGreen" id="planos">
     <div class="bandInner">
       <h2 class="bandTitle">Planos de atendimento</h2>
@@ -635,7 +707,7 @@
           <h3>Organização</h3>
           <p>
             Para empresas que precisam colocar ordem na rotina: clareza de prioridades,
-            definição do que é “crítico” e um plano enxuto para decisões mais seguras.
+            definição do que é crítico e um plano enxuto para decisões mais seguras.
           </p>
           <div class="meta">
             <span>Investimento sob consulta</span>
@@ -660,8 +732,8 @@
           <div class="tag">Recorrente</div>
           <h3>Acompanhamento</h3>
           <p>
-            Para manter consistência e evolução: revisão de metas, apoio nas decisões e ajustes na execução.
-            Suporte consultivo contínuo para o gestor.
+            Suporte contínuo para manter consistência: revisão de metas, apoio nas decisões e ajustes na execução.
+            Um braço consultivo para o gestor não caminhar sozinho.
           </p>
           <div class="meta">
             <span>Investimento sob consulta</span>
@@ -670,7 +742,6 @@
         </div>
       </div>
 
-      <!-- FOOTER dentro do verde -->
       <footer>
         <div class="footerRow">
           <div class="footerLeft">
@@ -700,7 +771,6 @@
           </div>
         </div>
       </footer>
-
     </div>
   </section>
 
