@@ -72,16 +72,23 @@
 
     /* >>> IMAGEM 5: LOGO + NOME 3x MAIOR <<< */
     .logoBox{
-      width:100px; height:100px;               /* maior */
-      border-radius:0px;
-      background: linear-gradient(180deg, var(--beige), var(--beige2));
-      border:1px solid rgba(11,37,34,.10);
-      display:grid; place-items:center;
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .logoBox img{
-      width:100%; height:100%; object-fit:cover; display:block; /* maior */
+  width: 96px;        /* ajuste fino: 80-120 */
+  height: 96px;
+  border-radius: 0;   /* sem borda arredondada */
+  background: transparent;
+  border: none;       /* remove a borda */
+  box-shadow: none;   /* remove sombra */
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.logoBox img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* use cover se quiser preencher cortando */
+  display: block;
     }
     .brandText{min-width:0; line-height:1.0}
     .brandText b{
@@ -102,11 +109,60 @@
     }
 
     nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+     display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navGroup{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* CTA com a mesma largura do grupo (soma dos botões) */
+.ctaMatch{
+  width: calc(100%);          /* fallback */
+  min-width: 260px;
+}
+
+/* Faz o CTA “copiar” a largura do grupo */
+@media (min-width: 700px){
+  .ctaMatch{
+    width: max-content;
+    min-width: unset;
+  }
+  .ctaPulse{
+  animation: pulse 1.15s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+  50%{transform:scale(1.03); box-shadow:0 22px 60px rgba(198,168,90,.32)}
+  100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+}
+  /* truque: define o CTA com largura do container de botões */
+  .nav{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    align-items: center;
+    gap: 12px;
+  }
+  .ctaMatch{
+    width: 100%;
+    justify-self: end;
+  }
+  .navGroup{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 10px;
+  }
+  /* faz o CTA ter a mesma largura do grupo */
+  .ctaMatch{
+    width: calc( (1 * 1px) ); /* será sobrescrito via JS abaixo */
+  }
     }
 
     .btn{
@@ -639,6 +695,16 @@
   </style>
 </head>
 
+  <script>
+  function matchCTAWidth(){
+    const group = document.querySelector('.navGroup');
+    const cta = document.querySelector('.ctaMatch');
+    if(!group || !cta) return;
+    cta.style.width = group.offsetWidth + "px";
+  }
+  window.addEventListener('load', matchCTAWidth);
+  window.addEventListener('resize', matchCTAWidth);
+</script>
 <body>
 
   <!-- HEADER -->
@@ -656,10 +722,19 @@
       </div>
 
       <nav>
-        <a class="btn ghost" href="#como">Como funciona</a>
-        <a class="btn ghost" href="#planos">Planos</a>
+        <nav class="nav">
+  <div class="navGroup">
+    <a class="btn ghost" href="#como">Como funciona</a>
+    <a class="btn ghost" href="#planos">Planos</a>
+  </div>
 
-        <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" target="_blank" aria-label="Instagram Telluna">
+  <a class="btn primary ctaPulse ctaMatch" href="mailto:contato@telluna.com.br">
+    Agendar conversa
+  </a>
+</nav>
+
+        <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" ...>...</a>
+<a class="iconBtn" href="https://www.linkedin.com/company/telluna/" ...>...</a>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
           </svg>
