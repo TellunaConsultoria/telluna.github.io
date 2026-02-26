@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Telluna | Consultoria Empresarial Estratégica</title>
-  <meta name="description" content="A Telluna organiza gestão, fortalece governança e direciona decisões para transformar operação em crescimento previsível." />
 
   <style>
     :root{
@@ -17,7 +16,6 @@
 
       --text:#0B2522;
       --muted:#41514B;
-      --muted2:#5A6A64;
 
       --line: rgba(11,37,34,.12);
       --shadow2: 0 14px 30px rgba(0,0,0,.08);
@@ -51,118 +49,76 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(10px);
-      background: rgba(243,239,230,.78);
+      background: rgba(243,239,230,.86);
       border-bottom: 1px solid var(--line);
     }
     .headerInner{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 14px 26px;
+      padding: 16px 26px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
+      gap:18px;
     }
+
+    /* Brand (logo + nome) */
     .brand{
       display:flex;
       align-items:center;
       gap:16px;
       min-width:0;
     }
-
-    /* >>> IMAGEM 5: LOGO + NOME 3x MAIOR <<< */
     .logoBox{
-  width: 96px;        /* ajuste fino: 80-120 */
-  height: 96px;
-  border-radius: 0;   /* sem borda arredondada */
-  background: transparent;
-  border: none;       /* remove a borda */
-  box-shadow: none;   /* remove sombra */
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  padding: 0;
-}
-
-.logoBox img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* use cover se quiser preencher cortando */
-  display: block;
+      width:72px;
+      height:72px;
+      background: transparent;
+      border: none;
+      box-shadow:none;
+      padding:0;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      flex:0 0 auto;
     }
-    .brandText{min-width:0; line-height:1.0}
+    .logoBox img{
+      width:100%;
+      height:100%;
+      object-fit:contain; /* se quiser preencher cortando, troque por cover */
+      display:block;
+    }
+    .brandText{
+      min-width:0;
+      line-height:1.05;
+    }
     .brandText b{
       display:block;
-      font-size:100px;                         /* maior */
-      letter-spacing:1.8px;
+      font-size:58px;          /* Nome grande */
+      letter-spacing:2px;
       color: var(--green2);
     }
     .brandText small{
       display:block;
       margin-top:8px;
-      font-size:10px;
-      color: var(--muted2);
+      font-size:13.5px;
+      color: rgba(65,81,75,.85);
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
       max-width: 60ch;
     }
 
+    /* NAV */
     nav{
-     display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.navGroup{
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* CTA com a mesma largura do grupo (soma dos botões) */
-.ctaMatch{
-  width: calc(100%);          /* fallback */
-  min-width: 260px;
-}
-
-/* Faz o CTA “copiar” a largura do grupo */
-@media (min-width: 700px){
-  .ctaMatch{
-    width: max-content;
-    min-width: unset;
-  }
-  .ctaPulse{
-  animation: pulse 1.15s ease-in-out infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
-  50%{transform:scale(1.03); box-shadow:0 22px 60px rgba(198,168,90,.32)}
-  100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
-}
-  /* truque: define o CTA com largura do container de botões */
-  .nav{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    align-items: center;
-    gap: 12px;
-  }
-  .ctaMatch{
-    width: 100%;
-    justify-self: end;
-  }
-  .navGroup{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 10px;
-  }
-  /* faz o CTA ter a mesma largura do grupo */
-  .ctaMatch{
-    width: calc( (1 * 1px) ); /* será sobrescrito via JS abaixo */
-  }
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex:0 0 auto;
+    }
+    .navGroup{
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
     .btn{
@@ -177,30 +133,33 @@
       cursor:pointer;
       white-space:nowrap;
       transition: transform .15s ease;
+      height:44px;
     }
     .btn:hover{transform: translateY(-1px)}
+    .btn.ghost{background: rgba(255,255,255,.35);}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(198,168,90,.95), rgba(198,168,90,.72));
+      background: linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.74));
       color: var(--green2);
       border:1px solid rgba(198,168,90,.55);
       box-shadow: 0 18px 40px rgba(198,168,90,.18);
+      font-size:16px;
+      height:44px;
+      padding:12px 18px;
     }
-    .btn.ghost{background: transparent;}
 
-    .iconBtn{
-      width:42px;height:42px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      display:grid;place-items:center;
-      box-shadow: 0 10px 24px rgba(0,0,0,.05);
-      transition: transform .15s ease;
+    /* CTA piscando + largura igual ao grupo */
+    .ctaPulse{
+      animation: pulse 1.15s ease-in-out infinite;
+      transform-origin:center;
     }
-    .iconBtn:hover{transform: translateY(-1px)}
-    .iconBtn svg{width:18px;height:18px;fill:var(--green2)}
+    @keyframes pulse{
+      0%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+      50%{transform:scale(1.03); box-shadow:0 22px 60px rgba(198,168,90,.32)}
+      100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+    }
 
-    /* HERO */
-    .hero{padding: 56px 0 16px;}
+    /* HERO só pra não ficar vazio (mantém simples) */
+    .hero{padding: 42px 0 16px;}
     .heroGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
@@ -218,7 +177,7 @@
       display:inline-flex;
       align-items:center;
       gap:10px;
-      color: var(--muted2);
+      color: rgba(65,81,75,.9);
       font-size:12px;
       letter-spacing:.9px;
       text-transform:uppercase;
@@ -232,44 +191,19 @@
     }
     .heroTitle{
       margin:0;
-      font-size:52px;
+      font-size:46px;
       line-height:1.05;
-      letter-spacing:-.8px;
+      letter-spacing:-.6px;
       color: var(--green2);
     }
     .heroTitle .gold{color: var(--gold)}
     .heroSub{
       margin:16px 0 0;
-      font-size:16.5px;
+      font-size:16px;
       line-height:1.75;
       color: var(--muted);
       max-width: 85ch;
     }
-
-    /* >>> NOVO: BLOCO "QUE É A TELLUNA?" LOGO APÓS A IMAGEM 1 <<< */
-    .aboutTelluna{
-      margin-top:18px;
-      padding:16px 18px;
-      border-radius: 18px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(243,239,230,.70);
-    }
-    .aboutTelluna b{
-      display:block;
-      color: var(--green2);
-      font-size:14px;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      margin-bottom:6px;
-    }
-    .aboutTelluna p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.7;
-      font-size:14.8px;
-      max-width: 95ch;
-    }
-
     .heroActions{
       margin-top:18px;
       display:flex;
@@ -277,38 +211,10 @@
       flex-wrap:wrap;
       align-items:center;
     }
-    .miniTrust{
-      margin-top:18px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(243,239,230,.65);
-      color: var(--green2);
-      font-weight:800;
-      font-size:13px;
-    }
-    .pill i{
-      width:18px;height:18px;border-radius:6px;
-      border:1px solid rgba(198,168,90,.55);
-      display:grid;place-items:center;
-      color: var(--gold);
-      font-style:normal;
-      font-size:12px;
-      flex:0 0 auto;
-      background: rgba(255,255,255,.5);
-    }
 
-    .heroImageCard{padding:0; overflow:hidden; min-height: 520px;}
+    .heroImageCard{padding:0; overflow:hidden; min-height: 360px;}
     .heroImageFill{
-      width:100%; height:100%; min-height:520px;
+      width:100%; height:100%; min-height:360px;
       background:
         linear-gradient(180deg, rgba(11,37,34,.18), rgba(11,37,34,.55)),
         radial-gradient(900px 520px at 20% 10%, rgba(198,168,90,.18), transparent 60%),
@@ -318,440 +224,59 @@
       transform: scale(1.02);
     }
 
-    /* SEÇÃO BASE */
-    .section{padding: 46px 0;}
-    .sectionTitle{
-      margin:0 0 12px;
-      font-size:34px;
-      letter-spacing:-.2px;
-      color: var(--green2);
-    }
-    .sectionLead{
-      margin:0 0 18px;
-      color: var(--muted);
-      line-height:1.7;
-      font-size:15.5px;
-      max-width: 100ch;
-    }
-
-    /* BAND VERDE */
-    .bandGreen{
-      background:
-        radial-gradient(900px 520px at 25% 0%, rgba(198,168,90,.18), transparent 60%),
-        linear-gradient(180deg, var(--green), var(--green2));
-      color:#EAF1EA;
-      border-top: 1px solid rgba(255,255,255,.10);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .bandInner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 52px 26px;
-    }
-    .bandTitle{
-      margin:0 0 10px;
-      font-size:34px;
-      color:#EAF1EA;
-      letter-spacing:-.2px;
-    }
-    .bandLead{
-      margin:0 0 18px;
-      color: rgba(234,241,234,.84);
-      line-height:1.7;
-      font-size:15.5px;
-      max-width: none;
-    }
-
-    /* POR QUE - 2 COLUNAS (imagem esquerda / texto direita) */
-    .why2col{
-      display:grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 22px;
-      align-items: stretch;
-      margin-top: 16px;
-    }
-    .whyImage{
-      border-radius: 26px;
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      min-height: 520px;
-      background:
-        linear-gradient(180deg, rgba(11,37,34,.18), rgba(11,37,34,.70)),
-        radial-gradient(900px 520px at 20% 10%, rgba(198,168,90,.16), transparent 60%),
-        url('parceria.jpg');
-      background-size: cover;
-      background-position: center;
-      box-shadow: var(--shadow2);
-      position:relative;
-    }
-    .whyRight{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      min-height: 520px;
-    }
-
-    .whyList{
-      display:grid;
-      gap:10px;
-    }
-    .whyItem{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(11,37,34,.35);
-    }
-    .whyCheck{
-      width:18px;height:18px;border-radius:6px;
-      border:1px solid rgba(198,168,90,.55);
-      background: rgba(255,255,255,.08);
-      display:grid;place-items:center;
-      color: var(--gold);
-      font-weight:900;
-      font-size:12px;
-      flex:0 0 auto;
-      margin-top:2px;
-    }
-    .whyItem span{color: rgba(234,241,234,.84); line-height:1.6; font-size:14.8px}
-
-    /* >>> IMAGEM 2: FRASES NOVAS <<< */
-    .whyStatements{
-      margin-top:auto;
-      display:grid;
-      gap:10px;
-    }
-    .statement{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:16px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(11,37,34,.35);
-      color: rgba(234,241,234,.88);
-      line-height:1.6;
-      font-size:15px;
-    }
-    .statement b{
-      color:#EAF1EA;
-      font-weight:900;
-    }
-    .statement .mark{
-      width:18px;height:18px;border-radius:6px;
-      border:1px solid rgba(198,168,90,.55);
-      background: rgba(255,255,255,.08);
-      display:grid;place-items:center;
-      color: var(--gold);
-      font-weight:900;
-      font-size:12px;
-      flex:0 0 auto;
-      margin-top:2px;
-    }
-
-    /* COMO FUNCIONA */
-    .process{
-      display:grid;
-      grid-template-columns: 1fr 420px 1fr;
-      gap: 18px;
-      align-items:center;
-      margin-top: 22px;
-    }
-    .processCol{display:grid; gap:14px;}
-    .procBox{
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      padding:16px;
-      box-shadow: 0 10px 22px rgba(0,0,0,.04);
-    }
-    .procBox b{display:block; color: var(--green2); margin-bottom:6px}
-    .procBox p{margin:0; color: var(--muted); line-height:1.6; font-size:14.5px}
-
-    .wheelWrap{
-      width:100%;
-      height: 420px;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(600px 360px at 50% 30%, rgba(198,168,90,.18), transparent 60%),
-        rgba(255,255,255,.45);
-      box-shadow: var(--shadow2);
-      display:grid;
-      place-items:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .wheel{
-      width: 300px; height: 300px;
-      border-radius: 999px;
-      border: 10px solid rgba(15,46,42,.18);
-      position:relative;
-      background: rgba(15,46,42,.06);
-    }
-    .wheel:before{
-      content:"";
-      position:absolute;
-      inset: 20px;
-      border-radius: 999px;
-      border: 10px solid rgba(15,46,42,.22);
-    }
-    .wheel:after{
-      content:"";
-      position:absolute;
-      inset: 118px;
-      border-radius: 999px;
-      background: rgba(243,239,230,.85);
-      border: 1px solid rgba(11,37,34,.10);
-    }
-    .wheelNum{
-      position:absolute;
-      width:46px;height:46px;border-radius:16px;
-      display:grid;place-items:center;
-      background: rgba(15,46,42,.92);
-      color:#EAF1EA;
-      font-weight:900;
-      border:1px solid rgba(198,168,90,.35);
-      box-shadow: 0 16px 30px rgba(0,0,0,.12);
-    }
-    .n1{top:20px; left:50%; transform: translateX(-50%);}
-    .n2{top:50%; right:20px; transform: translateY(-50%);}
-    .n3{bottom:20px; left:50%; transform: translateX(-50%);}
-    .n4{top:50%; left:20px; transform: translateY(-50%);}
-
-    /* >>> IMAGEM 3: FRASE GRANDE EM DESTAQUE (NO BLOCO COMO FUNCIONA) <<< */
-    .impactQuote{
-      margin-top: 22px;
-      border-radius: 26px;
-      border: 1px solid rgba(11,37,34,.10);
-      background:
-        radial-gradient(900px 520px at 18% 0%, rgba(198,168,90,.18), transparent 60%),
-        linear-gradient(180deg, rgba(243,239,230,.85), rgba(239,231,218,.85));
-      box-shadow: var(--shadow2);
-      padding: 26px 24px;
-      text-align:center;
-    }
-    .impactQuote h3{
-      margin:0;
-      color: var(--green2);
-      font-size:28px;
-      line-height:1.25;
-      letter-spacing:-.2px;
-    }
-    .impactQuote h3 .gold{color: var(--gold); font-weight:900;}
-
-    /* >>> BLOCO NOVO ABAIXO DA IMAGEM 3 <<< */
-    .painBlock{
-      margin-top: 14px;
-      border-radius: 26px;
-      border: 1px solid rgba(11,37,34,.10);
-      background: rgba(255,255,255,.55);
-      box-shadow: var(--shadow2);
-      padding: 24px 22px;
-    }
-    .painBlock h3{
-      margin:0 0 12px;
-      color: var(--green2);
-      font-size:26px;
-      letter-spacing:-.2px;
-    }
-    .painGrid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:12px;
-    }
-    .painItem{
-      border-radius: 18px;
-      border:1px solid rgba(11,37,34,.10);
-      background: rgba(243,239,230,.70);
-      padding:14px;
-      color: var(--muted);
-      line-height:1.6;
-      font-size:14.8px;
-    }
-    .painItem b{color: var(--green2);}
-
-    /* PLANOS */
-    .plansGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top: 18px;
-    }
-    .plan{
-      border-radius: var(--radius2);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(11,37,34,.35);
-      padding:18px;
-      min-height: 190px;
-    }
-    .plan .tag{
-      color: var(--gold);
-      font-weight:900;
-      letter-spacing:.7px;
-      text-transform:uppercase;
-      font-size:12px;
-    }
-    .plan h3{
-      margin:8px 0 10px;
-      color:#EAF1EA;
-      font-size:18px;
-    }
-    .plan p{
-      margin:0;
-      color: rgba(234,241,234,.84);
-      line-height:1.7;
-      font-size:14.8px;
-    }
-    .plan .meta{
-      margin-top:14px;
-      padding-top:12px;
-      border-top:1px solid rgba(255,255,255,.12);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      color:#EAF1EA;
-      font-weight:900;
-      font-size:13px;
-    }
-    .plan .meta small{color: rgba(234,241,234,.78); font-weight:700}
-
-    /* >>> BOTÃO FINAL (PISCANDO) <<< */
-    .ctaWrap{
-      margin-top: 22px;
-      display:flex;
-      justify-content:center;
-    }
-    .ctaBig{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:18px 26px;
-      border-radius: 18px;
-      font-weight:900;
-      font-size:18px;
-      letter-spacing:.2px;
-      color: var(--green2);
-      border:1px solid rgba(198,168,90,.55);
-      background: linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.74));
-      box-shadow: 0 18px 44px rgba(198,168,90,.22);
-      animation: pulse 1.15s ease-in-out infinite;
-      transform-origin:center;
-    }
-    @keyframes pulse{
-      0%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
-      50%{transform:scale(1.03); box-shadow:0 22px 60px rgba(198,168,90,.32)}
-      100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
-    }
-
-    /* FOOTER */
-    footer{
-      border-top: 1px solid rgba(255,255,255,.12);
-      margin-top: 26px;
-      padding-top: 16px;
-    }
-    .footerRow{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      color: rgba(234,241,234,.82);
-      font-size:13.5px;
-    }
-    .footerLeft{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footerBrand{
-      display:flex; align-items:center; gap:10px;
-      color:#EAF1EA;
-      font-weight:900;
-      letter-spacing:.6px;
-    }
-    .footerBrand img{width:28px;height:28px;object-fit:contain}
-    .footerLinks{display:flex; gap:10px; align-items:center}
-
-    /* RESPONSIVO */
+    /* Responsivo */
     @media (max-width: 1020px){
-      .heroGrid{grid-template-columns: 1fr;}
-      .heroImageCard, .heroImageFill{min-height: 320px;}
-      .why2col{grid-template-columns: 1fr;}
-      .whyImage{min-height: 300px;}
-      .whyRight{min-height: unset;}
-      .process{grid-template-columns: 1fr;}
-      .wheelWrap{height: 360px;}
-      .plansGrid{grid-template-columns: 1fr;}
-      .painGrid{grid-template-columns: 1fr;}
-      .heroTitle{font-size:44px;}
-      .brandText b{font-size:28px;}
-      .logoBox{width:82px;height:82px;}
-      .logoBox img{width:66px;height:66px;}
+      .brandText b{font-size:40px;}
+      .logoBox{width:60px;height:60px;}
+      .headerInner{gap:12px}
+      nav{gap:10px}
+      .heroGrid{grid-template-columns:1fr}
+      .heroImageCard,.heroImageFill{min-height:280px}
+    }
+    @media (max-width: 720px){
+      .headerInner{flex-direction:column; align-items:flex-start}
+      nav{width:100%; justify-content:flex-start; flex-wrap:wrap}
+      .brandText b{font-size:36px;}
+      .btn.primary{width:100%}
+      .navGroup{width:100%}
+      .navGroup .btn{flex:1}
     }
   </style>
 </head>
 
-  <script>
-  function matchCTAWidth(){
-    const group = document.querySelector('.navGroup');
-    const cta = document.querySelector('.ctaMatch');
-    if(!group || !cta) return;
-    cta.style.width = group.offsetWidth + "px";
-  }
-  window.addEventListener('load', matchCTAWidth);
-  window.addEventListener('resize', matchCTAWidth);
-</script>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="headerInner">
+
+      <!-- LOGO + NOME -->
       <div class="brand">
+        <!-- IMPORTANTE: deixe o arquivo no repo com ESTE nome -->
         <div class="logoBox">
-          <!-- Ajuste para o nome real do seu arquivo de logo -->
-          <img src="logo-telluna.png" alt="Logo Telluna">
+          <img src="logo-telluna.png" alt="Telluna">
         </div>
+
         <div class="brandText">
           <b>TELLUNA</b>
           <small>Consultoria Empresarial Estratégica</small>
         </div>
       </div>
 
+      <!-- NAV (sem Instagram/LinkedIn no topo) -->
       <nav>
-        <nav class="nav">
-  <div class="navGroup">
-    <a class="btn ghost" href="#como">Como funciona</a>
-    <a class="btn ghost" href="#planos">Planos</a>
-  </div>
+        <div class="navGroup" id="navGroup">
+          <a class="btn ghost" href="#como">Como funciona</a>
+          <a class="btn ghost" href="#planos">Planos</a>
+        </div>
 
-  <a class="btn primary ctaPulse ctaMatch" href="mailto:contato@telluna.com.br">
-    Agendar conversa
-  </a>
-</nav>
-
-        <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" ...>...</a>
-<a class="iconBtn" href="https://www.linkedin.com/company/telluna/" ...>...</a>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
-          </svg>
+        <a class="btn primary ctaPulse" id="ctaTop" href="mailto:contato@telluna.com.br">
+          Agendar conversa
         </a>
-
-        <a class="iconBtn" href="https://www.linkedin.com/company/telluna/" target="_blank" aria-label="LinkedIn Telluna">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5zM5.5 20.5h2.9V9h-2.9zM10.1 9h2.78v1.57h.04a3.05 3.05 0 0 1 2.75-1.5c2.94 0 3.48 1.93 3.48 4.44v6.99h-2.9v-6.2c0-1.48 0-3.38-2.06-3.38s-2.38 1.61-2.38 3.27v6.31h-2.9z"/>
-          </svg>
-        </a>
-
-        <a class="btn primary" href="mailto:contato@telluna.com.br">Agendar conversa</a>
       </nav>
+
     </div>
   </header>
 
-  <!-- HERO -->
   <main class="wrap">
     <section class="hero" id="inicio">
       <div class="heroGrid">
@@ -769,212 +294,52 @@
             para transformar operação em crescimento consistente — com método, clareza e execução.
           </p>
 
-          <!-- NOVO BLOCO: QUE É A TELLUNA? (>=150 caracteres) -->
-          <div class="aboutTelluna">
-            <b>Que é a Telluna?</b>
-            <p>
-              A Telluna é uma consultoria empresarial estratégica que organiza a gestão da sua empresa com método e execução.
-              Estruturamos prioridades, processos e indicadores simples para transformar decisões em previsibilidade, eficiência e crescimento consistente.
-            </p>
-          </div>
-
           <div class="heroActions">
-            <a class="btn primary" href="mailto:contato@telluna.com.br">Solicitar diagnóstico</a>
+            <a class="btn primary ctaPulse" href="mailto:contato@telluna.com.br">Agendar conversa</a>
             <a class="btn ghost" href="#como">Como funciona</a>
-          </div>
-
-          <div class="miniTrust">
-            <span class="pill"><i>✓</i> Método prático</span>
-            <span class="pill"><i>✓</i> Atuação remota</span>
-            <span class="pill"><i>✓</i> Foco em decisão</span>
           </div>
         </div>
 
-        <div class="card heroImageCard" aria-label="Imagem institucional Telluna">
+        <div class="card heroImageCard">
           <div class="heroImageFill"></div>
         </div>
 
       </div>
     </section>
-  </main>
 
-  <!-- POR QUE (alternância de cor: VERDE) -->
-  <section class="bandGreen" id="porque">
-    <div class="bandInner">
-      <h2 class="bandTitle">Por que a Telluna</h2>
-      <p class="bandLead">
-        A Telluna existe para tirar a empresa do improviso e colocar gestão no lugar.
-        Quando processos, prioridades e responsabilidades ficam claros, o gestor decide melhor,
-        reduz desperdícios e ganha previsibilidade para crescer com segurança.
+    <!-- Seções âncora básicas -->
+    <section class="wrap" id="como" style="padding: 40px 0;">
+      <h2 style="margin:0; font-size:32px; color: var(--green2);">Como funciona</h2>
+      <p style="margin:10px 0 0; color: var(--muted); line-height:1.7;">
+        Diagnóstico → Plano de ação → Implantação → Evolução contínua.
       </p>
+    </section>
 
-      <div class="why2col">
-        <div class="whyImage" aria-label="Transparência e parceria"></div>
-
-        <div class="whyRight">
-
-          <!-- IMAGEM 2: substituição por frases novas -->
-          <div class="whyStatements">
-            <div class="statement"><span class="mark">✓</span><span><b>Estruturamos metas trimestrais</b> com indicadores simples.</span></div>
-            <div class="statement"><span class="mark">✓</span><span><b>Criamos rotina de decisão</b> baseada em números reais.</span></div>
-            <div class="statement"><span class="mark">✓</span><span><b>Transformamos operação confusa</b> em gestão previsível.</span></div>
-          </div>
-
-          <div class="whyList">
-            <div class="whyItem"><span class="whyCheck">✓</span><span>Aplicável para qualquer setor — com adaptação ao seu momento.</span></div>
-            <div class="whyItem"><span class="whyCheck">✓</span><span>Organização sem burocracia: clareza, controle e execução.</span></div>
-            <div class="whyItem"><span class="whyCheck">✓</span><span>Atuação remota com rotina leve e acompanhamento consistente.</span></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMO FUNCIONA (alternância de cor: BEGE) -->
-  <section class="section wrap" id="como">
-    <h2 class="sectionTitle">Como funciona</h2>
-    <p class="sectionLead">
-      Um processo simples, visual e objetivo para organizar a gestão e transformar decisões em evolução real.
-    </p>
-
-    <div class="process">
-      <div class="processCol">
-        <div class="procBox">
-          <b>1. Diagnóstico</b>
-          <p>Levantamos cenário, gargalos e riscos. Identificamos o que impede previsibilidade hoje.</p>
-        </div>
-        <div class="procBox">
-          <b>4. Evolução contínua</b>
-          <p>Consolidamos rotina e indicadores para manter consistência e melhorar decisões ao longo do tempo.</p>
-        </div>
-      </div>
-
-      <div class="wheelWrap" aria-label="Processo Telluna">
-        <div class="wheel">
-          <div class="wheelNum n1">1</div>
-          <div class="wheelNum n2">2</div>
-          <div class="wheelNum n3">3</div>
-          <div class="wheelNum n4">4</div>
-        </div>
-      </div>
-
-      <div class="processCol">
-        <div class="procBox">
-          <b>2. Plano de ação</b>
-          <p>Definimos prioridades, metas e responsáveis — com foco no que destrava resultado.</p>
-        </div>
-        <div class="procBox">
-          <b>3. Implantação</b>
-          <p>Acompanhamos a execução, ajustamos o plano e colocamos a estrutura para rodar sem travar a operação.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- IMAGEM 3: FRASE GRANDE EM DESTAQUE -->
-    <div class="impactQuote">
-      <h3>
-        A Telluna não entrega relatórios. <span class="gold">Entrega rotina estruturada de decisão</span>.
-      </h3>
-    </div>
-
-    <!-- BLOCO NOVO ABAIXO: IMPACTO EMOCIONAL -->
-    <div class="painBlock">
-      <h3>Se você não fizer isso hoje, o que sua empresa sofre?</h3>
-      <div class="painGrid">
-        <div class="painItem"><b>•</b> Cresce no esforço, mas <b>não vira lucro</b> porque tudo se perde na desorganização.</div>
-        <div class="painItem"><b>•</b> Depende do dono para tudo e <b>trava</b> quando a operação aumenta.</div>
-        <div class="painItem"><b>•</b> Toma decisões no “achismo” e <b>paga caro</b> com retrabalho e desperdício.</div>
-        <div class="painItem"><b>•</b> Perde oportunidades por falta de controle — e <b>só percebe tarde</b> quando o caixa aperta.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLANOS (alternância de cor: VERDE) -->
-  <section class="bandGreen" id="planos">
-    <div class="bandInner">
-      <h2 class="bandTitle">Planos de atendimento</h2>
-      <p class="bandLead">
+    <section class="wrap" id="planos" style="padding: 40px 0 70px;">
+      <h2 style="margin:0; font-size:32px; color: var(--green2);">Planos</h2>
+      <p style="margin:10px 0 0; color: var(--muted); line-height:1.7;">
         Sem valores no site. O investimento é definido após uma conversa inicial para entender seu momento e escopo.
       </p>
+    </section>
 
-      <div class="plansGrid">
-        <div class="plan">
-          <div class="tag">Essencial</div>
-          <h3>Organização</h3>
-          <p>
-            Para colocar ordem na rotina e parar de apagar incêndio.
-            Definimos prioridades, responsabilidades e uma sequência de ação objetiva para melhorar decisões sem burocracia.
-          </p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>até 60 dias</small>
-          </div>
-        </div>
+  </main>
 
-        <div class="plan" style="border-color: rgba(198,168,90,.35)">
-          <div class="tag">Estratégico</div>
-          <h3>Estruturação</h3>
-          <p>
-            Para formalizar processos essenciais, criar indicadores simples e alinhar a equipe.
-            Ideal para crescer com previsibilidade, reduzir retrabalho e transformar rotina em consistência.
-          </p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>até 90 dias</small>
-          </div>
-        </div>
-
-        <div class="plan">
-          <div class="tag">Recorrente</div>
-          <h3>Acompanhamento</h3>
-          <p>
-            Para manter a evolução no ritmo certo.
-            Revisamos metas, apoiamos decisões e ajustamos a execução com você — um braço consultivo para não voltar ao improviso.
-          </p>
-          <div class="meta">
-            <span>Investimento sob consulta</span>
-            <small>mín. 6 meses</small>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA FINAL (PISCANDO) -->
-      <div class="ctaWrap">
-        <a class="ctaBig" href="mailto:contato@telluna.com.br">Agendar conversa estratégica</a>
-      </div>
-
-      <footer>
-        <div class="footerRow">
-          <div class="footerLeft">
-            <div class="footerBrand">
-              <img src="logo-telluna.png" alt="Telluna">
-              <span>TELLUNA</span>
-            </div>
-            <span>© 2026</span>
-            <span>•</span>
-            <span>Franca/SP</span>
-            <span>•</span>
-            <span>contato@telluna.com.br</span>
-          </div>
-
-          <div class="footerLinks">
-            <a class="iconBtn" href="https://www.instagram.com/telluna.esg/" target="_blank" aria-label="Instagram Telluna (rodapé)">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.25a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
-              </svg>
-            </a>
-
-            <a class="iconBtn" href="https://www.linkedin.com/company/telluna/" target="_blank" aria-label="LinkedIn Telluna (rodapé)">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5zM5.5 20.5h2.9V9h-2.9zM10.1 9h2.78v1.57h.04a3.05 3.05 0 0 1 2.75-1.5c2.94 0 3.48 1.93 3.48 4.44v6.99h-2.9v-6.2c0-1.48 0-3.38-2.06-3.38s-2.38 1.61-2.38 3.27v6.31h-2.9z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </section>
+  <script>
+    // Deixa o botão "Agendar conversa" com a mesma largura do grupo (Como funciona + Planos)
+    function matchCTAWidth(){
+      const group = document.getElementById('navGroup');
+      const cta = document.getElementById('ctaTop');
+      if(!group || !cta) return;
+      // só aplica em telas maiores (evita quebrar no mobile)
+      if(window.innerWidth > 720){
+        cta.style.width = group.offsetWidth + "px";
+      }else{
+        cta.style.width = "";
+      }
+    }
+    window.addEventListener('load', matchCTAWidth);
+    window.addEventListener('resize', matchCTAWidth);
+  </script>
 
 </body>
 </html>
