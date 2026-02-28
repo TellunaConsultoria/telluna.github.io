@@ -92,7 +92,7 @@
     .logoBox img{
       width:100%;
       height:100%;
-      object-fit:contain; /* se sua logo tiver muita borda interna, recorte no Canva */
+      object-fit:contain;
       display:block;
     }
     .brandText{min-width:0; line-height:1.05;}
@@ -147,7 +147,7 @@
       100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
     }
 
-    /* ===== HERO (Imagem 1) ===== */
+    /* ===== HERO ===== */
     .heroGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
@@ -213,7 +213,6 @@
       transform: scale(1.02);
     }
 
-    /* ===== "Que é a Telluna?" (Texto após imagem 1) ===== */
     .aboutStrip{
       margin-top: 22px;
       padding: 18px 22px;
@@ -226,7 +225,7 @@
     }
     .aboutStrip b{color: var(--green2);}
 
-    /* ===== Por que a Telluna (Imagem 2 - verde) ===== */
+    /* ===== Por que ===== */
     .grid2{
       display:grid;
       grid-template-columns: .95fr 1.05fr;
@@ -237,11 +236,11 @@
       border-radius: var(--radius);
       overflow:hidden;
       border:1px solid rgba(255,255,255,.14);
+      min-height: 320px;
+      position:relative;
       background:
         radial-gradient(900px 520px at 20% 10%, rgba(198,168,90,.14), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      min-height: 320px;
-      position:relative;
     }
     .whyPhoto::after{
       content:"";
@@ -267,10 +266,7 @@
       max-width: 90ch;
       font-size:16px;
     }
-    .checks{
-      display:grid;
-      gap:12px;
-    }
+    .checks{display:grid; gap:12px;}
     .checkItem{
       display:flex;
       gap:12px;
@@ -293,7 +289,7 @@
     .checkItem b{color:#fff}
     .checkItem span{color: rgba(255,255,255,.86); line-height:1.55; font-size:14.8px}
 
-    /* ===== Como funciona (Imagem 3 - INVERTER para VERDE) ===== */
+    /* ===== COMO FUNCIONA (AJUSTADO: card na direção de cada número) ===== */
     .howTop{
       display:flex;
       align-items:flex-end;
@@ -313,34 +309,21 @@
       color: rgba(255,255,255,.82);
       line-height:1.65;
     }
-    .howGrid{
-      display:grid;
-      grid-template-columns: 1fr 420px 1fr;
-      gap: 22px;
-      align-items:center;
-    }
-    .howCard{
-      border-radius: 18px;
-      padding: 18px 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      box-shadow: 0 12px 26px rgba(0,0,0,.18);
-    }
-    .howCard h3{
-      margin:0 0 6px;
-      font-size:15px;
-      color: var(--gold);
-      letter-spacing:.2px;
-    }
-    .howCard p{
-      margin:0;
-      color: rgba(255,255,255,.86);
-      line-height:1.55;
-      font-size:13.8px;
+
+    .howBoard{
+      position: relative;
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 28px;
+      box-shadow: 0 18px 44px rgba(0,0,0,.18);
+      min-height: 380px;
     }
 
-    /* círculo */
     .ringWrap{
+      width: 380px;
+      max-width: 100%;
+      margin: 0 auto;
       border-radius: 22px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
@@ -350,8 +333,6 @@
     .ring{
       width:100%;
       aspect-ratio:1/1;
-      max-width: 380px;
-      margin: 0 auto;
       border-radius: 18px;
       display:grid;
       place-items:center;
@@ -375,22 +356,65 @@
     .n3{bottom:13%; left:50%; transform:translate(-50%,50%);}
     .n4{top:50%; left:13%; transform:translate(-50%,-50%);}
 
-    /* frase grande dentro do bloco do "Como funciona" */
+    .howCard{
+      position:absolute;
+      width: 320px;
+      border-radius: 16px;
+      padding: 16px 16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 12px 26px rgba(0,0,0,.18);
+    }
+    .howCard h3{
+      margin:0 0 6px;
+      font-size:14.6px;
+      color: var(--gold);
+      letter-spacing:.2px;
+    }
+    .howCard p{
+      margin:0;
+      color: rgba(255,255,255,.86);
+      line-height:1.55;
+      font-size:13.6px;
+    }
+
+    /* posições: 1 em cima, 2 direita, 3 embaixo, 4 esquerda */
+    .pos1{top:22px; left:50%; transform:translateX(-50%);}
+    .pos2{top:50%; right:22px; transform:translateY(-50%);}
+    .pos3{bottom:22px; left:50%; transform:translateX(-50%);}
+    .pos4{top:50%; left:22px; transform:translateY(-50%);}
+
+    /* deixa o círculo sempre central */
+    .centerRing{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ===== FRASE (AJUSTADA: fundo dourado, letra branca, destaque verde, piscando, fonte maior) ===== */
     .quoteBar{
       margin-top: 26px;
       border-radius: 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      padding: 18px 20px;
+      border:1px solid rgba(198,168,90,.55);
+      background: linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.78));
+      padding: 22px 22px;
       text-align:center;
-      font-size:20px;
-      line-height:1.55;
+      font-size:24px;
+      line-height:1.35;
       font-weight:900;
       color:#fff;
+      box-shadow: 0 22px 64px rgba(198,168,90,.22);
+      animation: quoteBlink 1.1s ease-in-out infinite;
     }
-    .quoteBar .gold{color: var(--gold);}
+    .quoteBar .green{color: var(--green2);}
+    @keyframes quoteBlink{
+      0%{filter:brightness(1); transform:scale(1)}
+      50%{filter:brightness(1.08); transform:scale(1.01)}
+      100%{filter:brightness(1); transform:scale(1)}
+    }
 
-    /* ===== Bloco emocional (Imagem 4 - INVERTER para BRANCO) ===== */
+    /* ===== BLOCO EMOCIONAL (branco) ===== */
     .painCard{
       border-radius: var(--radius);
       border:1px solid rgba(11,37,34,.14);
@@ -421,7 +445,7 @@
     .painItem b{color: var(--green2)}
     .painItem .gold{color: var(--gold); font-weight:800;}
 
-    /* ===== Planos (Imagem 5 - manter verde) ===== */
+    /* ===== PLANOS ===== */
     .plansHead{
       display:flex;
       align-items:flex-end;
@@ -531,9 +555,7 @@
       color:#fff;
     }
     .footBrand img{width:18px; height:18px; object-fit:contain;}
-    .footSocial{
-      display:flex; gap:10px; align-items:center;
-    }
+    .footSocial{display:flex; gap:10px; align-items:center;}
     .iconBtn{
       width:40px; height:40px;
       border-radius: 12px;
@@ -561,7 +583,6 @@
       animation: waShake 2.2s ease-in-out infinite;
       border: 2px solid rgba(255,255,255,.65);
     }
-    .waFloat:hover{transform: translateY(-2px);}
     .waFloat svg{width:30px;height:30px; fill:#fff;}
     @keyframes waShake{
       0%, 70%, 100% { transform: translateX(0) rotate(0deg); }
@@ -577,10 +598,15 @@
       .heroGrid{grid-template-columns:1fr; gap:18px;}
       .heroImageFill{min-height:280px;}
       .grid2{grid-template-columns:1fr; }
-      .howGrid{grid-template-columns:1fr; }
-      .ringWrap{max-width:520px; margin: 0 auto;}
       .planGrid{grid-template-columns:1fr; }
       .painGrid{grid-template-columns:1fr;}
+      .howBoard{min-height: 560px;}
+      .howCard{width: min(86vw, 420px);}
+      .pos2{right: 50%; top: 18px; transform: translateX(50%);} /* empilha melhor */
+      .pos4{left: 50%; bottom: 18px; top: auto; transform: translateX(-50%);}
+      .pos1{top: 18px;}
+      .pos3{bottom: 18px;}
+      .centerRing{top:50%; left:50%;}
     }
     @media (max-width: 720px){
       .headerInner{flex-direction:column; align-items:flex-start}
@@ -593,19 +619,19 @@
       .section{padding:56px 0;}
       .heroTitle{font-size:38px}
       .whyText h2,.howTop h2,.plansHead h2{font-size:34px}
+      .howBoard{min-height: 620px;}
+      .quoteBar{font-size:20px;}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="headerInner">
 
       <div class="brand">
         <div class="logoBox">
-          <!-- coloque sua logo no repo com este nome -->
           <img src="logo-telluna.png" alt="Telluna">
         </div>
         <div class="brandText">
@@ -627,7 +653,7 @@
     </div>
   </header>
 
-  <!-- HERO (Imagem 1) -->
+  <!-- HERO -->
   <section class="section bg-beige" id="inicio">
     <div class="wrap">
       <div class="heroGrid">
@@ -664,13 +690,12 @@
     </div>
   </section>
 
-  <!-- POR QUE (Imagem 2 - verde) -->
+  <!-- POR QUE -->
   <section class="section bg-green" id="porque">
     <div class="wrap">
       <div class="grid2">
 
         <div class="whyPhoto">
-          <!-- imagem vertical/coluna esquerda (suba com esse nome) -->
           <img src="foto-porque.jpg" alt="Transparência e parceria">
         </div>
 
@@ -731,7 +756,7 @@
     </div>
   </section>
 
-  <!-- COMO FUNCIONA (Imagem 3 - invertido: verde + texto branco/dourado) -->
+  <!-- COMO FUNCIONA (corrigido) -->
   <section class="section bg-green" id="como">
     <div class="wrap">
       <div class="howTop">
@@ -741,51 +766,54 @@
         </div>
       </div>
 
-      <div class="howGrid">
-        <div class="howCard">
+      <div class="howBoard">
+        <!-- círculo central -->
+        <div class="centerRing">
+          <div class="ringWrap">
+            <div class="ring">
+              <svg viewBox="0 0 200 200" aria-hidden="true">
+                <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,.40)" stroke-width="6"/>
+                <circle cx="100" cy="100" r="52" fill="none" stroke="rgba(198,168,90,.30)" stroke-width="6"/>
+                <circle cx="100" cy="100" r="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.20)" stroke-width="2"/>
+              </svg>
+              <div class="ringNum n1">1</div>
+              <div class="ringNum n2">2</div>
+              <div class="ringNum n3">3</div>
+              <div class="ringNum n4">4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- cards na direção certa -->
+        <div class="howCard pos1">
           <h3>1. Diagnóstico</h3>
           <p>Levantamos cenário, gargalos e riscos. Identificamos o que impede previsibilidade hoje.</p>
         </div>
 
-        <div class="ringWrap">
-          <div class="ring">
-            <svg viewBox="0 0 200 200" aria-hidden="true">
-              <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,.40)" stroke-width="6"/>
-              <circle cx="100" cy="100" r="52" fill="none" stroke="rgba(198,168,90,.30)" stroke-width="6"/>
-              <circle cx="100" cy="100" r="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.20)" stroke-width="2"/>
-            </svg>
-            <div class="ringNum n1">1</div>
-            <div class="ringNum n2">2</div>
-            <div class="ringNum n3">3</div>
-            <div class="ringNum n4">4</div>
-          </div>
-        </div>
-
-        <div class="howCard">
+        <div class="howCard pos2">
           <h3>2. Plano de ação</h3>
           <p>Definimos prioridades, metas e responsáveis — com foco no que destrava resultado.</p>
         </div>
 
-        <div class="howCard">
-          <h3>4. Evolução contínua</h3>
-          <p>Consolidamos rotina e indicadores para manter consistência e melhorar decisões ao longo do tempo.</p>
-        </div>
-
-        <div></div>
-
-        <div class="howCard">
+        <div class="howCard pos3">
           <h3>3. Implantação</h3>
           <p>Acompanhamos a execução, ajustamos o plano e colocamos a estrutura para rodar sem travar a operação.</p>
         </div>
+
+        <div class="howCard pos4">
+          <h3>4. Evolução contínua</h3>
+          <p>Consolidamos rotina e indicadores para manter consistência e melhorar decisões ao longo do tempo.</p>
+        </div>
       </div>
 
+      <!-- FRASE (corrigida) -->
       <div class="quoteBar">
-        <span>A Telluna não entrega relatórios.</span> <span class="gold">Entrega rotina estruturada de decisão.</span>
+        A Telluna não entrega relatórios. <span class="green">Entrega rotina estruturada de decisão.</span>
       </div>
     </div>
   </section>
 
-  <!-- BLOCO EMOCIONAL (Imagem 4 - invertido: branco + texto verde/dourado) -->
+  <!-- BLOCO EMOCIONAL (branco) -->
   <section class="section bg-white" id="dor">
     <div class="wrap">
       <div class="painCard">
@@ -801,7 +829,7 @@
     </div>
   </section>
 
-  <!-- PLANOS (Imagem 5) -->
+  <!-- PLANOS -->
   <section class="section bg-green" id="planos">
     <div class="wrap">
       <div class="plansHead">
@@ -879,13 +907,12 @@
     </div>
   </section>
 
-  <!-- WhatsApp flutuante tremendo -->
+  <!-- WhatsApp flutuante -->
   <a class="waFloat" href="https://wa.me/5516993735556" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 32 32"><path d="M19.11 17.44c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.02-.15.17-.3.2-.56.07-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.11-.11.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.39-.79-1.91-.21-.5-.42-.43-.58-.44h-.5c-.17 0-.45.06-.69.32-.24.26-.9.88-.9 2.15s.92 2.49 1.05 2.66c.13.17 1.81 2.76 4.39 3.87.61.26 1.09.41 1.46.53.61.19 1.17.16 1.61.1.49-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.06-.11-.24-.17-.5-.3zM16.02 2.67C8.67 2.67 2.7 8.63 2.7 15.98c0 2.34.61 4.53 1.68 6.43L3 29.33l7.09-1.86c1.84 1 3.95 1.57 6.05 1.57 7.35 0 13.31-5.97 13.31-13.31S23.37 2.67 16.02 2.67zm0 23.02c-1.95 0-3.86-.52-5.52-1.5l-.4-.23-4.21 1.11 1.12-4.1-.26-.42a10.91 10.91 0 0 1-1.68-5.88c0-6.03 4.9-10.93 10.95-10.93 6.03 0 10.93 4.9 10.93 10.93 0 6.05-4.9 10.95-10.93 10.95z"/></svg>
   </a>
 
   <script>
-    // CTA do topo com a mesma largura do grupo (Como funciona + Planos)
     function matchCTAWidth(){
       const group = document.getElementById('navGroup');
       const cta = document.getElementById('ctaTop');
