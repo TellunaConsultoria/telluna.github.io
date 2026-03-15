@@ -1,1 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perguntas do Diagnóstico | Telluna</title>
+
+  <style>
+    :root{
+      --green:#0F2E2A;
+      --green2:#0B2522;
+      --gold:#C6A85A;
+      --text:#F5F1E8;
+      --muted:rgba(255,255,255,.78);
+      --line:rgba(255,255,255,.14);
+      --radius:22px;
+      --shadow:0 18px 40px rgba(0,0,0,.18);
+      --max:1040px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(900px 520px at 18% 10%, rgba(198,168,90,.14), transparent 60%),
+        linear-gradient(180deg, var(--green), var(--green2));
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(11,37,34,.78);
+      border-bottom:1px solid var(--line);
+    }
+
+    .headerInner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:16px 26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      min-width:0;
+    }
+
+    .logoBox{
+      width:84px;
+      height:84px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+
+    .logoBox img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brandText b{
+      display:block;
+      font-size:48px;
+      line-height:1;
+      letter-spacing:2px;
+      color:#fff;
+    }
+
+    .brandText small{
+      display:block;
+      margin-top:8px;
+      color:rgba(255,255,255,.74);
+      font-size:16px;
+    }
+
+    .backBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:700;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:52px 24px 90px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:28px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 0 6px rgba(198,168,90,.12);
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      font-size:42px;
+      line-height:1.08;
+      color:#fff;
+      letter-spacing:-.6px;
+    }
+
+    .hero p{
+      margin:0 auto;
+      max-width:800px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.75;
+    }
+
+    form{
+      display:grid;
+      gap:22px;
+    }
+
+    .block{
+      background:rgba(255,255,255,.07);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .block h2{
+      margin:0 0 8px;
+      font-size:24px;
+      color:#fff;
+    }
+
+    .blockIntro{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+      margin-bottom:18px;
+    }
+
+    .question{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+    }
+
+    .question + .question{
+      margin-top:14px;
+    }
+
+    .question h3{
+      font-size:16px;
+      line-height:1.5;
+      color:#fff;
+      margin-bottom:14px;
+    }
+
+    .options{
+      display:grid;
+      gap:10px;
+    }
+
+    .option{
+      position:relative;
+    }
+
+    .option input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .option label{
+      display:block;
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.86);
+      cursor:pointer;
+      transition:all .15s ease;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .option label:hover{
+      background:rgba(255,255,255,.10);
+      border-color:rgba(198,168,90,.45);
+    }
+
+    .option input:checked + label{
+      background:rgba(198,168,90,.16);
+      border-color:rgba(198,168,90,.60);
+      color:#fff;
+      box-shadow:0 0 0 4px rgba(198,168,90,.10);
+    }
+
+    .actions{
+      display:flex;
+      justify-content:center;
+      margin-top:6px;
+    }
+
+    .primaryBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:280px;
+      height:58px;
+      padding:0 28px;
+      border:none;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.76));
+      color:var(--green2);
+      font-size:17px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 18px 42px rgba(198,168,90,.22);
+      transition:transform .15s ease;
+    }
+
+    .primaryBtn:hover{
+      transform:translateY(-1px);
+    }
+
+    @media (max-width: 860px){
+      .brandText b{font-size:40px}
+      .brandText small{font-size:15px}
+      .hero h1{font-size:34px}
+      .primaryBtn{
+        width:100%;
+        min-width:unset;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="headerInner">
+      <div class="brand">
+        <div class="logoBox">
+          <img src="logo-telluna.png" alt="Telluna">
+        </div>
+        <div class="brandText">
+          <b>TELLUNA</b>
+          <small>Consultoria Empresarial Estratégica</small>
+        </div>
+      </div>
+
+      <a class="backBtn" href="diagnostico.html">Voltar</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        Etapa 2 · Perguntas estratégicas
+      </div>
+
+      <h1>Responda ao diagnóstico da sua empresa</h1>
+      <p>
+        As perguntas abaixo nos ajudam a identificar o estágio atual do seu negócio em estratégia,
+        processos, gestão, pessoas e crescimento. Escolha a opção que mais se aproxima da realidade da sua empresa.
+      </p>
+    </section>
+
+    <form action="resultado.html" method="get">
+
+      <!-- BLOCO 1 -->
+      <section class="block">
+        <h2>Estratégia e direção</h2>
+        <p class="blockIntro">
+          Este bloco avalia clareza estratégica, metas e capacidade de decisão da empresa.
+        </p>
+
+        <div class="question">
+          <h3>1. A empresa tem metas claras para os próximos 12 meses?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q1a" name="q1" value="0" required>
+              <label for="q1a">Não temos metas definidas.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q1b" name="q1" value="1" required>
+              <label for="q1b">Temos metas informais, mas sem registro ou acompanhamento.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q1c" name="q1" value="2" required>
+              <label for="q1c">Temos metas registradas, porém acompanhamos pouco.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q1d" name="q1" value="3" required>
+              <label for="q1d">Temos metas claras e acompanhamos com alguma frequência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q1e" name="q1" value="4" required>
+              <label for="q1e">Temos metas claras, acompanhadas e usadas nas decisões da empresa.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>2. As decisões mais importantes da empresa são tomadas com base em quê?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q2a" name="q2" value="0" required>
+              <label for="q2a">No improviso e na urgência do dia.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q2b" name="q2" value="1" required>
+              <label for="q2b">Principalmente na experiência do dono.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q2c" name="q2" value="2" required>
+              <label for="q2c">Com alguma análise, mas ainda sem padrão.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q2d" name="q2" value="3" required>
+              <label for="q2d">Com base em dados básicos e reuniões pontuais.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q2e" name="q2" value="4" required>
+              <label for="q2e">Com base em indicadores, metas e rotina de decisão estruturada.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>3. A empresa sabe exatamente quais prioridades atacar primeiro?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q3a" name="q3" value="0" required>
+              <label for="q3a">Não, tudo parece urgente ao mesmo tempo.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q3b" name="q3" value="1" required>
+              <label for="q3b">Temos uma noção, mas mudamos de foco com frequência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q3c" name="q3" value="2" required>
+              <label for="q3c">Existe alguma prioridade, mas nem sempre é seguida pela equipe.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q3d" name="q3" value="3" required>
+              <label for="q3d">As prioridades estão relativamente claras.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q3e" name="q3" value="4" required>
+              <label for="q3e">As prioridades são claras, compartilhadas e acompanhadas com consistência.</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCO 2 -->
+      <section class="block">
+        <h2>Processos e rotina</h2>
+        <p class="blockIntro">
+          Este bloco mostra o nível de organização operacional da empresa.
+        </p>
+
+        <div class="question">
+          <h3>4. Os principais processos da empresa estão documentados ou padronizados?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q4a" name="q4" value="0" required>
+              <label for="q4a">Não existe padronização.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q4b" name="q4" value="1" required>
+              <label for="q4b">Algumas pessoas sabem “como fazer”, mas nada está registrado.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q4c" name="q4" value="2" required>
+              <label for="q4c">Temos alguns processos descritos, mas de forma parcial.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q4d" name="q4" value="3" required>
+              <label for="q4d">Os principais processos estão razoavelmente definidos.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q4e" name="q4" value="4" required>
+              <label for="q4e">Os processos principais são padronizados, conhecidos e revisados.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>5. Quando surge um problema operacional, o que normalmente acontece?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q5a" name="q5" value="0" required>
+              <label for="q5a">Viramos para resolver no improviso.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q5b" name="q5" value="1" required>
+              <label for="q5b">O dono ou gestor centraliza a solução.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q5c" name="q5" value="2" required>
+              <label for="q5c">Tentamos corrigir, mas o mesmo problema volta.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q5d" name="q5" value="3" required>
+              <label for="q5d">Investigamos a causa e corrigimos com alguma disciplina.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q5e" name="q5" value="4" required>
+              <label for="q5e">Temos processo para tratar causas, corrigir e evitar recorrência.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>6. A rotina da empresa é previsível ou vive apagando incêndios?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q6a" name="q6" value="0" required>
+              <label for="q6a">É totalmente imprevisível.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q6b" name="q6" value="1" required>
+              <label for="q6b">Passamos boa parte do tempo resolvendo urgências.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q6c" name="q6" value="2" required>
+              <label for="q6c">Existe alguma previsibilidade, mas ainda há muita urgência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q6d" name="q6" value="3" required>
+              <label for="q6d">A rotina está relativamente organizada.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q6e" name="q6" value="4" required>
+              <label for="q6e">A rotina é previsível, organizada e bem distribuída entre os responsáveis.</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCO 3 -->
+      <section class="block">
+        <h2>Financeiro e indicadores</h2>
+        <p class="blockIntro">
+          Este bloco avalia visibilidade financeira e uso de números para tomada de decisão.
+        </p>
+
+        <div class="question">
+          <h3>7. A empresa acompanha indicadores de desempenho com frequência?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q7a" name="q7" value="0" required>
+              <label for="q7a">Não acompanhamos indicadores.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q7b" name="q7" value="1" required>
+              <label for="q7b">Acompanhamos só quando há problema.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q7c" name="q7" value="2" required>
+              <label for="q7c">Temos alguns números, mas sem rotina definida.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q7d" name="q7" value="3" required>
+              <label for="q7d">Acompanhamos indicadores básicos com alguma frequência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q7e" name="q7" value="4" required>
+              <label for="q7e">Temos indicadores claros e eles orientam decisões da gestão.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>8. O financeiro da empresa oferece clareza para decidir com segurança?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q8a" name="q8" value="0" required>
+              <label for="q8a">Não temos clareza real sobre a situação financeira.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q8b" name="q8" value="1" required>
+              <label for="q8b">Temos informações básicas, mas pouco confiáveis.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q8c" name="q8" value="2" required>
+              <label for="q8c">Temos algum controle, mas faltam análises.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q8d" name="q8" value="3" required>
+              <label for="q8d">O financeiro ajuda em parte na tomada de decisão.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q8e" name="q8" value="4" required>
+              <label for="q8e">O financeiro é claro, confiável e usado estrategicamente.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>9. Vocês sabem com clareza onde estão os maiores desperdícios da empresa?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q9a" name="q9" value="0" required>
+              <label for="q9a">Não sabemos.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q9b" name="q9" value="1" required>
+              <label for="q9b">Temos suspeitas, mas nada confirmado.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q9c" name="q9" value="2" required>
+              <label for="q9c">Sabemos alguns pontos, mas não medimos bem.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q9d" name="q9" value="3" required>
+              <label for="q9d">Conseguimos identificar boa parte dos desperdícios.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q9e" name="q9" value="4" required>
+              <label for="q9e">Mapeamos desperdícios com clareza e atuamos sobre eles.</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCO 4 -->
+      <section class="block">
+        <h2>Pessoas e liderança</h2>
+        <p class="blockIntro">
+          Este bloco mede alinhamento da equipe, clareza de papéis e dependência do dono.
+        </p>
+
+        <div class="question">
+          <h3>10. A equipe sabe exatamente o que se espera de cada pessoa?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q10a" name="q10" value="0" required>
+              <label for="q10a">Não, os papéis são confusos.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q10b" name="q10" value="1" required>
+              <label for="q10b">Existe alguma noção, mas sem clareza formal.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q10c" name="q10" value="2" required>
+              <label for="q10c">As funções são conhecidas, porém ainda há sobreposição.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q10d" name="q10" value="3" required>
+              <label for="q10d">Os papéis estão razoavelmente claros.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q10e" name="q10" value="4" required>
+              <label for="q10e">Papéis, responsabilidades e entregas são claros para todos.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>11. O negócio depende excessivamente do dono para funcionar?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q11a" name="q11" value="0" required>
+              <label for="q11a">Totalmente. Quase tudo passa pelo dono.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q11b" name="q11" value="1" required>
+              <label for="q11b">A maior parte das decisões ainda depende dele.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q11c" name="q11" value="2" required>
+              <label for="q11c">Há alguma delegação, mas com limitações.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q11d" name="q11" value="3" required>
+              <label for="q11d">A equipe já opera com relativa autonomia.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q11e" name="q11" value="4" required>
+              <label for="q11e">A operação funciona com autonomia e liderança distribuída.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>12. Existem reuniões ou rituais de alinhamento com frequência?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q12a" name="q12" value="0" required>
+              <label for="q12a">Não temos rotina de alinhamento.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q12b" name="q12" value="1" required>
+              <label for="q12b">As reuniões acontecem só quando há problema.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q12c" name="q12" value="2" required>
+              <label for="q12c">Temos algumas reuniões, mas sem padrão claro.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q12d" name="q12" value="3" required>
+              <label for="q12d">Existe rotina de alinhamento com certa consistência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q12e" name="q12" value="4" required>
+              <label for="q12e">Temos rituais objetivos de alinhamento e acompanhamento.</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCO 5 -->
+      <section class="block">
+        <h2>Crescimento e capacidade de escalar</h2>
+        <p class="blockIntro">
+          Este bloco identifica se a empresa está pronta para crescer com segurança.
+        </p>
+
+        <div class="question">
+          <h3>13. Se a empresa dobrar de clientes amanhã, a operação suporta?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q13a" name="q13" value="0" required>
+              <label for="q13a">Não suportaria.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q13b" name="q13" value="1" required>
+              <label for="q13b">Teríamos muitos problemas operacionais.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q13c" name="q13" value="2" required>
+              <label for="q13c">Suportaríamos parcialmente, com esforço extra.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q13d" name="q13" value="3" required>
+              <label for="q13d">A empresa suportaria com alguns ajustes.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q13e" name="q13" value="4" required>
+              <label for="q13e">Temos estrutura e rotina para crescer com segurança.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>14. O crescimento atual da empresa está organizado ou está pressionando a operação?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q14a" name="q14" value="0" required>
+              <label for="q14a">Está desorganizado e gera muito desgaste.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q14b" name="q14" value="1" required>
+              <label for="q14b">Tem pressionado a operação com frequência.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q14c" name="q14" value="2" required>
+              <label for="q14c">Há sinais de pressão, mas ainda controláveis.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q14d" name="q14" value="3" required>
+              <label for="q14d">Está razoavelmente organizado.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q14e" name="q14" value="4" required>
+              <label for="q14e">O crescimento está sustentado por estrutura e gestão.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question">
+          <h3>15. Hoje, em que estágio você sente que sua empresa está?</h3>
+          <div class="options">
+            <div class="option">
+              <input type="radio" id="q15a" name="q15" value="0" required>
+              <label for="q15a">Operação no improviso.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q15b" name="q15" value="1" required>
+              <label for="q15b">Organização inicial.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q15c" name="q15" value="2" required>
+              <label for="q15c">Estrutura em desenvolvimento.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q15d" name="q15" value="3" required>
+              <label for="q15d">Gestão relativamente organizada.</label>
+            </div>
+            <div class="option">
+              <input type="radio" id="q15e" name="q15" value="4" required>
+              <label for="q15e">Empresa pronta para escalar com mais consistência.</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit" class="primaryBtn">Ver resultado do diagnóstico</button>
+      </div>
+    </form>
+  </main>
+
+</body>
+</html>
 
