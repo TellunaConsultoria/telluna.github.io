@@ -1,1 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultado do Diagnóstico | Telluna</title>
 
+  <style>
+    :root{
+      --green:#0F2E2A;
+      --green2:#0B2522;
+      --gold:#C6A85A;
+      --text:#F5F1E8;
+      --muted:rgba(255,255,255,.78);
+      --line:rgba(255,255,255,.14);
+      --radius:22px;
+      --shadow:0 18px 40px rgba(0,0,0,.18);
+      --max:1060px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(900px 520px at 18% 10%, rgba(198,168,90,.14), transparent 60%),
+        linear-gradient(180deg, var(--green), var(--green2));
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(11,37,34,.78);
+      border-bottom:1px solid var(--line);
+    }
+
+    .headerInner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:16px 26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      min-width:0;
+    }
+
+    .logoBox{
+      width:84px;
+      height:84px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+
+    .logoBox img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brandText b{
+      display:block;
+      font-size:48px;
+      line-height:1;
+      letter-spacing:2px;
+      color:#fff;
+    }
+
+    .brandText small{
+      display:block;
+      margin-top:8px;
+      color:rgba(255,255,255,.74);
+      font-size:16px;
+    }
+
+    .backBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:700;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:52px 24px 90px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:28px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 0 6px rgba(198,168,90,.12);
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      font-size:42px;
+      line-height:1.08;
+      color:#fff;
+      letter-spacing:-.6px;
+    }
+
+    .hero p{
+      margin:0 auto;
+      max-width:780px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.75;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .card{
+      background:rgba(255,255,255,.07);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+
+    .scoreBadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:120px;
+      height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      background:rgba(198,168,90,.18);
+      border:1px solid rgba(198,168,90,.35);
+      color:#fff;
+      font-weight:900;
+      margin-bottom:16px;
+    }
+
+    .stageTitle{
+      font-size:34px;
+      line-height:1.1;
+      color:#fff;
+      margin-bottom:12px;
+    }
+
+    .stageDesc{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:16px;
+    }
+
+    .sectionTitle{
+      font-size:24px;
+      color:#fff;
+      margin-bottom:14px;
+    }
+
+    .bulletList{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .bulletItem{
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      line-height:1.65;
+      color:rgba(255,255,255,.88);
+      font-size:15px;
+    }
+
+    .bulletItem b{
+      color:var(--gold);
+    }
+
+    .planBox{
+      margin-top:14px;
+      padding:18px 18px;
+      border-radius:18px;
+      background:rgba(198,168,90,.10);
+      border:1px solid rgba(198,168,90,.24);
+    }
+
+    .planTag{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(198,168,90,.18);
+      border:1px solid rgba(198,168,90,.28);
+      color:#fff;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+
+    .planBox h3{
+      font-size:26px;
+      color:#fff;
+      margin-bottom:10px;
+    }
+
+    .planBox p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .ctaWrap{
+      margin-top:24px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .ctaBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:320px;
+      height:60px;
+      padding:0 28px;
+      border:none;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.76));
+      color:var(--green2);
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 18px 42px rgba(198,168,90,.22);
+      animation:pulse 1.15s ease-in-out infinite;
+    }
+
+    @keyframes pulse{
+      0%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+      50%{transform:scale(1.03); box-shadow:0 22px 60px rgba(198,168,90,.32)}
+      100%{transform:scale(1); box-shadow:0 18px 44px rgba(198,168,90,.20)}
+    }
+
+    .status{
+      margin-top:18px;
+      text-align:center;
+      color:rgba(255,255,255,.62);
+      font-size:13px;
+    }
+
+    .hidden{
+      display:none;
+    }
+
+    @media (max-width: 900px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+      .brandText b{font-size:40px}
+      .brandText small{font-size:15px}
+      .hero h1{font-size:34px}
+      .ctaBtn{
+        width:100%;
+        min-width:unset;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="headerInner">
+      <div class="brand">
+        <div class="logoBox">
+          <img src="logo-telluna.png" alt="Telluna">
+        </div>
+        <div class="brandText">
+          <b>TELLUNA</b>
+          <small>Consultoria Empresarial Estratégica</small>
+        </div>
+      </div>
+
+      <a class="backBtn" href="perguntas.html">Voltar</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        Etapa 3 · Resultado do diagnóstico
+      </div>
+
+      <h1>Resultado do diagnóstico estratégico</h1>
+      <p>
+        Abaixo está a leitura inicial da maturidade da sua empresa com base nas respostas informadas.
+        Este resultado aponta o estágio atual do negócio, os erros mais prováveis e a consultoria mais adequada para o seu momento.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="scoreBadge" id="scoreBadge">Pontuação: 0/60</div>
+        <h2 class="stageTitle" id="stageTitle">Carregando resultado...</h2>
+        <p class="stageDesc" id="stageDesc">Estamos processando as respostas do diagnóstico.</p>
+      </div>
+
+      <div class="card">
+        <h2 class="sectionTitle">Leitura principal</h2>
+        <div class="bulletList" id="mainInsights"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="sectionTitle">Possíveis erros da estrutura atual</h2>
+        <div class="bulletList" id="errorList"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="sectionTitle">Consultoria recomendada</h2>
+        <div class="planBox">
+          <div class="planTag">Plano indicado</div>
+          <h3 id="planTitle">Carregando...</h3>
+          <p id="planDesc"></p>
+        </div>
+
+        <div class="ctaWrap">
+          <a class="ctaBtn" href="https://wa.me/5516993735556" target="_blank" rel="noopener">
+            Solicite sua consultoria
+          </a>
+        </div>
+
+        <div class="status" id="mailStatus">Processando e enviando as respostas...</div>
+      </div>
+    </section>
+
+    <!-- formulário oculto de envio -->
+    <form id="mailForm" class="hidden">
+      <input type="hidden" name="access_key" value="3e2ac5c8-6daa-476d-bd65-72e5b79cb947">
+      <input type="hidden" name="subject" value="Resultado do diagnóstico Telluna">
+      <input type="hidden" name="email" value="">
+      <input type="hidden" name="Pontuação total" id="mailScore">
+      <input type="hidden" name="Etapa da empresa" id="mailStage">
+      <input type="hidden" name="Plano recomendado" id="mailPlan">
+      <input type="hidden" name="Leitura principal" id="mailInsights">
+      <input type="hidden" name="Possíveis erros" id="mailErrors">
+      <input type="hidden" name="Respostas completas" id="mailAnswers">
+    </form>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const answers = [];
+    for (let i = 1; i <= 15; i++) {
+      const val = Number(params.get(`q${i}`) || 0);
+      answers.push(val);
+    }
+
+    const total = answers.reduce((sum, n) => sum + n, 0);
+
+    const blocks = {
+      estrategia: answers.slice(0, 3).reduce((a,b)=>a+b,0),
+      processos: answers.slice(3, 6).reduce((a,b)=>a+b,0),
+      financeiro: answers.slice(6, 9).reduce((a,b)=>a+b,0),
+      pessoas: answers.slice(9, 12).reduce((a,b)=>a+b,0),
+      crescimento: answers.slice(12, 15).reduce((a,b)=>a+b,0)
+    };
+
+    function getStage(score){
+      if(score <= 15){
+        return {
+          title: "Estágio 1 · Operação no improviso",
+          desc: "A empresa ainda opera com alto nível de centralização, urgência e falta de previsibilidade. A gestão depende muito do esforço diário e sofre com ausência de estrutura para crescer com segurança."
+        };
+      }
+      if(score <= 30){
+        return {
+          title: "Estágio 2 · Organização inicial",
+          desc: "A empresa já demonstra sinais de organização, mas ainda carece de rotina estruturada, clareza de prioridades e consistência de gestão. Há base para evoluir, porém com fragilidades que travam o crescimento."
+        };
+      }
+      if(score <= 45){
+        return {
+          title: "Estágio 3 · Estrutura em consolidação",
+          desc: "A empresa já possui algum nível de controle e organização, mas ainda precisa consolidar processos, indicadores e liderança para crescer com mais segurança e menos dependência do improviso."
+        };
+      }
+      return {
+        title: "Estágio 4 · Gestão madura para escalar",
+        desc: "A empresa demonstra boa base de gestão, clareza e organização. O foco agora está em refinar a estrutura, sustentar o crescimento e fortalecer a capacidade de decisão estratégica."
+      };
+    }
+
+    function getMainInsights(blocks){
+      const insights = [];
+
+      if(blocks.estrategia <= 4){
+        insights.push("A estratégia ainda não está clara o suficiente para orientar prioridades e decisões.");
+      } else if(blocks.estrategia <= 8){
+        insights.push("Existe alguma direção estratégica, mas ela ainda precisa ser traduzida em metas e rotina.");
+      } else {
+        insights.push("A empresa já demonstra boa direção estratégica e capacidade de priorização.");
+      }
+
+      if(blocks.processos <= 4){
+        insights.push("A operação depende de improviso e falta padronização nos processos principais.");
+      } else if(blocks.processos <= 8){
+        insights.push("A operação já mostra alguma organização, mas ainda precisa consolidar processos e reduzir retrabalho.");
+      } else {
+        insights.push("A empresa já possui boa base operacional e potencial para avançar com mais eficiência.");
+      }
+
+      if(blocks.financeiro <= 4){
+        insights.push("Há baixa visibilidade sobre indicadores e números que sustentem decisões seguras.");
+      } else if(blocks.financeiro <= 8){
+        insights.push("O financeiro já gera alguma leitura, mas ainda não orienta toda a tomada de decisão.");
+      } else {
+        insights.push("A empresa já utiliza números com mais maturidade e pode evoluir para decisões ainda mais estratégicas.");
+      }
+
+      return insights;
+    }
+
+    function getErrors(blocks){
+      const errors = [];
+
+      if(blocks.estrategia <= 5){
+        errors.push("Falta de metas claras, o que faz a empresa trocar de prioridade com frequência.");
+      }
+      if(blocks.processos <= 5){
+        errors.push("Retrabalho e dependência de improviso por ausência de padronização operacional.");
+      }
+      if(blocks.financeiro <= 5){
+        errors.push("Decisões sem base suficiente em indicadores e baixa previsibilidade financeira.");
+      }
+      if(blocks.pessoas <= 5){
+        errors.push("Excesso de dependência do dono e baixa clareza de responsabilidades na equipe.");
+      }
+      if(blocks.crescimento <= 5){
+        errors.push("Crescimento desorganizado, com risco de pressionar a operação e travar resultados.");
+      }
+
+      if(errors.length === 0){
+        errors.push("Não há sinais graves de desorganização, mas ainda há espaço para fortalecer governança, consistência e ritmo de crescimento.");
+      }
+
+      return errors;
+    }
+
+    function getPlan(score){
+      if(score <= 18){
+        return {
+          title: "Plano Essencial",
+          desc: "Ideal para empresas que precisam colocar ordem na rotina, criar clareza de prioridades, estruturar o básico da gestão e sair do improviso."
+        };
+      }
+      if(score <= 42){
+        return {
+          title: "Plano Estratégico",
+          desc: "Indicado para empresas que já possuem alguma base, mas precisam estruturar processos, indicadores, metas e rotina de decisão para crescer com previsibilidade."
+        };
+      }
+      return {
+        title: "Plano de Acompanhamento",
+        desc: "Recomendado para empresas com estrutura mais madura, que precisam de suporte consultivo contínuo para consolidar decisões, acompanhar evolução e sustentar o crescimento."
+      };
+    }
+
+    const stage = getStage(total);
+    const insights = getMainInsights(blocks);
+    const errors = getErrors(blocks);
+    const plan = getPlan(total);
+
+    document.getElementById("scoreBadge").textContent = `Pontuação: ${total}/60`;
+    document.getElementById("stageTitle").textContent = stage.title;
+    document.getElementById("stageDesc").textContent = stage.desc;
+    document.getElementById("planTitle").textContent = plan.title;
+    document.getElementById("planDesc").textContent = plan.desc;
+
+    const insightsBox = document.getElementById("mainInsights");
+    insights.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "bulletItem";
+      div.innerHTML = item;
+      insightsBox.appendChild(div);
+    });
+
+    const errorBox = document.getElementById("errorList");
+    errors.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "bulletItem";
+      div.innerHTML = item;
+      errorBox.appendChild(div);
+    });
+
+    // prepara texto de respostas
+    const answersText = answers.map((v, i) => `Q${i+1}: ${v}`).join(" | ");
+
+    // preenche formulário oculto para envio
+    document.getElementById("mailScore").value = `${total}/60`;
+    document.getElementById("mailStage").value = stage.title;
+    document.getElementById("mailPlan").value = plan.title;
+    document.getElementById("mailInsights").value = insights.join(" || ");
+    document.getElementById("mailErrors").value = errors.join(" || ");
+    document.getElementById("mailAnswers").value = answersText;
+
+    async function sendResultsOnce(){
+      const status = document.getElementById("mailStatus");
+      const sentKey = "telluna_resultado_enviado_" + window.location.search;
+
+      if(sessionStorage.getItem(sentKey)){
+        status.textContent = "Resultado processado. Respostas já registradas.";
+        return;
+      }
+
+      const form = document.getElementById("mailForm");
+      const formData = new FormData(form);
+
+      try{
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+          sessionStorage.setItem(sentKey, "1");
+          status.textContent = "Resultado processado e enviado com sucesso.";
+        }else{
+          status.textContent = "Resultado calculado. O envio por e-mail não foi confirmado.";
+        }
+      }catch(error){
+        status.textContent = "Resultado calculado. Houve falha no envio por e-mail.";
+      }
+    }
+
+    sendResultsOnce();
+  </script>
+
+</body>
+</html>
