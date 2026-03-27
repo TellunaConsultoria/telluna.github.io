@@ -1,375 +1,168 @@
 <!DOCTYPE html>
-    <html lang="pt-br">
-    	<head>
-    	  <meta charset="UTF-8" />
-    	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    	  <title>Resultado do Diagnóstico | Telluna</title>
-    	
-    	  <style>
-    	    :root{
-    	      --green:#0F2E2A;
-    	      --green2:#0B2522;
-    	      --gold:#C6A85A;
-    	      --text:#F5F1E8;
-    	      --muted:rgba(255,255,255,.8);
-    	      --line:rgba(255,255,255,.14);
-    	      --radius:22px;
-    	      --shadow:0 20px 44px rgba(0,0,0,.22);
-    	      --max:1080px;
-    	    }
-    	
-    	    *{box-sizing:border-box;margin:0;padding:0}
-    	
-    	    body{
-    	      font-family:Arial, Helvetica, sans-serif;
-    	      background:
-    	        radial-gradient(900px 520px at 18% 10%, rgba(198,168,90,.14), transparent 60%),
-    	        linear-gradient(180deg, var(--green), var(--green2));
-    	      color:var(--text);
-    	      min-height:100vh;
-    	    }
-    	
-    	    a{color:inherit;text-decoration:none}
-    	
-    	    header{
-    	      position:sticky;
-    	      top:0;
-    	      z-index:20;
-    	      backdrop-filter:blur(10px);
-    	      background:rgba(11,37,34,.82);
-    	      border-bottom:1px solid var(--line);
-    	    }
-    	
-    	    .headerInner{
-    	      max-width:1200px;
-    	      margin:0 auto;
-    	      padding:16px 26px;
-    	      display:flex;
-    	      align-items:center;
-    	      justify-content:space-between;
-    	      gap:18px;
-    	    }
-    	
-    	    .brand{display:flex;align-items:center;gap:18px;min-width:0}
-    	
-    	    .logoBox{
-    	      width:84px;
-    	      height:84px;
-    	      display:grid;
-    	      place-items:center;
-    	      overflow:hidden;
-    	      flex:0 0 auto;
-    	    }
-    	
-    	    .logoBox img{width:100%;height:100%;object-fit:contain;display:block}
-    	
-    	    .brandText b{display:block;font-size:48px;line-height:1;letter-spacing:2px;color:#fff}
-    	    .brandText small{display:block;margin-top:8px;color:rgba(255,255,255,.74);font-size:16px}
-    	
-    	    .backBtn{
-    	      display:inline-flex;
-    	      align-items:center;
-    	      justify-content:center;
-    	      padding:12px 18px;
-    	      border-radius:14px;
-    	      border:1px solid var(--line);
-    	      background:rgba(255,255,255,.06);
-    	      color:#fff;
-    	      font-weight:700;
-    	    }
-    	
-    	    .page{max-width:var(--max);margin:0 auto;padding:48px 24px 90px}
-    	
-    	    .hero{text-align:center;margin-bottom:24px}
-    	
-    	    .eyebrow{
-    	      display:inline-flex;
-    	      align-items:center;
-    	      gap:10px;
-    	      margin-bottom:14px;
-    	      color:rgba(255,255,255,.72);
-    	      font-size:12px;
-    	      letter-spacing:1px;
-    	      text-transform:uppercase;
-    	    }
-    	
-    	    .dot{width:8px;height:8px;border-radius:999px;background:var(--gold);box-shadow:0 0 0 6px rgba(198,168,90,.12)}
-    	
-    	    .hero h1{font-size:42px;line-height:1.08;letter-spacing:-.5px;margin-bottom:12px}
-    	    .hero p{color:var(--muted);font-size:17px;line-height:1.72;max-width:760px;margin:0 auto}
-   	
-   	    .grid{
-   	      margin-top:26px;
-   	      display:grid;
-          grid-template-columns:1.15fr .85fr;
-   	      gap:18px;
-   	      align-items:start;
-   	    }
-   	
-   	    .card{
-   	      background:rgba(255,255,255,.07);
-   	      border:1px solid var(--line);
-   	      border-radius:var(--radius);
-   	      box-shadow:var(--shadow);
-   	      padding:26px;
-   	    }
-   	
-   	    .badge{
-   	      display:inline-flex;
-   	      align-items:center;
-   	      justify-content:center;
-   	      padding:10px 14px;
-   	      border-radius:999px;
-   	      border:1px solid rgba(198,168,90,.45);
-   	      background:rgba(198,168,90,.14);
-   	      color:#F7E9C8;
-   	      font-size:14px;
-   	      font-weight:700;
-   	      margin-bottom:14px;
-   	    }
-   	
-   	    .stageTitle{font-size:34px;line-height:1.12;margin-bottom:8px;color:#fff}
-   	    .lead{color:var(--muted);font-size:16px;line-height:1.68}
-   	
-   	    .planBox{
-   	      margin-top:18px;
-   	      padding:18px;
-   	      border-radius:18px;
-   	      border:1px solid rgba(198,168,90,.35);
-   	      background:rgba(198,168,90,.08);
-   	    }
-   	
-   	    .planBox h3{font-size:22px;color:#fff;margin-bottom:8px}
-   	    .planBox p{color:var(--muted);line-height:1.64;font-size:15px}
-   	
-   	    .list{margin-top:16px;display:grid;gap:10px}
-   	    .list li{list-style:none;padding-left:22px;position:relative;color:rgba(255,255,255,.9);line-height:1.55;font-size:15px}
-   	    .list li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:999px;background:var(--gold)}
-   	
-   	    .ctaTitle{font-size:24px;line-height:1.2;margin-bottom:10px;color:#fff}
-   	    .small{font-size:15px;line-height:1.7;color:var(--muted);margin-bottom:16px}
-   	
-   	    .ctaBtn{
-   	      display:inline-flex;
-   	      align-items:center;
-   	      justify-content:center;
-   	      width:100%;
-   	      min-height:58px;
-   	      padding:0 16px;
-   	      border-radius:16px;
-   	      border:none;
-   	      background:linear-gradient(135deg, rgba(198,168,90,.98), rgba(198,168,90,.76));
-   	      color:var(--green2);
-   	      font-size:18px;
-   	      font-weight:900;
-   	      box-shadow:0 20px 44px rgba(198,168,90,.28);
-   	      animation:blinkGold 1.15s ease-in-out infinite;
-   	      cursor:pointer;
-   	    }
-   	
-   	    @keyframes blinkGold {
-   	      0%{opacity:1;transform:scale(1)}
-   	      50%{opacity:.66;transform:scale(1.03)}
-   	      100%{opacity:1;transform:scale(1)}
-   	    }
-   	
-   	    .contactList{margin-top:14px;display:grid;gap:8px;color:var(--muted);font-size:14px}
-   	
-   	    .warning{
-   	      margin-top:16px;
-   	      padding:12px 14px;
-   	      border-radius:12px;
-   	      border:1px solid rgba(255,255,255,.16);
-   	      background:rgba(255,255,255,.05);
-   	      font-size:13px;
-   	      color:rgba(255,255,255,.76);
-   	      line-height:1.55;
-   	    }
-   	
-   	    @media (max-width: 920px){
-   	      .grid{grid-template-columns:1fr}
-   	      .hero h1{font-size:34px}
-   	      .brandText b{font-size:40px}
-   	      .brandText small{font-size:15px}
-   	    }
-   	  </style>
-   	</head>
-   	<body>
-   	
-   	  <header>
-   	    <div class="headerInner">
-   	      <div class="brand">
-   	        <div class="logoBox">
-   	          <img src="logo-telluna.png" alt="Telluna">
-   	        </div>
-   	        <div class="brandText">
-   	          <b>TELLUNA</b>
-   	          <small>Consultoria Empresarial Estratégica</small>
-   	        </div>
-   	      </div>
-   	
-   	      <a class="backBtn" href="perguntas.html">Refazer perguntas</a>
-   	    </div>
-   	  </header>
-   	
-   	  <main class="page">
-   	    <section class="hero">
-         <div class="eyebrow"><span class="dot">
-   	      <p>
-           Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua empresa e
-   	        o próximo passo mais indicado para acelerar resultados com organização.
-   	      </p>
-   	    </section>
-   	
-   	    <section class="grid">
-   	      <article class="card">
-   	        <div class="badge" id="scoreBadge">Pontuação: --/60</div>
-   	        <h2 class="stageTitle" id="stageTitle">Analisando...</h2>
-   	        <p class="lead" id="stageDescription"></p>
-   	
-   	        <div class="planBox">
-   	          <h3 id="planTitle">Plano recomendado</h3>
-   	          <p id="planDescription"></p>
-   	        </div>
-   	
-   	        <ul class="list" id="insightList"></ul>
-   	      </article>
-   	
-   	      <aside class="card">
-   	        <h3 class="ctaTitle">Próximo passo: diagnóstico com especialista</h3>
-   	        <p class="small" id="ctaText">
-   	          Você já tem um retrato do cenário atual. Agora, em uma conversa de consultoria,
-   	          mostramos o que priorizar nos próximos 90 dias para reduzir desperdícios e acelerar o crescimento.
-   	        </p>
-   	
-   	        <a class="ctaBtn" id="ctaBtn" href="#" target="_blank" rel="noopener noreferrer">Solicitar consultoria</a>
-   	
-   	        <p class="warning">
-   	          Este resultado é uma leitura inicial e não substitui uma análise detalhada de operação, finanças e gestão.
-   	        </p>
-   	      </aside>
-   	    </section>
-   	  </main>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resultado do Diagnóstico | Telluna</title>
 
-        <script>
-   	    const params = new URLSearchParams(window.location.search);
-   	
-   	    if (!params.has("q1")) {
-   	      document.body.innerHTML = "<h1 style='color:white;text-align:center;padding:32px'>Acesso inválido. Por favor, refaça o diagnóstico.</h1>";
-         throw new Error("Sem respostas do formulário");
-   	    }
-   	
-   	    const answers = [];
-   	    for (let i = 1; i <= 15; i++) {
-   	      answers.push(Number(params.get(`q${i}`) || 0));
-   	    }
-   	
-   	    const total = answers.reduce((sum, item) => sum + item, 0);
-   	
-   	    const nome = params.get("nome") || params.get("Nome") || "Não informado";
-   	    const email = params.get("email") || "Não informado";
-   	    const telefone = params.get("telefone") || params.get("Telefone / WhatsApp") || "Não informado";
-   	    const empresa = params.get("empresa") || params.get("Nome da empresa") || "Não informada";
-   	
-       function getStage(score){
-   	      if(score <= 20) {
-   	        return {
-   	          stage: "Empresa desorganizada",
-   	          description: "Seu negócio demonstra potencial, mas ainda opera em modo reativo. O foco imediato é estruturar prioridades, rotina de gestão e processos essenciais.",
-   	          plan: "Plano Essencial",
-   	          planDescription: "Organização da base operacional, definição de prioridades e criação de rotina de acompanhamento para tirar a empresa do improviso."
-   	        };
-   	      }
-   	
-   	      if(score <= 40) {
-   	        return {
-   	          stage: "Empresa em estruturação",
-   	          description: "Sua empresa já possui sinais de gestão, mas existem gargalos que travam performance e crescimento. O objetivo é consolidar o que funciona e corrigir pontos críticos.",
-   	          plan: "Plano Estratégico",
-   	          planDescription: "Refinamento da estratégia, melhoria dos indicadores e desenho de processos para crescer com mais previsibilidade e menor dependência do dono."
-   	        };
-   	      }
-   	
-   	      return {
-   	        stage: "Empresa estruturada",
-   	        description: "Seu negócio já mostra maturidade de gestão. O próximo nível é aumentar eficiência, escalar com segurança e fortalecer a liderança para sustentar crescimento.",
-   	        plan: "Plano de Acompanhamento",
-   	        planDescription: "Acompanhamento estratégico com foco em expansão, performance de liderança, metas mais agressivas e ganho de margem com controle de indicadores."
-   	      };
-   	    }
-   	
-   	    function buildInsights(score){
-   	      if(score <= 20){
-   	        return [
-   	          "Prioridade 1: estabelecer metas claras e acompanhadas semanalmente.",
-   	          "Prioridade 2: reduzir retrabalho com processos mínimos padronizados.",
-   	          "Prioridade 3: definir indicadores simples para tomada de decisão."
-   	        ];
-   	      }
-   	
-         if(score <= 40){
-   	        return [
-   	          "Prioridade 1: criar rituais de gestão para manter foco nas prioridades.",
-   	          "Prioridade 2: fortalecer autonomia da equipe e diminuir centralização.",
-   	          "Prioridade 3: transformar indicadores em ações práticas de melhoria."
-   	        ];
-   	      }
-   	
-   	      return [
-   	        "Prioridade 1: acelerar crescimento com processos escaláveis.",
-   	        "Prioridade 2: melhorar margem com gestão de desperdícios e produtividade.",
-   	        "Prioridade 3: evoluir liderança para sustentar expansão com previsibilidade."
-   	      ];
-   	    }
-   	
-   	    const result = getStage(total);
-   	    const insights = buildInsights(total);
-   	
-        document.getElementById("scoreBadge").textContent = `Pontuação: ${total}/60`;
-   	    document.getElementById("stageTitle").textContent = result.stage;
-   	    document.getElementById("stageDescription").textContent = result.description;
-   	    document.getElementById("planTitle").textContent = result.plan;
-   	    document.getElementById("planDescription").textContent = result.planDescription;
-   	
-   	    document.getElementById("resumoNome").textContent = `Nome: ${nome}`;
-   	    document.getElementById("resumoEmpresa").textContent = `Empresa: ${empresa}`;
-   	    document.getElementById("resumoEmail").textContent = `E-mail: ${email}`;
-   	
-   	    const insightList = document.getElementById("insightList");
-   	    insights.forEach((item) => {
-   	      const li = document.createElement("li");
-   	      li.textContent = item;
-   	      insightList.appendChild(li);
-   	    });
-   	
-   	    const mensagem = encodeURIComponent(
-   	      `Olá, aqui é ${nome} (${empresa}). Acabei de finalizar o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero solicitar consultoria.`
-   	    );
-   	    const whatsappLink = `https://wa.me/5549999447624?text=${mensagem}`;
-   	    document.getElementById("ctaBtn").href = whatsappLink;
-   	 
-   	    async function enviar() {
-   	      const data = {
-   	        access_key: "3e2ac5c8-6daa-476d-bd65-72e5b79cb947",
-           subject: "Novo diagnóstico Telluna",
-   	        name: nome,
-   	        email,
-   	        message: `Nome: ${nome}\nEmpresa: ${empresa}\nTelefone: ${telefone}\n\nPontuação: ${total}\nEstágio: ${result.stage}\nPlano: ${result.plan}\n\nRespostas: ${answers.join(",")}`
-   	      };
-   	
-   	      try {
-   	        await fetch("https://api.web3forms.com/submit", {
-   	          method: "POST",
-   	          headers: { "Content-Type": "application/json" },
-   	          body: JSON.stringify(data)
-   	        });
-   	      } catch (error) {
-   	        console.error("Falha ao enviar resultado", error);
-   	      }
-   	    }
-   	
-   	    enviar();
-   	  </script>
-   	</body>
-   	</html>
+<style>
+:root{
+--green:#0F2E2A;
+--green2:#0B2522;
+--gold:#C6A85A;
+--text:#F5F1E8;
+--muted:rgba(255,255,255,.8);
+--line:rgba(255,255,255,.14);
+}
 
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(180deg,var(--green),var(--green2));
+color:var(--text);
+}
+
+.page{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+text-align:center;
+}
+
+h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.score{
+font-size:64px;
+font-weight:900;
+color:var(--gold);
+margin:30px 0;
+}
+
+.card{
+background:rgba(255,255,255,.06);
+border:1px solid var(--line);
+border-radius:20px;
+padding:30px;
+margin-top:20px;
+}
+
+.stage{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.desc{
+font-size:18px;
+line-height:1.7;
+color:var(--muted);
+}
+
+.plan{
+margin-top:20px;
+font-size:16px;
+color:var(--muted);
+}
+
+.cta{
+margin-top:30px;
+}
+
+.cta button{
+width:100%;
+padding:18px;
+font-size:20px;
+font-weight:900;
+border:none;
+border-radius:12px;
+background:var(--gold);
+color:#0B2522;
+cursor:pointer;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.6}
+100%{opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<h1>Seu diagnóstico está pronto</h1>
+
+<div class="score" id="score">--/60</div>
+
+<div class="card">
+<div class="stage" id="stage"></div>
+<div class="desc" id="desc"></div>
+
+<div class="plan" id="plan"></div>
+</div>
+
+<div class="cta">
+<button id="btn">Solicitar consultoria</button>
+</div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const answers = [];
+for (let i = 1; i <= 15; i++) {
+answers.push(Number(params.get(`q${i}`) || 0));
+}
+
+const total = answers.reduce((sum, item) => sum + item, 0);
+
+function getStage(score){
+
+if(score <= 20){
+return {
+stage:"Empresa desorganizada",
+desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia. Você resolve problemas todos os dias, mas dificilmente tem clareza do que realmente está construindo.\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?",
+plan:"O próximo passo é estruturar base, processos e clareza de direção antes de pensar em crescimento."
+}
+}
+
+if(score <= 40){
+return {
+stage:"Empresa em estruturação",
+desc:"Você já saiu do caos inicial, mas ainda enfrenta travas que impedem crescimento consistente.\n\nSua empresa até evolui, mas depende demais de você. Se você parar hoje, o negócio continua — ou trava?",
+plan:"Agora é o momento de organizar gestão, indicadores e reduzir dependência do dono."
+}
+}
+
+return {
+stage:"Empresa estruturada",
+desc:"Sua empresa já tem base sólida e sinais claros de maturidade.\n\nMas a pergunta agora é: você está crescendo no ritmo que poderia — ou ainda existe potencial desperdiçado?",
+plan:"O foco agora é escalar com eficiência, aumentar margem e fortalecer liderança."
+}
+}
+
+const result = getStage(total);
+
+document.getElementById("score").innerText = total + "/60";
+document.getElementById("stage").innerText = result.stage;
+document.getElementById("desc").innerText = result.desc;
+document.getElementById("plan").innerText = result.plan;
+
+const mensagem = encodeURIComponent(
+`Olá, acabei de finalizar o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero uma consultoria.`
+);
+
+document.getElementById("btn").onclick = () => {
+window.open(`https://wa.me/5549999447624?text=${mensagem}`);
+};
+</script>
+
+</body>
+</html>
