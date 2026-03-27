@@ -2,8 +2,8 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Resultado do Diagnóstico | Telluna</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resultado | Telluna</title>
 
 <style>
 :root{
@@ -23,63 +23,119 @@ background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
 
-.page{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 30px;
+border-bottom:1px solid var(--line);
+background:rgba(11,37,34,.8);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+width:60px;
+}
+
+.logo-text b{
+font-size:26px;
+}
+
+.logo-text small{
+display:block;
+font-size:12px;
+color:var(--muted);
+}
+
+.btn-top{
+padding:10px 16px;
+border:1px solid var(--line);
+border-radius:10px;
+}
+
+/* HERO */
+.hero{
 text-align:center;
+padding:40px 20px 10px;
 }
 
-h1{
-font-size:42px;
-margin-bottom:20px;
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
 }
 
+.hero p{
+max-width:700px;
+margin:auto;
+color:var(--muted);
+line-height:1.6;
+}
+
+/* SCORE */
 .score{
-font-size:64px;
+text-align:center;
+font-size:70px;
 font-weight:900;
 color:var(--gold);
 margin:30px 0;
 }
 
-.card{
-background:rgba(255,255,255,.06);
-border:1px solid var(--line);
-border-radius:20px;
-padding:30px;
-margin-top:20px;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:20px;
+max-width:1000px;
+margin:30px auto;
+padding:0 20px;
 }
 
+/* CARD */
+.card{
+background:rgba(255,255,255,.05);
+border:1px solid var(--line);
+border-radius:20px;
+padding:25px;
+}
+
+/* RESULT */
 .stage{
-font-size:32px;
-margin-bottom:15px;
+font-size:28px;
+margin-bottom:10px;
 }
 
 .desc{
-font-size:18px;
+font-size:16px;
 line-height:1.7;
 color:var(--muted);
 }
 
-.plan{
-margin-top:20px;
-font-size:16px;
+/* CTA */
+.cta-title{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.cta-text{
+font-size:15px;
 color:var(--muted);
+margin-bottom:20px;
+line-height:1.6;
 }
 
-.cta{
-margin-top:30px;
-}
-
-.cta button{
+.cta-btn{
 width:100%;
 padding:18px;
-font-size:20px;
-font-weight:900;
 border:none;
 border-radius:12px;
 background:var(--gold);
-color:#0B2522;
+font-weight:900;
 cursor:pointer;
 animation:blink 1.2s infinite;
 }
@@ -89,29 +145,53 @@ animation:blink 1.2s infinite;
 50%{opacity:.6}
 100%{opacity:1}
 }
+
+@media(max-width:900px){
+.grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<header>
+<div class="logo">
+<img src="logo-telluna.png">
+<div class="logo-text">
+<b>TELLUNA</b>
+<small>Consultoria Empresarial Estratégica</small>
+</div>
+</div>
 
+<a href="perguntas.html" class="btn-top">Refazer perguntas</a>
+</header>
+
+<section class="hero">
 <h1>Seu diagnóstico está pronto</h1>
+<p>
+Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua empresa e o próximo passo mais indicado para acelerar resultados com organização.
+</p>
+</section>
 
 <div class="score" id="score">--/60</div>
+
+<section class="grid">
 
 <div class="card">
 <div class="stage" id="stage"></div>
 <div class="desc" id="desc"></div>
-
-<div class="plan" id="plan"></div>
 </div>
 
-<div class="cta">
-<button id="btn">Solicitar consultoria</button>
+<div class="card">
+<div class="cta-title">Próximo passo: diagnóstico com especialista</div>
+<div class="cta-text">
+Você já tem um retrato do cenário atual. Agora, em uma conversa de consultoria, mostramos o que priorizar nos próximos 90 dias para reduzir desperdícios e acelerar o crescimento.
 </div>
 
+<button class="cta-btn" id="btn">Solicitar consultoria</button>
 </div>
+
+</section>
 
 <script>
 const params = new URLSearchParams(window.location.search);
@@ -128,23 +208,20 @@ function getStage(score){
 if(score <= 20){
 return {
 stage:"Empresa desorganizada",
-desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia. Você resolve problemas todos os dias, mas dificilmente tem clareza do que realmente está construindo.\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?",
-plan:"O próximo passo é estruturar base, processos e clareza de direção antes de pensar em crescimento."
+desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia. Você resolve problemas todos os dias, mas dificilmente tem clareza do que realmente está construindo.\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?\n\nO próximo passo é estruturar base, processos e clareza de direção antes de pensar em crescimento."
 }
 }
 
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
-desc:"Você já saiu do caos inicial, mas ainda enfrenta travas que impedem crescimento consistente.\n\nSua empresa até evolui, mas depende demais de você. Se você parar hoje, o negócio continua — ou trava?",
-plan:"Agora é o momento de organizar gestão, indicadores e reduzir dependência do dono."
+desc:"Você já saiu do caos inicial, mas ainda enfrenta travas que impedem crescimento consistente.\n\nSua empresa até evolui, mas depende demais de você. Se você parar hoje, o negócio continua — ou trava?\n\nAgora é o momento de organizar gestão, indicadores e reduzir dependência do dono."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa já tem base sólida e sinais claros de maturidade.\n\nMas a pergunta agora é: você está crescendo no ritmo que poderia — ou ainda existe potencial desperdiçado?",
-plan:"O foco agora é escalar com eficiência, aumentar margem e fortalecer liderança."
+desc:"Sua empresa já tem base sólida e sinais claros de maturidade.\n\nMas a pergunta agora é: você está crescendo no ritmo que poderia — ou ainda existe potencial desperdiçado?\n\nO foco agora é escalar com eficiência, aumentar margem e fortalecer liderança."
 }
 }
 
@@ -153,10 +230,9 @@ const result = getStage(total);
 document.getElementById("score").innerText = total + "/60";
 document.getElementById("stage").innerText = result.stage;
 document.getElementById("desc").innerText = result.desc;
-document.getElementById("plan").innerText = result.plan;
 
 const mensagem = encodeURIComponent(
-`Olá, acabei de finalizar o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero uma consultoria.`
+`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero uma consultoria.`
 );
 
 document.getElementById("btn").onclick = () => {
