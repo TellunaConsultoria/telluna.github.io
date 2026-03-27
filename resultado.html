@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resultado | Telluna</title>
 
 <style>
@@ -23,55 +23,60 @@ background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
 
-/* HEADER */
+/* HEADER AJUSTADO */
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 30px;
+padding:20px 40px;
 border-bottom:1px solid var(--line);
-background:rgba(11,37,34,.8);
+background:rgba(11,37,34,.85);
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:12px;
+gap:16px;
 }
 
 .logo img{
-width:60px;
+width:85px;
 }
 
 .logo-text b{
-font-size:26px;
+font-size:42px;
+letter-spacing:2px;
 }
 
 .logo-text small{
 display:block;
-font-size:12px;
+font-size:15px;
 color:var(--muted);
+margin-top:4px;
 }
 
+/* BOTÃO TOPO */
 .btn-top{
-padding:10px 16px;
+padding:12px 20px;
 border:1px solid var(--line);
-border-radius:10px;
+border-radius:12px;
+color:#fff;
+font-weight:600;
 }
 
 /* HERO */
 .hero{
 text-align:center;
-padding:40px 20px 10px;
+padding:50px 20px 10px;
 }
 
 .hero h1{
-font-size:40px;
+font-size:42px;
 margin-bottom:10px;
 }
 
 .hero p{
-max-width:700px;
+max-width:720px;
 margin:auto;
 color:var(--muted);
 line-height:1.6;
@@ -80,7 +85,7 @@ line-height:1.6;
 /* SCORE */
 .score{
 text-align:center;
-font-size:70px;
+font-size:78px;
 font-weight:900;
 color:var(--gold);
 margin:30px 0;
@@ -90,35 +95,53 @@ margin:30px 0;
 .grid{
 display:grid;
 grid-template-columns:1.2fr .8fr;
-gap:20px;
-max-width:1000px;
+gap:22px;
+max-width:1100px;
 margin:30px auto;
 padding:0 20px;
 }
 
 /* CARD */
 .card{
-background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.06);
 border:1px solid var(--line);
 border-radius:20px;
-padding:25px;
+padding:28px;
 }
 
 /* RESULT */
 .stage{
-font-size:28px;
-margin-bottom:10px;
+font-size:32px;
+margin-bottom:12px;
 }
 
 .desc{
-font-size:16px;
+font-size:17px;
 line-height:1.7;
+color:var(--muted);
+}
+
+/* PLANO */
+.plan-box{
+margin-top:20px;
+padding:18px;
+border-radius:16px;
+border:1px solid rgba(198,168,90,.4);
+background:rgba(198,168,90,.08);
+}
+
+.plan-box h3{
+font-size:22px;
+margin-bottom:8px;
+}
+
+.plan-box p{
 color:var(--muted);
 }
 
 /* CTA */
 .cta-title{
-font-size:22px;
+font-size:24px;
 margin-bottom:10px;
 }
 
@@ -131,9 +154,10 @@ line-height:1.6;
 
 .cta-btn{
 width:100%;
-padding:18px;
+padding:20px;
+font-size:18px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 background:var(--gold);
 font-weight:900;
 cursor:pointer;
@@ -148,6 +172,8 @@ animation:blink 1.2s infinite;
 
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
+.logo-text b{font-size:32px}
+.logo img{width:65px}
 }
 </style>
 </head>
@@ -180,10 +206,16 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 <div class="card">
 <div class="stage" id="stage"></div>
 <div class="desc" id="desc"></div>
+
+<div class="plan-box">
+<h3 id="planTitle"></h3>
+<p id="planDesc"></p>
+</div>
 </div>
 
 <div class="card">
 <div class="cta-title">Próximo passo: diagnóstico com especialista</div>
+
 <div class="cta-text">
 Você já tem um retrato do cenário atual. Agora, em uma conversa de consultoria, mostramos o que priorizar nos próximos 90 dias para reduzir desperdícios e acelerar o crescimento.
 </div>
@@ -208,20 +240,26 @@ function getStage(score){
 if(score <= 20){
 return {
 stage:"Empresa desorganizada",
-desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia. Você resolve problemas todos os dias, mas dificilmente tem clareza do que realmente está construindo.\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?\n\nO próximo passo é estruturar base, processos e clareza de direção antes de pensar em crescimento."
+desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia...\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?",
+plan:"Plano Essencial",
+planDesc:"Organização da base operacional, definição de prioridades e criação de rotina de gestão."
 }
 }
 
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
-desc:"Você já saiu do caos inicial, mas ainda enfrenta travas que impedem crescimento consistente.\n\nSua empresa até evolui, mas depende demais de você. Se você parar hoje, o negócio continua — ou trava?\n\nAgora é o momento de organizar gestão, indicadores e reduzir dependência do dono."
+desc:"Você já saiu do caos inicial, mas ainda enfrenta travas de crescimento...\n\nSe você parar hoje, o negócio continua ou trava?",
+plan:"Plano Estratégico",
+planDesc:"Melhoria da gestão, indicadores e redução da dependência do dono."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa já tem base sólida e sinais claros de maturidade.\n\nMas a pergunta agora é: você está crescendo no ritmo que poderia — ou ainda existe potencial desperdiçado?\n\nO foco agora é escalar com eficiência, aumentar margem e fortalecer liderança."
+desc:"Sua empresa já tem base sólida...\n\nMas você está crescendo no ritmo que poderia?",
+plan:"Plano de Acompanhamento",
+planDesc:"Escala com eficiência, liderança e aumento de margem."
 }
 }
 
@@ -230,6 +268,8 @@ const result = getStage(total);
 document.getElementById("score").innerText = total + "/60";
 document.getElementById("stage").innerText = result.stage;
 document.getElementById("desc").innerText = result.desc;
+document.getElementById("planTitle").innerText = result.plan;
+document.getElementById("planDesc").innerText = result.planDesc;
 
 const mensagem = encodeURIComponent(
 `Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero uma consultoria.`
