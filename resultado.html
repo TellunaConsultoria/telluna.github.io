@@ -23,7 +23,7 @@ background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
 
-/* HEADER AJUSTADO */
+/* HEADER */
 header{
 display:flex;
 justify-content:space-between;
@@ -52,10 +52,8 @@ letter-spacing:2px;
 display:block;
 font-size:15px;
 color:var(--muted);
-margin-top:4px;
 }
 
-/* BOTÃO TOPO */
 .btn-top{
 padding:12px 20px;
 border:1px solid var(--line);
@@ -117,13 +115,13 @@ margin-bottom:12px;
 
 .desc{
 font-size:17px;
-line-height:1.7;
+line-height:1.75;
 color:var(--muted);
 }
 
 /* PLANO */
 .plan-box{
-margin-top:20px;
+margin-top:22px;
 padding:18px;
 border-radius:16px;
 border:1px solid rgba(198,168,90,.4);
@@ -135,21 +133,24 @@ font-size:22px;
 margin-bottom:8px;
 }
 
-.plan-box p{
-color:var(--muted);
-}
-
 /* CTA */
 .cta-title{
 font-size:24px;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
 .cta-text{
 font-size:15px;
 color:var(--muted);
-margin-bottom:20px;
+margin-bottom:16px;
 line-height:1.6;
+}
+
+.cta-highlight{
+font-size:15px;
+color:#fff;
+margin-bottom:20px;
+font-weight:600;
 }
 
 .cta-btn{
@@ -203,6 +204,7 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 
 <section class="grid">
 
+<!-- BLOCO ESQUERDA -->
 <div class="card">
 <div class="stage" id="stage"></div>
 <div class="desc" id="desc"></div>
@@ -213,14 +215,23 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 </div>
 </div>
 
+<!-- BLOCO DIREITA -->
 <div class="card">
-<div class="cta-title">Próximo passo: diagnóstico com especialista</div>
+<div class="cta-title">Diagnóstico com especialista</div>
 
 <div class="cta-text">
-Você já tem um retrato do cenário atual. Agora, em uma conversa de consultoria, mostramos o que priorizar nos próximos 90 dias para reduzir desperdícios e acelerar o crescimento.
+Você já tem um retrato do cenário atual. Mas sem um plano claro, a tendência é continuar enfrentando os mesmos problemas — só que com mais custo e desgaste.
 </div>
 
-<button class="cta-btn" id="btn">Solicitar consultoria</button>
+<div class="cta-highlight">
+Quanto mais você demora para estruturar isso, mais caro fica o crescimento.
+</div>
+
+<div class="cta-text">
+Em uma única conversa, você terá clareza do que ajustar imediatamente para destravar sua empresa.
+</div>
+
+<button class="cta-btn" id="btn">Quero destravar meu negócio</button>
 </div>
 
 </section>
@@ -240,26 +251,26 @@ function getStage(score){
 if(score <= 20){
 return {
 stage:"Empresa desorganizada",
-desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia...\n\nVocê consegue enxergar crescimento consistente nesse cenário atual — ou sente que está sempre apagando incêndios?",
+desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia.\n\nVocê resolve problemas todos os dias, mas não tem clareza real do que está construindo.\n\nSe nada mudar, a tendência é continuar presa no mesmo nível — com retrabalho, desgaste e crescimento travado.\n\nA pergunta é: até quando isso é sustentável?",
 plan:"Plano Essencial",
-planDesc:"Organização da base operacional, definição de prioridades e criação de rotina de gestão."
+planDesc:"Organização da base operacional, definição de prioridades e criação de uma rotina de gestão para tirar a empresa do improviso."
 }
 }
 
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
-desc:"Você já saiu do caos inicial, mas ainda enfrenta travas de crescimento...\n\nSe você parar hoje, o negócio continua ou trava?",
+desc:"Sua empresa já evoluiu, mas ainda enfrenta travas que limitam o crescimento.\n\nVocê até avança, mas depende demais de você para tudo funcionar.\n\nSe esse cenário continuar, o crescimento será lento, instável e cada vez mais desgastante.\n\nVocê está construindo um negócio… ou um sistema que depende de você o tempo todo?",
 plan:"Plano Estratégico",
-planDesc:"Melhoria da gestão, indicadores e redução da dependência do dono."
+planDesc:"Estruturação da gestão, melhoria de indicadores e redução da dependência do dono para crescimento sustentável."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa já tem base sólida...\n\nMas você está crescendo no ritmo que poderia?",
+desc:"Sua empresa já possui base sólida e sinais claros de maturidade.\n\nMas ainda existe potencial não aproveitado.\n\nSem ajustes estratégicos, você cresce abaixo do que poderia — deixando dinheiro e oportunidades na mesa.\n\nA questão agora é: você quer manter esse nível… ou escalar de verdade?",
 plan:"Plano de Acompanhamento",
-planDesc:"Escala com eficiência, liderança e aumento de margem."
+planDesc:"Acompanhamento estratégico para escalar com eficiência, aumentar margem e fortalecer liderança."
 }
 }
 
@@ -272,7 +283,7 @@ document.getElementById("planTitle").innerText = result.plan;
 document.getElementById("planDesc").innerText = result.planDesc;
 
 const mensagem = encodeURIComponent(
-`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero uma consultoria.`
+`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero destravar meu negócio com uma consultoria.`
 );
 
 document.getElementById("btn").onclick = () => {
