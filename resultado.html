@@ -13,51 +13,86 @@
 --text:#F5F1E8;
 --muted:rgba(255,255,255,.8);
 --line:rgba(255,255,255,.14);
+--light:#F5F1E8;
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
+/* BODY */
 body{
 font-family:Arial, Helvetica, sans-serif;
 background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
 
-/* HEADER */
+/* HEADER CLARO (IGUAL INDEX) */
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 40px;
-border-bottom:1px solid var(--line);
-background:rgba(11,37,34,.85);
+padding:18px 40px;
+background:var(--light);
+border-bottom:1px solid rgba(0,0,0,.08);
 }
 
+/* LOGO */
 .logo{
 display:flex;
 align-items:center;
 gap:16px;
 }
 
-.logo img{width:85px;}
+.logo img{
+width:80px;
+}
 
 .logo-text b{
-font-size:42px;
+font-size:40px;
 letter-spacing:2px;
+color:#0F2E2A;
 }
 
 .logo-text small{
 display:block;
-font-size:15px;
-color:var(--muted);
+font-size:14px;
+color:#555;
 }
 
-.btn-top{
-padding:12px 20px;
-border:1px solid var(--line);
+/* BOTÕES HEADER */
+.header-actions{
+display:flex;
+gap:14px;
+align-items:center;
+}
+
+/* BOTÃO REFAZER */
+.btn-secondary{
+padding:12px 18px;
 border-radius:12px;
-color:#fff;
+border:1px solid #0F2E2A;
+background:#fff;
+color:#0F2E2A;
 font-weight:600;
+cursor:pointer;
+}
+
+/* BOTÃO PRINCIPAL */
+.btn-primary{
+padding:14px 22px;
+border-radius:12px;
+border:none;
+background:var(--gold);
+color:#0F2E2A;
+font-weight:900;
+cursor:pointer;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.6}
+100%{opacity:1}
 }
 
 /* HERO */
@@ -162,8 +197,6 @@ border:1px solid rgba(198,168,90,.4);
 background:rgba(198,168,90,.08);
 }
 
-.plan-box h3{margin-bottom:8px;}
-
 /* CTA */
 .cta-title{
 font-size:24px;
@@ -196,16 +229,10 @@ cursor:pointer;
 animation:blink 1.2s infinite;
 }
 
-@keyframes blink{
-0%{opacity:1}
-50%{opacity:.6}
-100%{opacity:1}
-}
-
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
-.logo-text b{font-size:32px}
-.logo img{width:65px}
+.logo-text b{font-size:30px}
+.logo img{width:60px}
 }
 </style>
 </head>
@@ -221,7 +248,10 @@ animation:blink 1.2s infinite;
 </div>
 </div>
 
-<a href="perguntas.html" class="btn-top">Refazer perguntas</a>
+<div class="header-actions">
+<a href="perguntas.html" class="btn-secondary">Refaça as questões</a>
+<button class="btn-primary" id="topBtn">Destravar meu negócio</button>
+</div>
 </header>
 
 <section class="hero">
@@ -242,7 +272,6 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 
 <section class="grid">
 
-<!-- ESQUERDA -->
 <div class="card">
 <div class="stage" id="stage"></div>
 <div class="desc" id="desc"></div>
@@ -250,7 +279,7 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 <div class="alert">
 <strong>O que isso está te custando hoje:</strong>
 <p style="margin-top:8px;">
-Retrabalho constante, decisões sem clareza, tempo perdido e crescimento abaixo do potencial.
+Retrabalho, decisões sem clareza e crescimento abaixo do potencial.
 </p>
 </div>
 
@@ -260,12 +289,11 @@ Retrabalho constante, decisões sem clareza, tempo perdido e crescimento abaixo 
 </div>
 </div>
 
-<!-- DIREITA -->
 <div class="card">
 <div class="cta-title">Diagnóstico com especialista</div>
 
 <div class="cta-text">
-Você já tem clareza do cenário atual. O problema é que, sem um plano estruturado, sua empresa tende a continuar exatamente como está.
+Sem um plano estruturado, sua empresa tende a continuar no mesmo nível.
 </div>
 
 <div class="cta-highlight">
@@ -273,7 +301,7 @@ Cada mês sem ajuste custa tempo, energia e dinheiro.
 </div>
 
 <div class="cta-text">
-Em uma única conversa, você terá clareza do que ajustar imediatamente para destravar seu crescimento.
+Em uma única conversa, você terá clareza do que ajustar imediatamente.
 </div>
 
 <button class="cta-btn" id="btn">Quero destravar meu negócio</button>
@@ -297,26 +325,26 @@ function getStage(score){
 if(score <= 20){
 return {
 stage:"Empresa desorganizada",
-desc:"Sua empresa está operando no modo sobrevivência.\n\nVocê resolve problemas todos os dias, mas não constrói crescimento real.\n\nSe nada mudar, a tendência é continuar travada — com desgaste, retrabalho e falta de direção.\n\nAté quando isso é sustentável?",
+desc:"Sua empresa está travada no operacional.\n\nSe nada mudar, continuará no mesmo nível.",
 plan:"Plano Essencial",
-planDesc:"Organizar base, criar processos e estabelecer rotina de gestão."
+planDesc:"Organização e estrutura da base."
 }
 }
 
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
-desc:"Sua empresa já evoluiu, mas ainda depende demais de você.\n\nO crescimento existe, mas é instável e limitado.\n\nSe isso continuar, você cresce devagar — e sempre no limite.\n\nVocê está construindo uma empresa ou um sistema que depende de você?",
+desc:"Você cresce, mas com esforço excessivo.\n\nO modelo atual limita sua evolução.",
 plan:"Plano Estratégico",
-planDesc:"Estruturar gestão, indicadores e reduzir dependência."
+planDesc:"Gestão, processos e autonomia."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa já tem base sólida.\n\nMas ainda existe crescimento não aproveitado.\n\nSem ajustes estratégicos, você cresce abaixo do potencial.\n\nVocê quer manter esse nível ou escalar de verdade?",
+desc:"Você já tem base.\n\nAgora precisa escalar com inteligência.",
 plan:"Plano de Acompanhamento",
-planDesc:"Escalar com eficiência, margem e liderança."
+planDesc:"Escala e performance."
 }
 }
 
@@ -330,26 +358,21 @@ document.getElementById("planDesc").innerText = result.planDesc;
 
 document.getElementById("bar").style.width = percent + "%";
 
-let levelText = "";
-if(percent <= 33){
-levelText = "Baixo nível de estrutura";
-}
-else if(percent <= 66){
-levelText = "Nível médio de estrutura";
-}
-else{
-levelText = "Empresa estruturada";
-}
+let levelText = percent <= 33 ? "Baixo nível" :
+percent <= 66 ? "Nível médio" : "Alto nível";
 
-document.getElementById("levelText").innerText = levelText + " (" + percent + "%)";
+document.getElementById("levelText").innerText = levelText + " ("+percent+"%)";
 
 const mensagem = encodeURIComponent(
-`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero destravar meu negócio.`
+`Olá, finalizei o diagnóstico Telluna (${total}/60) e quero destravar meu negócio.`
 );
 
-document.getElementById("btn").onclick = () => {
+function abrirWhats(){
 window.open(`https://wa.me/5549999447624?text=${mensagem}`);
-};
+}
+
+document.getElementById("btn").onclick = abrirWhats;
+document.getElementById("topBtn").onclick = abrirWhats;
 </script>
 
 </body>
