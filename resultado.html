@@ -39,9 +39,7 @@ align-items:center;
 gap:16px;
 }
 
-.logo img{
-width:85px;
-}
+.logo img{width:85px;}
 
 .logo-text b{
 font-size:42px;
@@ -86,7 +84,34 @@ text-align:center;
 font-size:78px;
 font-weight:900;
 color:var(--gold);
-margin:30px 0;
+margin:30px 0 10px;
+}
+
+/* NIVEL */
+.level{
+text-align:center;
+margin-bottom:30px;
+}
+
+.bar{
+background:rgba(255,255,255,.1);
+border-radius:10px;
+overflow:hidden;
+height:14px;
+max-width:400px;
+margin:auto;
+}
+
+.bar-fill{
+height:100%;
+width:0%;
+background:var(--gold);
+transition:1s;
+}
+
+.level-text{
+margin-top:8px;
+font-weight:600;
 }
 
 /* GRID */
@@ -119,6 +144,15 @@ line-height:1.75;
 color:var(--muted);
 }
 
+/* ALERTA */
+.alert{
+margin-top:20px;
+padding:16px;
+border:1px solid rgba(255,0,0,.2);
+border-radius:12px;
+background:rgba(255,0,0,.05);
+}
+
 /* PLANO */
 .plan-box{
 margin-top:22px;
@@ -128,10 +162,7 @@ border:1px solid rgba(198,168,90,.4);
 background:rgba(198,168,90,.08);
 }
 
-.plan-box h3{
-font-size:22px;
-margin-bottom:8px;
-}
+.plan-box h3{margin-bottom:8px;}
 
 /* CTA */
 .cta-title{
@@ -148,9 +179,9 @@ line-height:1.6;
 
 .cta-highlight{
 font-size:15px;
-color:#fff;
-margin-bottom:20px;
+margin-bottom:18px;
 font-weight:600;
+color:#fff;
 }
 
 .cta-btn{
@@ -202,12 +233,26 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 
 <div class="score" id="score">--/60</div>
 
+<div class="level">
+<div class="bar">
+<div class="bar-fill" id="bar"></div>
+</div>
+<div class="level-text" id="levelText"></div>
+</div>
+
 <section class="grid">
 
-<!-- BLOCO ESQUERDA -->
+<!-- ESQUERDA -->
 <div class="card">
 <div class="stage" id="stage"></div>
 <div class="desc" id="desc"></div>
+
+<div class="alert">
+<strong>O que isso está te custando hoje:</strong>
+<p style="margin-top:8px;">
+Retrabalho constante, decisões sem clareza, tempo perdido e crescimento abaixo do potencial.
+</p>
+</div>
 
 <div class="plan-box">
 <h3 id="planTitle"></h3>
@@ -215,20 +260,20 @@ Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua e
 </div>
 </div>
 
-<!-- BLOCO DIREITA -->
+<!-- DIREITA -->
 <div class="card">
 <div class="cta-title">Diagnóstico com especialista</div>
 
 <div class="cta-text">
-Você já tem um retrato do cenário atual. Mas sem um plano claro, a tendência é continuar enfrentando os mesmos problemas — só que com mais custo e desgaste.
+Você já tem clareza do cenário atual. O problema é que, sem um plano estruturado, sua empresa tende a continuar exatamente como está.
 </div>
 
 <div class="cta-highlight">
-Quanto mais você demora para estruturar isso, mais caro fica o crescimento.
+Cada mês sem ajuste custa tempo, energia e dinheiro.
 </div>
 
 <div class="cta-text">
-Em uma única conversa, você terá clareza do que ajustar imediatamente para destravar sua empresa.
+Em uma única conversa, você terá clareza do que ajustar imediatamente para destravar seu crescimento.
 </div>
 
 <button class="cta-btn" id="btn">Quero destravar meu negócio</button>
@@ -245,32 +290,33 @@ answers.push(Number(params.get(`q${i}`) || 0));
 }
 
 const total = answers.reduce((sum, item) => sum + item, 0);
+const percent = Math.round((total/60)*100);
 
 function getStage(score){
 
 if(score <= 20){
 return {
 stage:"Empresa desorganizada",
-desc:"Hoje sua empresa sobrevive mais no esforço do que na estratégia.\n\nVocê resolve problemas todos os dias, mas não tem clareza real do que está construindo.\n\nSe nada mudar, a tendência é continuar presa no mesmo nível — com retrabalho, desgaste e crescimento travado.\n\nA pergunta é: até quando isso é sustentável?",
+desc:"Sua empresa está operando no modo sobrevivência.\n\nVocê resolve problemas todos os dias, mas não constrói crescimento real.\n\nSe nada mudar, a tendência é continuar travada — com desgaste, retrabalho e falta de direção.\n\nAté quando isso é sustentável?",
 plan:"Plano Essencial",
-planDesc:"Organização da base operacional, definição de prioridades e criação de uma rotina de gestão para tirar a empresa do improviso."
+planDesc:"Organizar base, criar processos e estabelecer rotina de gestão."
 }
 }
 
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
-desc:"Sua empresa já evoluiu, mas ainda enfrenta travas que limitam o crescimento.\n\nVocê até avança, mas depende demais de você para tudo funcionar.\n\nSe esse cenário continuar, o crescimento será lento, instável e cada vez mais desgastante.\n\nVocê está construindo um negócio… ou um sistema que depende de você o tempo todo?",
+desc:"Sua empresa já evoluiu, mas ainda depende demais de você.\n\nO crescimento existe, mas é instável e limitado.\n\nSe isso continuar, você cresce devagar — e sempre no limite.\n\nVocê está construindo uma empresa ou um sistema que depende de você?",
 plan:"Plano Estratégico",
-planDesc:"Estruturação da gestão, melhoria de indicadores e redução da dependência do dono para crescimento sustentável."
+planDesc:"Estruturar gestão, indicadores e reduzir dependência."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa já possui base sólida e sinais claros de maturidade.\n\nMas ainda existe potencial não aproveitado.\n\nSem ajustes estratégicos, você cresce abaixo do que poderia — deixando dinheiro e oportunidades na mesa.\n\nA questão agora é: você quer manter esse nível… ou escalar de verdade?",
+desc:"Sua empresa já tem base sólida.\n\nMas ainda existe crescimento não aproveitado.\n\nSem ajustes estratégicos, você cresce abaixo do potencial.\n\nVocê quer manter esse nível ou escalar de verdade?",
 plan:"Plano de Acompanhamento",
-planDesc:"Acompanhamento estratégico para escalar com eficiência, aumentar margem e fortalecer liderança."
+planDesc:"Escalar com eficiência, margem e liderança."
 }
 }
 
@@ -282,8 +328,23 @@ document.getElementById("desc").innerText = result.desc;
 document.getElementById("planTitle").innerText = result.plan;
 document.getElementById("planDesc").innerText = result.planDesc;
 
+document.getElementById("bar").style.width = percent + "%";
+
+let levelText = "";
+if(percent <= 33){
+levelText = "Baixo nível de estrutura";
+}
+else if(percent <= 66){
+levelText = "Nível médio de estrutura";
+}
+else{
+levelText = "Empresa estruturada";
+}
+
+document.getElementById("levelText").innerText = levelText + " (" + percent + "%)";
+
 const mensagem = encodeURIComponent(
-`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero destravar meu negócio com uma consultoria.`
+`Olá, finalizei o diagnóstico Telluna com pontuação ${total}/60 (${result.stage}) e quero destravar meu negócio.`
 );
 
 document.getElementById("btn").onclick = () => {
