@@ -1,234 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultado | Telluna</title>
-
-<style>
-:root{
---green:#0F2E2A;
---green2:#0B2522;
---gold:#C6A85A;
---text:#F5F1E8;
---muted:rgba(255,255,255,.8);
---line:rgba(255,255,255,.14);
---light:#F5F1E8;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(180deg,var(--green),var(--green2));
-color:var(--text);
-}
-
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 40px;
-background:var(--light);
-border-bottom:1px solid rgba(0,0,0,.08);
-}
-
-.logo{display:flex;align-items:center;gap:16px;}
-.logo img{width:80px;}
-
-.logo-text b{
-font-size:40px;
-letter-spacing:2px;
-color:#0F2E2A;
-}
-
-.logo-text small{
-font-size:14px;
-color:#555;
-display:block;
-}
-
-.header-actions{display:flex;gap:12px;}
-
-.btn-secondary{
-padding:10px 16px;
-border:1px solid #0F2E2A;
-background:#fff;
-color:#0F2E2A;
-border-radius:10px;
-font-weight:600;
-}
-
-.btn-primary{
-padding:12px 20px;
-border:none;
-border-radius:10px;
-background:var(--gold);
-color:#0F2E2A;
-font-weight:900;
-animation:blink 1.2s infinite;
-cursor:pointer;
-}
-
-@keyframes blink{
-0%{opacity:1}
-50%{opacity:.6}
-100%{opacity:1}
-}
-
-/* HERO */
-.hero{text-align:center;padding:40px 20px;}
-.hero h1{font-size:40px;margin-bottom:10px;}
-.hero p{max-width:700px;margin:auto;color:var(--muted);}
-
-/* SCORE */
-.score{text-align:center;font-size:70px;color:var(--gold);margin:20px 0;}
-
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:1.2fr .8fr;
-gap:20px;
-max-width:1100px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-border:1px solid var(--line);
-border-radius:20px;
-padding:25px;
-}
-
-/* RESULT */
-.stage{font-size:28px;margin-bottom:10px;}
-.desc{color:var(--muted);line-height:1.7;margin-bottom:20px;}
-
-/* CRITÉRIOS */
-.criteria{
-margin-top:10px;
-display:grid;
-gap:8px;
-font-size:14px;
-color:#fff;
-}
-
-/* ALERTA DOURADO */
-.alert{
-margin-top:20px;
-padding:16px;
-border-radius:12px;
-background:rgba(198,168,90,.12);
-border:1px solid var(--gold);
-}
-
-/* PLANO */
-.plan-box{
-margin-top:20px;
-padding:16px;
-border-radius:12px;
-background:rgba(198,168,90,.08);
-border:1px solid var(--gold);
-}
-
-/* CTA */
-.cta-title{font-size:22px;margin-bottom:10px;}
-.cta-text{font-size:14px;color:var(--muted);margin-bottom:10px;}
-
-.plan-detail{
-margin-top:15px;
-font-size:14px;
-line-height:1.6;
-}
-
-.plan-detail ul{
-margin-top:10px;
-padding-left:18px;
-}
-
-.cta-btn{
-margin-top:20px;
-width:100%;
-padding:18px;
-border:none;
-border-radius:12px;
-background:var(--gold);
-font-weight:900;
-cursor:pointer;
-animation:blink 1.2s infinite;
-}
-
-@media(max-width:900px){
-.grid{grid-template-columns:1fr}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="logo">
-<img src="logo-telluna.png">
-<div class="logo-text">
-<b>TELLUNA</b>
-<small>Consultoria Empresarial Estratégica</small>
-</div>
-</div>
-
-<div class="header-actions">
-<a href="perguntas.html" class="btn-secondary">Refaça as questões</a>
-<button class="btn-primary" id="topBtn">Destravar meu negócio</button>
-</div>
-</header>
-
-<section class="hero">
-<h1>Seu diagnóstico está pronto</h1>
-<p>Com base nas respostas enviadas, identificamos os principais pontos que estão travando o crescimento da sua empresa.</p>
-</section>
-
-<div class="score" id="score"></div>
-
-<section class="grid">
-
-<!-- ESQUERDA -->
-<div class="card">
-<div class="stage" id="stage"></div>
-<div class="desc" id="desc"></div>
-
-<div class="criteria" id="criteria"></div>
-
-<div class="alert">
-<strong>O que isso está te custando hoje:</strong>
-<p>Retrabalho, decisões sem clareza e crescimento abaixo do potencial.</p>
-</div>
-
-<div class="plan-box">
-<strong id="planTitle"></strong>
-<p id="planDesc"></p>
-</div>
-</div>
-
-<!-- DIREITA -->
-<div class="card">
-<div class="cta-title">Diagnóstico com especialista</div>
-
-<div class="cta-text">Veja como podemos atuar no seu caso:</div>
-
-<div class="plan-detail" id="planDetail"></div>
-
-<button class="cta-btn" id="btn">Quero destravar meu negócio</button>
-</div>
-
-</section>
-
 <script>
 const params = new URLSearchParams(window.location.search);
 
 let total = 0;
+let hasData = false;
+
 for(let i=1;i<=15;i++){
-total += Number(params.get("q"+i)||0);
+const val = Number(params.get("q"+i));
+if(val){
+total += val;
+hasData = true;
+}
+}
+
+// fallback (se não vier dados)
+if(!hasData){
+total = 12; // valor padrão pra teste
 }
 
 function getData(score){
@@ -245,16 +31,7 @@ criteria:[
 ],
 plan:"Plano Essencial",
 planDesc:"Organização da base e saída do improviso.",
-planDetail:`
-<b>Organização</b><br>
-Para empresas que precisam estruturar a base.<br><br>
-✔ Diagnóstico dos principais gargalos<br>
-✔ Estruturação inicial de prioridades<br>
-✔ Definição do que realmente importa<br>
-✔ Primeira rotina de decisão<br>
-✔ 1 sessão estratégica<br><br>
-<i>Ideal para sair do improviso.</i>
-`
+planDetail:"Plano focado em estruturar base e decisões."
 }
 }
 
@@ -265,51 +42,30 @@ desc:"Sua empresa cresce, mas ainda com desorganização interna.",
 criteria:[
 "Processos inconsistentes",
 "Indicadores pouco claros",
-"Dependência do dono",
-"Falta de rotina estratégica"
+"Dependência do dono"
 ],
 plan:"Plano Estratégico",
 planDesc:"Estruturação para crescimento previsível.",
-planDetail:`
-<b>Estruturação</b><br>
-Para empresas que querem crescer com previsibilidade.<br><br>
-✔ Tudo do Plano Essencial<br>
-✔ Estruturação de processos<br>
-✔ Definição de KPIs<br>
-✔ Rotina de acompanhamento<br>
-✔ Plano estratégico<br><br>
-<i>Ideal para crescimento consistente.</i>
-`
+planDetail:"Plano focado em crescimento estruturado."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Sua empresa tem base, mas ainda pode evoluir.",
+desc:"Sua empresa já tem base, mas pode evoluir.",
 criteria:[
-"Falta de escala estruturada",
-"Indicadores subutilizados",
+"Falta de escala",
 "Decisões estratégicas pontuais"
 ],
 plan:"Plano Transformação",
-planDesc:"Evolução contínua da gestão.",
-planDetail:`
-<b>Evolução Contínua</b><br>
-Para empresas que querem escalar.<br><br>
-✔ Diagnóstico contínuo<br>
-✔ Revisão de metas<br>
-✔ Ajustes estratégicos<br>
-✔ Suporte à decisão<br>
-✔ Evolução de indicadores<br><br>
-<i>Ideal para crescer com consistência.</i>
-`
+planDesc:"Evolução contínua.",
+planDetail:"Plano focado em escala."
 }
-}
-
 }
 
 const data = getData(total);
 
+// FORÇA PREENCHIMENTO
 document.getElementById("score").innerText = total+"/60";
 document.getElementById("stage").innerText = data.stage;
 document.getElementById("desc").innerText = data.desc;
@@ -317,20 +73,20 @@ document.getElementById("planTitle").innerText = data.plan;
 document.getElementById("planDesc").innerText = data.planDesc;
 document.getElementById("planDetail").innerHTML = data.planDetail;
 
+// CRITÉRIOS
 const criteriaEl = document.getElementById("criteria");
+criteriaEl.innerHTML = "";
 data.criteria.forEach(c=>{
 const div=document.createElement("div");
 div.innerText="✔ "+c;
 criteriaEl.appendChild(div);
 });
 
-const msg = encodeURIComponent(`Finalizei meu diagnóstico (${total}/60) e quero destravar meu negócio.`);
-function go(){window.open(`https://wa.me/5549999447624?text=${msg}`);}
+// BOTÕES
+function go(){
+window.open("https://wa.me/5549999447624");
+}
 
 document.getElementById("btn").onclick=go;
 document.getElementById("topBtn").onclick=go;
-
 </script>
-
-</body>
-</html>
