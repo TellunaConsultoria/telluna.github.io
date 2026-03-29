@@ -63,6 +63,7 @@ border:none;
 border-radius:10px;
 font-weight:900;
 animation:blink 1.2s infinite;
+cursor:pointer;
 }
 
 @keyframes blink{
@@ -94,20 +95,18 @@ border-radius:20px;
 padding:25px;
 }
 
-/* TITULO */
+/* ESQUERDA */
 .stage{
 font-size:28px;
 margin-bottom:20px;
 }
 
-/* TEXTO */
 .desc p{
 margin-bottom:16px;
 line-height:1.7;
 color:var(--muted);
 }
 
-/* ALERTA */
 .alert{
 margin-top:25px;
 padding:18px;
@@ -120,20 +119,34 @@ background:rgba(198,168,90,.12);
 display:block;
 margin-bottom:12px;
 font-size:18px;
-color:#fff;
-}
-
-.alert ul{
-list-style:none;
-padding-left:0;
 }
 
 .alert li{
 margin-bottom:8px;
-font-size:15px;
 }
 
-/* CTA */
+/* DIREITA */
+.plan-title{
+font-size:26px;
+margin-bottom:10px;
+}
+
+.plan-sub{
+font-size:14px;
+color:var(--muted);
+margin-bottom:20px;
+}
+
+.plan-list li{
+margin-bottom:8px;
+}
+
+.urgency{
+margin-top:20px;
+font-size:14px;
+font-weight:600;
+}
+
 .cta-btn{
 margin-top:20px;
 width:100%;
@@ -143,8 +156,12 @@ border:none;
 border-radius:12px;
 font-weight:900;
 animation:blink 1.2s infinite;
+cursor:pointer;
 }
 
+@media(max-width:900px){
+.grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -174,8 +191,9 @@ animation:blink 1.2s infinite;
 
 <section class="grid">
 
-<!-- ESQUERDA -->
+<!-- BLOCO ESQUERDO -->
 <div class="card">
+
 <div class="stage" id="stage"></div>
 
 <div class="desc" id="desc"></div>
@@ -191,18 +209,23 @@ animation:blink 1.2s infinite;
 
 </div>
 
-<!-- DIREITA -->
+<!-- BLOCO DIREITO -->
 <div class="card">
-<h3>Diagnóstico com especialista</h3>
 
-<p>
-Empresas no seu nível estão avançando porque estruturaram decisões estratégicas.
-Enquanto isso, quem não age permanece travado no mesmo ponto.
-</p>
+<div class="plan-title" id="planTitle"></div>
 
-<p><strong>Você decide: continuar assim ou destravar o crescimento.</strong></p>
+<div class="plan-sub">
+Esse é o próximo passo lógico para destravar sua empresa com base no seu diagnóstico.
+</div>
+
+<ul class="plan-list" id="planList"></ul>
+
+<div class="urgency">
+Empresas no seu nível que não tomam decisão agora continuam travadas — enquanto outras avançam com estrutura.
+</div>
 
 <button class="cta-btn" id="btn">Quero destravar meu negócio</button>
+
 </div>
 
 </section>
@@ -222,15 +245,19 @@ return {
 stage:"Empresa desorganizada",
 desc:`
 <p>Hoje sua empresa depende mais de esforço do que de estratégia.</p>
-
 <p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
-
 <p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
-
 <p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
-
 <p><strong>Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza.</strong></p>
-`
+`,
+plan:"Plano Essencial",
+list:[
+"✔ Diagnóstico dos principais gargalos",
+"✔ Estruturação inicial de prioridades",
+"✔ Definição do que realmente importa",
+"✔ Primeira rotina de decisão",
+"✔ 1 sessão estratégica com o gestor"
+]
 }
 }
 
@@ -239,26 +266,40 @@ return {
 stage:"Empresa em estruturação",
 desc:`
 <p>Você já tem operação, mas ainda não tem estrutura.</p>
-
 <p>Empresas nesse estágio crescem ou travam — dependendo da organização interna.</p>
-
 <p>A Telluna atua exatamente nesse ponto de virada.</p>
-
-<p><strong>Para empresas que precisam estruturar processos e crescer com previsibilidade.</strong></p>
-`
+<p><strong>Para empresas que precisam estruturar processos, indicadores e decisões para crescer com previsibilidade.</strong></p>
+`,
+plan:"Plano Estruturado",
+list:[
+"✔ Estruturação de processos-chave",
+"✔ Definição de indicadores (KPIs)",
+"✔ Rotina de acompanhamento",
+"✔ Plano de ação estratégico",
+"✔ Acompanhamento contínuo"
+]
 }
 }
 
 return {
 stage:"Empresa estruturada",
 desc:`
-<p>Você já tem base, mas ainda não atingiu seu potencial máximo.</p>
-
-<p>Sem evolução contínua, o crescimento desacelera.</p>
-
-<p><strong>Para empresas que querem escalar com segurança.</strong></p>
-`
+<p>Você já construiu uma base, mas ainda não atingiu seu potencial máximo.</p>
+<p>Empresas que escalam mantêm evolução contínua e decisões estratégicas frequentes.</p>
+<p><strong>Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança.</strong></p>
+`,
+plan:"Plano Recorrente",
+list:[
+"✔ Diagnóstico contínuo da operação",
+"✔ Revisão constante de metas",
+"✔ Ajustes estratégicos recorrentes",
+"✔ Suporte direto à tomada de decisão",
+"✔ Evolução de indicadores",
+"✔ Acompanhamento próximo"
+]
 }
+}
+
 }
 
 const data = getData(total);
@@ -266,14 +307,22 @@ const data = getData(total);
 document.getElementById("score").innerText = total+"/60";
 document.getElementById("stage").innerText = data.stage;
 document.getElementById("desc").innerHTML = data.desc;
+document.getElementById("planTitle").innerText = data.plan;
 
-/* BOTÕES */
+const ul = document.getElementById("planList");
+data.list.forEach(item=>{
+const li=document.createElement("li");
+li.innerText=item;
+ul.appendChild(li);
+});
+
 function go(){
-window.open("https://wa.me/5549999447624");
+window.open("https://wa.me/5516993735556");
 }
 
 document.getElementById("btn").onclick=go;
 document.getElementById("topBtn").onclick=go;
+
 </script>
 
 </body>
