@@ -75,7 +75,7 @@ animation:blink 1.2s infinite;
 .hero p{color:var(--muted);}
 
 /* SCORE */
-.score{text-align:center;font-size:70px;color:var(--gold);}
+.score{text-align:center;font-size:70px;color:var(--gold);margin-bottom:20px;}
 
 /* GRID */
 .grid{
@@ -94,13 +94,43 @@ border-radius:20px;
 padding:25px;
 }
 
-/* ALERT */
+/* TITULO */
+.stage{
+font-size:28px;
+margin-bottom:20px;
+}
+
+/* TEXTO */
+.desc p{
+margin-bottom:16px;
+line-height:1.7;
+color:var(--muted);
+}
+
+/* ALERTA */
 .alert{
-margin-top:20px;
-padding:16px;
-border-radius:12px;
-border:1px solid var(--gold);
-background:rgba(198,168,90,.1);
+margin-top:25px;
+padding:18px;
+border-radius:14px;
+border:2px solid var(--gold);
+background:rgba(198,168,90,.12);
+}
+
+.alert strong{
+display:block;
+margin-bottom:12px;
+font-size:18px;
+color:#fff;
+}
+
+.alert ul{
+list-style:none;
+padding-left:0;
+}
+
+.alert li{
+margin-bottom:8px;
+font-size:15px;
 }
 
 /* CTA */
@@ -114,6 +144,7 @@ border-radius:12px;
 font-weight:900;
 animation:blink 1.2s infinite;
 }
+
 </style>
 </head>
 
@@ -145,16 +176,19 @@ animation:blink 1.2s infinite;
 
 <!-- ESQUERDA -->
 <div class="card">
-<h2 id="stage"></h2>
-<p id="desc"></p>
+<div class="stage" id="stage"></div>
+
+<div class="desc" id="desc"></div>
 
 <div class="alert">
 <strong>O que isso está te custando hoje:</strong>
-<p>Tempo perdido, decisões erradas e crescimento abaixo do que sua empresa poderia atingir.</p>
+<ul>
+<li>⚠️ Tempo perdido em decisões sem clareza</li>
+<li>⚠️ Retrabalho constante na operação</li>
+<li>⚠️ Crescimento abaixo do potencial real</li>
+</ul>
 </div>
 
-<h3 id="planTitle"></h3>
-<p id="planDesc"></p>
 </div>
 
 <!-- DIREITA -->
@@ -177,12 +211,8 @@ Enquanto isso, quem não age permanece travado no mesmo ponto.
 const params = new URLSearchParams(window.location.search);
 
 let total = 0;
-let respostas = [];
-
 for(let i=1;i<=15;i++){
-const val = Number(params.get("q"+i)||0);
-respostas.push(val);
-total += val;
+total += Number(params.get("q"+i)||0);
 }
 
 function getData(score){
@@ -190,44 +220,44 @@ function getData(score){
 if(score<=20){
 return {
 stage:"Empresa desorganizada",
-desc:`Hoje sua empresa depende mais de esforço do que de estratégia.
+desc:`
+<p>Hoje sua empresa depende mais de esforço do que de estratégia.</p>
 
-Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.
+<p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
 
-Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.
+<p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
 
-A Telluna utiliza um método estruturado para tirar empresas desse ciclo.`,
-plan:"Plano Essencial",
-planDesc:"Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza."
+<p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
+
+<p><strong>Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza.</strong></p>
+`
 }
 }
 
 if(score<=40){
 return {
 stage:"Empresa em estruturação",
-desc:`Sua empresa já tem operação, mas ainda não está estruturada para crescer com consistência.
+desc:`
+<p>Você já tem operação, mas ainda não tem estrutura.</p>
 
-Empresas que evoluem nesse estágio estruturam processos e indicadores — quem não faz isso, trava.
+<p>Empresas nesse estágio crescem ou travam — dependendo da organização interna.</p>
 
-Você está próximo de crescer… mas sem ajuste, continuará limitado.
+<p>A Telluna atua exatamente nesse ponto de virada.</p>
 
-A Telluna atua exatamente nesse ponto de virada.`,
-plan:"Plano Estratégico",
-planDesc:"Para empresas que já têm operação ativa, mas precisam estruturar processos, indicadores e decisões para crescer com previsibilidade."
+<p><strong>Para empresas que precisam estruturar processos e crescer com previsibilidade.</strong></p>
+`
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:`Você já construiu uma base — mas ainda não está no nível máximo de performance.
+desc:`
+<p>Você já tem base, mas ainda não atingiu seu potencial máximo.</p>
 
-Empresas que realmente escalam mantêm acompanhamento contínuo e decisões estratégicas frequentes.
+<p>Sem evolução contínua, o crescimento desacelera.</p>
 
-Sem isso, o crescimento desacelera.
-
-A Telluna atua na evolução contínua das empresas.`,
-plan:"Plano Recorrente",
-planDesc:"Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança ao longo do tempo."
+<p><strong>Para empresas que querem escalar com segurança.</strong></p>
+`
 }
 }
 
@@ -235,32 +265,15 @@ const data = getData(total);
 
 document.getElementById("score").innerText = total+"/60";
 document.getElementById("stage").innerText = data.stage;
-document.getElementById("desc").innerText = data.desc;
-document.getElementById("planTitle").innerText = data.plan;
-document.getElementById("planDesc").innerText = data.planDesc;
+document.getElementById("desc").innerHTML = data.desc;
 
-/* WHATSAPP */
-const mensagem = encodeURIComponent(
-`Finalizei o diagnóstico (${total}/60) e quero destravar meu negócio.`
-);
-
+/* BOTÕES */
 function go(){
-window.open(`https://wa.me/5549999447624?text=${mensagem}`);
+window.open("https://wa.me/5549999447624");
 }
 
-document.getElementById("btn").onclick = go;
-document.getElementById("topBtn").onclick = go;
-
-/* ENVIO EMAIL */
-fetch("https://api.web3forms.com/submit", {
-method: "POST",
-headers: {"Content-Type": "application/json"},
-body: JSON.stringify({
-access_key:"3e2ac5c8-6daa-476d-bd65-72e5b79cb947",
-subject:"Novo diagnóstico Telluna",
-message:`Pontuação: ${total}\nRespostas: ${respostas.join(",")}`
-})
-});
+document.getElementById("btn").onclick=go;
+document.getElementById("topBtn").onclick=go;
 </script>
 
 </body>
