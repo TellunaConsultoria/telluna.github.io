@@ -19,7 +19,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-font-family:Arial, Helvetica, sans-serif;
+font-family:Arial;
 background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
@@ -36,15 +36,8 @@ background:var(--light);
 .logo{display:flex;gap:16px;align-items:center;}
 .logo img{width:80px;}
 
-.logo-text b{
-font-size:40px;
-color:#0F2E2A;
-}
-
-.logo-text small{
-font-size:14px;
-color:#555;
-}
+.logo-text b{font-size:40px;color:#0F2E2A;}
+.logo-text small{font-size:14px;color:#555;}
 
 .header-actions{display:flex;gap:10px;}
 
@@ -93,7 +86,6 @@ margin:auto;
 padding:0 20px;
 }
 
-/* CARD */
 .card{
 background:rgba(255,255,255,.05);
 border:1px solid var(--line);
@@ -197,7 +189,7 @@ cursor:pointer;
 
 <section class="grid">
 
-<!-- ESQUERDA -->
+<!-- ESQUERDA (EXATAMENTE COMO VOCÊ DEFINIU) -->
 <div class="card">
 
 <div class="stage" id="stage"></div>
@@ -215,7 +207,7 @@ cursor:pointer;
 
 </div>
 
-<!-- DIREITA -->
+<!-- DIREITA (PLANO COMO BLOCO SEPARADO) -->
 <div class="card">
 
 <div class="plan-title" id="planTitle"></div>
@@ -251,9 +243,13 @@ return {
 stage:"Empresa desorganizada",
 desc:`
 <p>Hoje sua empresa depende mais de esforço do que de estratégia.</p>
+
 <p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
+
 <p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
+
 <p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
+
 <p><strong>Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza.</strong></p>
 `,
 plan:"Plano Essencial",
@@ -262,8 +258,7 @@ list:[
 "✔ Estruturação inicial de prioridades",
 "✔ Definição do que realmente importa",
 "✔ Primeira rotina de decisão",
-"✔ 1 sessão estratégica com o gestor",
-"✔ Direcionamento claro do que fazer primeiro"
+"✔ 1 sessão estratégica com o gestor"
 ]
 }
 }
@@ -273,8 +268,11 @@ return {
 stage:"Empresa em estruturação",
 desc:`
 <p>Você já tem operação, mas ainda não tem estrutura.</p>
+
 <p>Empresas nesse estágio crescem ou travam — dependendo da organização interna.</p>
+
 <p>A Telluna atua exatamente nesse ponto de virada.</p>
+
 <p><strong>Para empresas que precisam estruturar processos, indicadores e decisões para crescer com previsibilidade.</strong></p>
 `,
 plan:"Plano Estruturado",
@@ -292,7 +290,9 @@ return {
 stage:"Empresa estruturada",
 desc:`
 <p>Você já construiu uma base, mas ainda não atingiu seu potencial máximo.</p>
+
 <p>Empresas que escalam mantêm evolução contínua e decisões estratégicas frequentes.</p>
+
 <p><strong>Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança.</strong></p>
 `,
 plan:"Plano Recorrente",
