@@ -100,16 +100,14 @@ font-size:28px;
 margin-bottom:25px;
 }
 
-.desc{
-margin-bottom:10px;
-}
-
 .desc p{
 margin-bottom:18px;
 line-height:1.7;
 color:var(--muted);
+font-size:16px;
 }
 
+/* ALERT (SEM BOLINHAS) */
 .alert{
 margin-top:25px;
 padding:18px;
@@ -124,44 +122,66 @@ margin-bottom:12px;
 font-size:18px;
 }
 
+/* 🔥 REMOVE BOLINHAS */
+.alert ul{
+list-style:none;
+padding-left:0;
+margin:0;
+}
+
 .alert li{
 margin-bottom:10px;
+font-size:15px;
 }
 
 /* DIREITA */
 .plan-title{
-font-size:26px;
-margin-bottom:10px;
+font-size:30px;
+margin-bottom:16px;
+font-weight:700;
 }
 
 .plan-desc{
-font-size:14px;
+font-size:16px;
 color:var(--muted);
-margin-bottom:20px;
+margin-bottom:22px;
+line-height:1.6;
+}
+
+/* 🔥 REMOVE BOLINHAS */
+.plan-list{
+list-style:none;
+padding-left:0;
+margin:0;
 }
 
 .plan-list li{
-margin-bottom:10px;
+margin-bottom:12px;
+font-size:16px;
+line-height:1.6;
 }
 
 .urgency{
-margin-top:20px;
-font-size:14px;
+margin-top:22px;
+font-size:16px;
 font-weight:600;
+line-height:1.6;
 }
 
 .cta-btn{
-margin-top:20px;
+margin-top:24px;
 width:100%;
-padding:18px;
+padding:20px;
 background:var(--gold);
 border:none;
 border-radius:12px;
 font-weight:900;
+font-size:16px;
 animation:blink 1.2s infinite;
 cursor:pointer;
 }
 
+/* RESPONSIVO */
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
 }
@@ -196,7 +216,6 @@ cursor:pointer;
 
 <!-- ESQUERDA -->
 <div class="card">
-
 <div class="stage" id="stage"></div>
 
 <div class="desc" id="desc"></div>
@@ -209,7 +228,6 @@ cursor:pointer;
 <li>⚠️ Crescimento abaixo do potencial real</li>
 </ul>
 </div>
-
 </div>
 
 <!-- DIREITA -->
@@ -242,18 +260,13 @@ total += Number(params.get("q"+i)||0);
 }
 
 function getData(score){
-
 return {
 stage:"Empresa desorganizada",
 desc:`
 <p>Hoje sua empresa depende mais de esforço do que de estratégia.</p>
-
 <p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
-
 <p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
-
 <p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
-
 <p><strong>Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza.</strong></p>
 `,
 plan:"Plano Essencial",
@@ -265,7 +278,6 @@ list:[
 "✔ 1 sessão estratégica com o gestor"
 ]
 }
-
 }
 
 const data = getData(total);
