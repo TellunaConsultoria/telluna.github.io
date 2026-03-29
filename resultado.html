@@ -16,223 +16,103 @@
 --light:#F5F1E8;
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* BODY */
 body{
 font-family:Arial, Helvetica, sans-serif;
 background:linear-gradient(180deg,var(--green),var(--green2));
 color:var(--text);
 }
 
-/* HEADER CLARO (IGUAL INDEX) */
+/* HEADER */
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:18px 40px;
 background:var(--light);
-border-bottom:1px solid rgba(0,0,0,.08);
 }
 
-/* LOGO */
-.logo{
-display:flex;
-align-items:center;
-gap:16px;
-}
-
-.logo img{
-width:80px;
-}
+.logo{display:flex;gap:16px;align-items:center;}
+.logo img{width:80px;}
 
 .logo-text b{
 font-size:40px;
-letter-spacing:2px;
 color:#0F2E2A;
 }
 
 .logo-text small{
-display:block;
 font-size:14px;
 color:#555;
 }
 
-/* BOTÕES HEADER */
-.header-actions{
-display:flex;
-gap:14px;
-align-items:center;
-}
+.header-actions{display:flex;gap:10px;}
 
-/* BOTÃO REFAZER */
 .btn-secondary{
-padding:12px 18px;
-border-radius:12px;
+padding:10px 16px;
 border:1px solid #0F2E2A;
 background:#fff;
 color:#0F2E2A;
-font-weight:600;
-cursor:pointer;
+border-radius:10px;
 }
 
-/* BOTÃO PRINCIPAL */
 .btn-primary{
-padding:14px 22px;
-border-radius:12px;
-border:none;
+padding:12px 20px;
 background:var(--gold);
-color:#0F2E2A;
+border:none;
+border-radius:10px;
 font-weight:900;
-cursor:pointer;
 animation:blink 1.2s infinite;
 }
 
 @keyframes blink{
-0%{opacity:1}
 50%{opacity:.6}
-100%{opacity:1}
 }
 
 /* HERO */
-.hero{
-text-align:center;
-padding:50px 20px 10px;
-}
-
-.hero h1{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.hero p{
-max-width:720px;
-margin:auto;
-color:var(--muted);
-line-height:1.6;
-}
+.hero{text-align:center;padding:40px;}
+.hero h1{font-size:38px;margin-bottom:10px;}
+.hero p{color:var(--muted);}
 
 /* SCORE */
-.score{
-text-align:center;
-font-size:78px;
-font-weight:900;
-color:var(--gold);
-margin:30px 0 10px;
-}
-
-/* NIVEL */
-.level{
-text-align:center;
-margin-bottom:30px;
-}
-
-.bar{
-background:rgba(255,255,255,.1);
-border-radius:10px;
-overflow:hidden;
-height:14px;
-max-width:400px;
-margin:auto;
-}
-
-.bar-fill{
-height:100%;
-width:0%;
-background:var(--gold);
-transition:1s;
-}
-
-.level-text{
-margin-top:8px;
-font-weight:600;
-}
+.score{text-align:center;font-size:70px;color:var(--gold);}
 
 /* GRID */
 .grid{
 display:grid;
 grid-template-columns:1.2fr .8fr;
-gap:22px;
+gap:20px;
 max-width:1100px;
 margin:30px auto;
 padding:0 20px;
 }
 
-/* CARD */
 .card{
-background:rgba(255,255,255,.06);
+background:rgba(255,255,255,.05);
 border:1px solid var(--line);
 border-radius:20px;
-padding:28px;
+padding:25px;
 }
 
-/* RESULT */
-.stage{
-font-size:32px;
-margin-bottom:12px;
-}
-
-.desc{
-font-size:17px;
-line-height:1.75;
-color:var(--muted);
-}
-
-/* ALERTA */
+/* ALERT */
 .alert{
 margin-top:20px;
 padding:16px;
-border:1px solid rgba(255,0,0,.2);
 border-radius:12px;
-background:rgba(255,0,0,.05);
-}
-
-/* PLANO */
-.plan-box{
-margin-top:22px;
-padding:18px;
-border-radius:16px;
-border:1px solid rgba(198,168,90,.4);
-background:rgba(198,168,90,.08);
+border:1px solid var(--gold);
+background:rgba(198,168,90,.1);
 }
 
 /* CTA */
-.cta-title{
-font-size:24px;
-margin-bottom:12px;
-}
-
-.cta-text{
-font-size:15px;
-color:var(--muted);
-margin-bottom:16px;
-line-height:1.6;
-}
-
-.cta-highlight{
-font-size:15px;
-margin-bottom:18px;
-font-weight:600;
-color:#fff;
-}
-
 .cta-btn{
+margin-top:20px;
 width:100%;
-padding:20px;
-font-size:18px;
-border:none;
-border-radius:14px;
+padding:18px;
 background:var(--gold);
+border:none;
+border-radius:12px;
 font-weight:900;
-cursor:pointer;
 animation:blink 1.2s infinite;
-}
-
-@media(max-width:900px){
-.grid{grid-template-columns:1fr}
-.logo-text b{font-size:30px}
-.logo img{width:60px}
 }
 </style>
 </head>
@@ -256,53 +136,37 @@ animation:blink 1.2s infinite;
 
 <section class="hero">
 <h1>Seu diagnóstico está pronto</h1>
-<p>
-Com base nas respostas enviadas, geramos uma leitura inicial do momento da sua empresa e o próximo passo mais indicado para acelerar resultados com organização.
-</p>
+<p>Identificamos exatamente o que está travando o crescimento da sua empresa.</p>
 </section>
 
-<div class="score" id="score">--/60</div>
-
-<div class="level">
-<div class="bar">
-<div class="bar-fill" id="bar"></div>
-</div>
-<div class="level-text" id="levelText"></div>
-</div>
+<div class="score" id="score"></div>
 
 <section class="grid">
 
+<!-- ESQUERDA -->
 <div class="card">
-<div class="stage" id="stage"></div>
-<div class="desc" id="desc"></div>
+<h2 id="stage"></h2>
+<p id="desc"></p>
 
 <div class="alert">
 <strong>O que isso está te custando hoje:</strong>
-<p style="margin-top:8px;">
-Retrabalho, decisões sem clareza e crescimento abaixo do potencial.
-</p>
+<p>Tempo perdido, decisões erradas e crescimento abaixo do que sua empresa poderia atingir.</p>
 </div>
 
-<div class="plan-box">
 <h3 id="planTitle"></h3>
 <p id="planDesc"></p>
 </div>
-</div>
 
+<!-- DIREITA -->
 <div class="card">
-<div class="cta-title">Diagnóstico com especialista</div>
+<h3>Diagnóstico com especialista</h3>
 
-<div class="cta-text">
-Sem um plano estruturado, sua empresa tende a continuar no mesmo nível.
-</div>
+<p>
+Empresas no seu nível estão avançando porque estruturaram decisões estratégicas.
+Enquanto isso, quem não age permanece travado no mesmo ponto.
+</p>
 
-<div class="cta-highlight">
-Cada mês sem ajuste custa tempo, energia e dinheiro.
-</div>
-
-<div class="cta-text">
-Em uma única conversa, você terá clareza do que ajustar imediatamente.
-</div>
+<p><strong>Você decide: continuar assim ou destravar o crescimento.</strong></p>
 
 <button class="cta-btn" id="btn">Quero destravar meu negócio</button>
 </div>
@@ -312,67 +176,91 @@ Em uma única conversa, você terá clareza do que ajustar imediatamente.
 <script>
 const params = new URLSearchParams(window.location.search);
 
-const answers = [];
-for (let i = 1; i <= 15; i++) {
-answers.push(Number(params.get(`q${i}`) || 0));
+let total = 0;
+let respostas = [];
+
+for(let i=1;i<=15;i++){
+const val = Number(params.get("q"+i)||0);
+respostas.push(val);
+total += val;
 }
 
-const total = answers.reduce((sum, item) => sum + item, 0);
-const percent = Math.round((total/60)*100);
+function getData(score){
 
-function getStage(score){
-
-if(score <= 20){
+if(score<=20){
 return {
 stage:"Empresa desorganizada",
-desc:"Sua empresa está travada no operacional.\n\nSe nada mudar, continuará no mesmo nível.\n\nPara empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza."
+desc:`Hoje sua empresa depende mais de esforço do que de estratégia.
+
+Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.
+
+Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.
+
+A Telluna utiliza um método estruturado para tirar empresas desse ciclo.`,
 plan:"Plano Essencial",
-planDesc:"Ideal para sair do improviso e criar uma base segura."
+planDesc:"Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza."
 }
 }
 
-if(score <= 40){
+if(score<=40){
 return {
 stage:"Empresa em estruturação",
-desc:"Você cresce, mas com esforço excessivo.\n\nO modelo atual limita sua evolução.\n\nPara empresas que já têm operação ativa, mas precisam estruturar processos, indicadores e decisões para crescer com previsibilidade."
+desc:`Sua empresa já tem operação, mas ainda não está estruturada para crescer com consistência.
+
+Empresas que evoluem nesse estágio estruturam processos e indicadores — quem não faz isso, trava.
+
+Você está próximo de crescer… mas sem ajuste, continuará limitado.
+
+A Telluna atua exatamente nesse ponto de virada.`,
 plan:"Plano Estratégico",
-planDesc:"Ideal para transformar operação em crescimento previsível."
+planDesc:"Para empresas que já têm operação ativa, mas precisam estruturar processos, indicadores e decisões para crescer com previsibilidade."
 }
 }
 
 return {
 stage:"Empresa estruturada",
-desc:"Você já tem base.\n\nAgora precisa escalar com inteligência.\n\nPara empresas que precisam consolidar gestão, manter consistência e evoluir com segurança ao longo do tempo."
+desc:`Você já construiu uma base — mas ainda não está no nível máximo de performance.
+
+Empresas que realmente escalam mantêm acompanhamento contínuo e decisões estratégicas frequentes.
+
+Sem isso, o crescimento desacelera.
+
+A Telluna atua na evolução contínua das empresas.`,
 plan:"Plano Recorrente",
-planDesc:"Ideal para crescer sem voltar ao improviso."
+planDesc:"Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança ao longo do tempo."
 }
 }
 
-const result = getStage(total);
+const data = getData(total);
 
-document.getElementById("score").innerText = total + "/60";
-document.getElementById("stage").innerText = result.stage;
-document.getElementById("desc").innerText = result.desc;
-document.getElementById("planTitle").innerText = result.plan;
-document.getElementById("planDesc").innerText = result.planDesc;
+document.getElementById("score").innerText = total+"/60";
+document.getElementById("stage").innerText = data.stage;
+document.getElementById("desc").innerText = data.desc;
+document.getElementById("planTitle").innerText = data.plan;
+document.getElementById("planDesc").innerText = data.planDesc;
 
-document.getElementById("bar").style.width = percent + "%";
-
-let levelText = percent <= 33 ? "Baixo nível" :
-percent <= 66 ? "Nível médio" : "Alto nível";
-
-document.getElementById("levelText").innerText = levelText + " ("+percent+"%)";
-
+/* WHATSAPP */
 const mensagem = encodeURIComponent(
-`Olá, finalizei o diagnóstico Telluna (${total}/60) e quero destravar meu negócio.`
+`Finalizei o diagnóstico (${total}/60) e quero destravar meu negócio.`
 );
 
-function abrirWhats(){
+function go(){
 window.open(`https://wa.me/5549999447624?text=${mensagem}`);
 }
 
-document.getElementById("btn").onclick = abrirWhats;
-document.getElementById("topBtn").onclick = abrirWhats;
+document.getElementById("btn").onclick = go;
+document.getElementById("topBtn").onclick = go;
+
+/* ENVIO EMAIL */
+fetch("https://api.web3forms.com/submit", {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({
+access_key:"3e2ac5c8-6daa-476d-bd65-72e5b79cb947",
+subject:"Novo diagnóstico Telluna",
+message:`Pontuação: ${total}\nRespostas: ${respostas.join(",")}`
+})
+});
 </script>
 
 </body>
