@@ -107,7 +107,7 @@ color:var(--muted);
 font-size:16px;
 }
 
-/* ALERT (SEM BOLINHAS) */
+/* ALERT */
 .alert{
 margin-top:25px;
 padding:18px;
@@ -122,11 +122,9 @@ margin-bottom:12px;
 font-size:18px;
 }
 
-/* 🔥 REMOVE BOLINHAS */
 .alert ul{
 list-style:none;
 padding-left:0;
-margin:0;
 }
 
 .alert li{
@@ -148,11 +146,9 @@ margin-bottom:22px;
 line-height:1.6;
 }
 
-/* 🔥 REMOVE BOLINHAS */
 .plan-list{
 list-style:none;
 padding-left:0;
-margin:0;
 }
 
 .plan-list li{
@@ -181,7 +177,6 @@ animation:blink 1.2s infinite;
 cursor:pointer;
 }
 
-/* RESPONSIVO */
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
 }
@@ -217,7 +212,6 @@ cursor:pointer;
 <!-- ESQUERDA -->
 <div class="card">
 <div class="stage" id="stage"></div>
-
 <div class="desc" id="desc"></div>
 
 <div class="alert">
@@ -232,7 +226,6 @@ cursor:pointer;
 
 <!-- DIREITA -->
 <div class="card">
-
 <div class="plan-title" id="planTitle"></div>
 
 <div class="plan-desc">
@@ -246,7 +239,6 @@ Empresas no seu nível que não tomam decisão agora continuam travadas — enqu
 </div>
 
 <button class="cta-btn" id="btn">Quero destravar meu negócio</button>
-
 </div>
 
 </section>
@@ -259,7 +251,10 @@ for(let i=1;i<=15;i++){
 total += Number(params.get("q"+i)||0);
 }
 
+/* ✅ CORREÇÃO AQUI */
 function getData(score){
+
+if(score <= 20){
 return {
 stage:"Empresa desorganizada",
 desc:`
@@ -280,6 +275,48 @@ list:[
 }
 }
 
+if(score <= 40){
+return {
+stage:"Empresa em estruturação",
+desc:`
+<p>Sua empresa já tem operação, mas ainda não está estruturada para crescer.</p>
+<p>Sem processos e indicadores claros, o crescimento fica travado.</p>
+<p><strong>Você está no ponto de virada entre operar e crescer.</strong></p>
+<p><strong>Para empresas que precisam estruturar processos, indicadores e decisões para crescer com previsibilidade.</strong></p>
+`,
+plan:"Plano Estruturado",
+list:[
+"✔ Estruturação de processos-chave",
+"✔ Definição de indicadores (KPIs)",
+"✔ Rotina de acompanhamento",
+"✔ Plano de ação estratégico",
+"✔ Acompanhamento contínuo"
+]
+}
+}
+
+return {
+stage:"Empresa estruturada",
+desc:`
+<p>Você já construiu uma base sólida.</p>
+<p>Agora o desafio é manter consistência e evoluir com estratégia.</p>
+<p><strong>Empresas que crescem de verdade não param de ajustar.</strong></p>
+<p><strong>Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança.</strong></p>
+`,
+plan:"Plano Recorrente",
+list:[
+"✔ Diagnóstico contínuo da operação",
+"✔ Revisão constante de metas",
+"✔ Ajustes estratégicos recorrentes",
+"✔ Suporte direto à tomada de decisão",
+"✔ Evolução de indicadores",
+"✔ Acompanhamento próximo"
+]
+}
+}
+
+}
+
 const data = getData(total);
 
 document.getElementById("score").innerText = total+"/60";
@@ -294,6 +331,7 @@ li.innerText=item;
 ul.appendChild(li);
 });
 
+/* BOTÕES */
 function go(){
 window.open("https://wa.me/5516993735556");
 }
