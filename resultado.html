@@ -148,14 +148,6 @@ list-style:none;
 padding-left:0;
 }
 
-const alertList = document.getElementById("alertList");
-alertList.innerHTML="";
-data.alert.forEach(item=>{
-  const li=document.createElement("li");
-  li.innerText=item;
-  alertList.appendChild(li);
-});
-
 .plan-list li{
 margin-bottom:12px;
 font-size:16px;
@@ -336,12 +328,21 @@ document.getElementById("stage").innerText = data.stage;
 document.getElementById("desc").innerHTML = data.desc;
 document.getElementById("planTitle").innerText = data.plan;
 
+
 const ul = document.getElementById("planList");
 ul.innerHTML="";
 data.list.forEach(item=>{
 const li=document.createElement("li");
 li.innerText=item;
 ul.appendChild(li);
+});
+
+const alertList = document.getElementById("alertList");
+alertList.innerHTML="";
+data.alert.forEach(item=>{
+  const li=document.createElement("li");
+  li.innerText=item;
+  alertList.appendChild(li);
 });
 
 /* BOTÕES */
