@@ -36,8 +36,23 @@ background:var(--light);
 .logo{display:flex;gap:16px;align-items:center;}
 .logo img{width:80px;}
 
-.logo-text b{font-size:40px;color:#0F2E2A;}
-.logo-text small{font-size:14px;color:#555;}
+.logo-text{
+  display:flex;
+  flex-direction:column; /* 👈 ESSENCIAL */
+  line-height:1.1;
+}
+
+.logo-text b{
+  font-size:48px;
+  color:#0F2E2A;
+  font-weight:800;
+}
+
+.logo-text small{
+  font-size:14px;
+  color:#555;
+  margin-top:4px;
+}
 
 .header-actions{display:flex;gap:10px;}
 
