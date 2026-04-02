@@ -239,6 +239,8 @@ Empresas no seu nível que não tomam decisão agora continuam travadas — enqu
 </section>
 
 <script>
+window.addEventListener("DOMContentLoaded", function(){
+
 const params = new URLSearchParams(window.location.search);
 
 let total = 0;
@@ -250,7 +252,7 @@ total += val;
 }
 }
 
-/* 🔥 CORREÇÃO DA LÓGICA */
+/* LÓGICA CORRETA */
 function getData(score){
 
 if(score <= 20){
@@ -260,7 +262,6 @@ desc:`
 <p>Hoje sua empresa depende mais de esforço do que de estratégia.</p>
 <p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
 <p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
-<p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
 <p><strong>Para empresas que precisam organizar a base da gestão.</strong></p>
 `,
 plan:"Plano Essencial",
@@ -281,7 +282,6 @@ desc:`
 <p>Sua empresa já tem operação, mas ainda não está estruturada para crescer.</p>
 <p>Sem processos e indicadores claros, o crescimento fica travado.</p>
 <p><strong>Você está no ponto de virada entre operar e crescer.</strong></p>
-<p><strong>Para empresas que precisam estruturar processos e decisões.</strong></p>
 `,
 plan:"Plano Estruturado",
 list:[
@@ -298,20 +298,15 @@ return {
 stage:"Empresa estruturada",
 desc:`
 <p>Você já construiu uma base sólida.</p>
-<p>Agora o desafio é manter consistência e evoluir com estratégia.</p>
-<p><strong>Empresas que crescem não param de ajustar.</strong></p>
+<p>Agora o desafio é evoluir com consistência.</p>
 `,
 plan:"Plano Recorrente",
 list:[
-"✔ Diagnóstico contínuo da operação",
-"✔ Revisão constante de metas",
-"✔ Ajustes estratégicos recorrentes",
-"✔ Suporte direto à decisão",
-"✔ Evolução contínua"
+"✔ Diagnóstico contínuo",
+"✔ Ajustes estratégicos",
+"✔ Evolução da operação"
 ]
 }
-}
-
 }
 
 const data = getData(total);
@@ -338,7 +333,5 @@ window.open("https://wa.me/5516993735556");
 document.getElementById("btn").onclick=go;
 document.getElementById("topBtn").onclick=go;
 
+});
 </script>
-
-</body>
-</html>
