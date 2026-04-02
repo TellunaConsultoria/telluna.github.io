@@ -211,11 +211,7 @@ cursor:pointer;
 
 <div class="alert">
 <strong>O que isso está te custando hoje:</strong>
-<ul>
-<li>⚠️ Tempo perdido em decisões sem clareza</li>
-<li>⚠️ Retrabalho constante na operação</li>
-<li>⚠️ Crescimento abaixo do potencial real</li>
-</ul>
+<ul> id="alertList"></ul>
 </div>
 </div>
 
@@ -271,10 +267,15 @@ list:[
 "✔ Definição do que realmente importa",
 "✔ Primeira rotina de decisão",
 "✔ 1 sessão estratégica com o gestor"
-]
+],
+alert:[
+"⚠️ Falta de clareza nas decisões",
+"⚠️ Operação desorganizada",
+"⚠️ Perda de oportunidades"
+]  
 }
 }
-
+  
 if(score <= 40){
 return {
 stage:"Empresa em estruturação",
@@ -290,6 +291,11 @@ list:[
 "✔ Rotina de acompanhamento",
 "✔ Plano de ação estratégico",
 "✔ Acompanhamento contínuo"
+],
+alert:[
+"⚠️ Crescimento travado",
+"⚠️ Decisões sem previsibilidade",
+"⚠️ Falta de controle sobre resultados"
 ]
 }
 }
@@ -305,6 +311,11 @@ list:[
 "✔ Diagnóstico contínuo",
 "✔ Ajustes estratégicos",
 "✔ Evolução da operação"
+],
+alert:[
+"⚠️ Estagnação no crescimento",
+"⚠️ Perda de eficiência ao escalar",
+"⚠️ Falta de consistência nos resultados"
 ]
 }
 }
