@@ -1,32 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultado | Telluna</title>
+
+<style>
+:root{
+--green:#0F2E2A;
+--green2:#0B2522;
+--gold:#C6A85A;
+--text:#F5F1E8;
+--muted:rgba(255,255,255,.8);
+--line:rgba(255,255,255,.14);
+--light:#F5F1E8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:Arial;
+background:linear-gradient(180deg,var(--green),var(--green2));
+color:var(--text);
+}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:var(--light);
+}
+
+.logo{display:flex;gap:16px;align-items:center;}
+.logo img{width:80px;}
+
+.logo-text b{font-size:40px;color:#0F2E2A;}
+.logo-text small{font-size:14px;color:#555;}
+
+.header-actions{display:flex;gap:10px;}
+
+.btn-secondary{
+padding:10px 16px;
+border:1px solid #0F2E2A;
+background:#fff;
+color:#0F2E2A;
+border-radius:10px;
+}
+
+.btn-primary{
+padding:12px 20px;
+background:var(--gold);
+border:none;
+border-radius:10px;
+font-weight:900;
+animation:blink 1.2s infinite;
+cursor:pointer;
+}
+
+@keyframes blink{
+50%{opacity:.6}
+}
+
+/* HERO */
+.hero{text-align:center;padding:40px;}
+.hero h1{font-size:38px;margin-bottom:10px;}
+.hero p{color:var(--muted);}
+
+/* SCORE */
+.score{
+text-align:center;
+font-size:70px;
+color:var(--gold);
+margin-bottom:30px;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:20px;
+max-width:1100px;
+margin:auto;
+padding:0 20px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,.05);
+border:1px solid var(--line);
+border-radius:20px;
+padding:30px;
+}
+
+/* ESQUERDA */
+.stage{
+font-size:28px;
+margin-bottom:25px;
+}
+
+.desc p{
+margin-bottom:18px;
+line-height:1.7;
+color:var(--muted);
+font-size:16px;
+}
+
+.alert{
+margin-top:25px;
+padding:18px;
+border-radius:14px;
+border:2px solid var(--gold);
+background:rgba(198,168,90,.12);
+}
+
+.alert strong{
+display:block;
+margin-bottom:12px;
+font-size:18px;
+}
+
+.alert ul{
+list-style:none;
+padding-left:0;
+}
+
+.alert li{
+margin-bottom:10px;
+}
+
+/* DIREITA */
+.plan-title{
+font-size:30px;
+margin-bottom:16px;
+font-weight:700;
+}
+
+.plan-desc{
+font-size:16px;
+color:var(--muted);
+margin-bottom:22px;
+}
+
+.plan-list{
+list-style:none;
+padding-left:0;
+}
+
+.plan-list li{
+margin-bottom:12px;
+font-size:16px;
+}
+
+.urgency{
+margin-top:22px;
+font-size:16px;
+font-weight:600;
+}
+
+.cta-btn{
+margin-top:24px;
+width:100%;
+padding:18px;
+background:var(--gold);
+border:none;
+border-radius:12px;
+font-weight:900;
+animation:blink 1.2s infinite;
+cursor:pointer;
+}
+
+@media(max-width:900px){
+.grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<img src="logo-telluna.png">
+<div class="logo-text">
+<b>TELLUNA</b>
+<small>Consultoria Empresarial Estratégica</small>
+</div>
+</div>
+
+<div class="header-actions">
+<a href="perguntas.html" class="btn-secondary">Refaça as questões</a>
+<button class="btn-primary" id="topBtn">Destravar meu negócio</button>
+</div>
+</header>
+
+<section class="hero">
+<h1>Seu diagnóstico está pronto</h1>
+<p>Identificamos exatamente o que está travando o crescimento da sua empresa.</p>
+</section>
+
+<div class="score" id="score"></div>
+
+<section class="grid">
+
+<!-- ESQUERDA -->
+<div class="card">
+<div class="stage" id="stage"></div>
+
+<div class="desc" id="desc"></div>
+
+<div class="alert">
+<strong>O que isso está te custando hoje:</strong>
+<ul>
+<li>⚠️ Tempo perdido em decisões sem clareza</li>
+<li>⚠️ Retrabalho constante na operação</li>
+<li>⚠️ Crescimento abaixo do potencial real</li>
+</ul>
+</div>
+</div>
+
+<!-- DIREITA -->
+<div class="card">
+<div class="plan-title" id="planTitle"></div>
+
+<div class="plan-desc">
+Esse é o próximo passo lógico para destravar sua empresa com base no seu diagnóstico.
+</div>
+
+<ul class="plan-list" id="planList"></ul>
+
+<div class="urgency">
+Empresas no seu nível que não tomam decisão agora continuam travadas — enquanto outras avançam com estrutura.
+</div>
+
+<button class="cta-btn" id="btn">Quero destravar meu negócio</button>
+</div>
+
+</section>
+
 <script>
 const params = new URLSearchParams(window.location.search);
 
 let total = 0;
-let respostasRecebidas = 0;
 
 for(let i=1;i<=15;i++){
-  const valor = params.get("q"+i);
-
-  if(valor !== null && valor !== ""){
-    const numero = Number(valor);
-
-    if(!isNaN(numero)){
-      total += numero;
-      respostasRecebidas++;
-    }
-  }
+const val = Number(params.get("q"+i));
+if(!isNaN(val)){
+total += val;
+}
 }
 
-/* DEBUG IMPORTANTE */
-console.log("Total calculado:", total);
-console.log("Respostas recebidas:", respostasRecebidas);
-
-/* ⚠️ ALERTA SE ALGO ESTIVER ERRADO */
-if(respostasRecebidas < 15){
-  console.warn("Nem todas as respostas foram recebidas corretamente.");
-}
-
-/* DIAGNÓSTICO */
+/* 🔥 CORREÇÃO DA LÓGICA */
 function getData(score){
 
 if(score <= 20){
@@ -37,7 +261,7 @@ desc:`
 <p>Enquanto outras empresas estruturam gestão e crescem com previsibilidade, você ainda resolve problemas todos os dias sem clareza real.</p>
 <p>Se nada mudar, você continuará exatamente onde está — enquanto outros avançam.</p>
 <p>A Telluna utiliza um método estruturado para tirar empresas desse ciclo.</p>
-<p><strong>Para empresas que precisam organizar a base da gestão, sair do improviso e começar a tomar decisões com clareza.</strong></p>
+<p><strong>Para empresas que precisam organizar a base da gestão.</strong></p>
 `,
 plan:"Plano Essencial",
 list:[
@@ -57,7 +281,7 @@ desc:`
 <p>Sua empresa já tem operação, mas ainda não está estruturada para crescer.</p>
 <p>Sem processos e indicadores claros, o crescimento fica travado.</p>
 <p><strong>Você está no ponto de virada entre operar e crescer.</strong></p>
-<p><strong>Para empresas que precisam estruturar processos, indicadores e decisões para crescer com previsibilidade.</strong></p>
+<p><strong>Para empresas que precisam estruturar processos e decisões.</strong></p>
 `,
 plan:"Plano Estruturado",
 list:[
@@ -75,17 +299,15 @@ stage:"Empresa estruturada",
 desc:`
 <p>Você já construiu uma base sólida.</p>
 <p>Agora o desafio é manter consistência e evoluir com estratégia.</p>
-<p><strong>Empresas que crescem de verdade não param de ajustar.</strong></p>
-<p><strong>Para empresas que precisam consolidar gestão, manter consistência e evoluir com segurança.</strong></p>
+<p><strong>Empresas que crescem não param de ajustar.</strong></p>
 `,
 plan:"Plano Recorrente",
 list:[
 "✔ Diagnóstico contínuo da operação",
 "✔ Revisão constante de metas",
 "✔ Ajustes estratégicos recorrentes",
-"✔ Suporte direto à tomada de decisão",
-"✔ Evolução de indicadores",
-"✔ Acompanhamento próximo"
+"✔ Suporte direto à decisão",
+"✔ Evolução contínua"
 ]
 }
 }
@@ -103,17 +325,20 @@ document.getElementById("planTitle").innerText = data.plan;
 const ul = document.getElementById("planList");
 ul.innerHTML="";
 data.list.forEach(item=>{
-  const li=document.createElement("li");
-  li.innerText=item;
-  ul.appendChild(li);
+const li=document.createElement("li");
+li.innerText=item;
+ul.appendChild(li);
 });
 
 /* BOTÕES */
 function go(){
-  window.open("https://wa.me/5516993735556");
+window.open("https://wa.me/5516993735556");
 }
 
 document.getElementById("btn").onclick=go;
 document.getElementById("topBtn").onclick=go;
 
 </script>
+
+</body>
+</html>
