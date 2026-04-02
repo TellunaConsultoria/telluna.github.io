@@ -148,6 +148,14 @@ list-style:none;
 padding-left:0;
 }
 
+const alertList = document.getElementById("alertList");
+alertList.innerHTML="";
+data.alert.forEach(item=>{
+  const li=document.createElement("li");
+  li.innerText=item;
+  alertList.appendChild(li);
+});
+
 .plan-list li{
 margin-bottom:12px;
 font-size:16px;
